@@ -3,197 +3,436 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Saverio Moretti — sviluppo e integrazioni e-commerce</title>
-<meta name="description" content="Sviluppatore e integratore e-commerce ad Arezzo: catalogo da 10.000 a oltre 120.000 prodotti, integrazioni marketplace, automazione con agenti AI.">
+<title>Saverio Moretti — sviluppo, integrazioni e server per e-commerce</title>
+<meta name="description" content="Sviluppo, integrazioni e server di un e-commerce PrestaShop da oltre 120.000 prodotti: i lavori, con i numeri di prima e di dopo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#E9EDF1; --ink:#16202E; --soft:#4A5668; --rule:#C9D1DA;
-  --label:#FFCE3A; --link:#2448C8; --sheet:#FFFFFF;
-  --wide:"wdth" 125; --narrow:"wdth" 75;
+  --paper:#F5F3EE; --sheet:#FFFFFF; --ink:#151515; --soft:#5A5852; --rule:#D9D5CC; --faint:#ECE9E2;
+  --before:#8C3B2A; --after:#11604A; --hi:#FFE45C;
+  --serif:"Source Serif 4",Georgia,serif; --mono:"IBM Plex Mono",ui-monospace,monospace; --cond:"IBM Plex Sans Condensed","Arial Narrow",sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,sans-serif;
-  font-size:17px;line-height:1.55;font-variant-numeric:tabular-nums}
-a{color:var(--link);text-underline-offset:3px}
-a:focus-visible,summary:focus-visible{outline:3px solid var(--link);outline-offset:3px;border-radius:2px}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.6}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.lab{font-family:var(--cond);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
 
-/* intestazione */
-.top{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding:72px 0 64px}
-h1{font-stretch:125%;font-variation-settings:var(--wide);font-weight:800;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-.01em;margin:0 0 20px}
-.lead{font-size:20px;max-width:34em;margin:0 0 24px}
-.contacts{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0;padding:0;list-style:none;font-size:16px}
+/* testata */
+.mast{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--ink);font-family:var(--cond);font-size:15px}
+.mast b{font-weight:700;letter-spacing:.02em}
+.mast nav{display:flex;gap:18px;flex-wrap:wrap}
+.mast nav a{text-decoration:none}
+.mast nav a:hover{text-decoration:underline}
 
-/* l'etichetta */
-.label{background:var(--sheet);border:1.5px solid var(--ink);border-radius:6px;padding:22px 24px 18px;position:relative;
-  box-shadow:6px 6px 0 var(--ink);transform:rotate(1.2deg)}
-.label::before{content:"";position:absolute;top:-1.5px;left:22px;width:84px;height:12px;background:var(--label);border:1.5px solid var(--ink);border-top:0;border-radius:0 0 4px 4px}
-.label-name{font-variation-settings:var(--narrow);font-weight:700;font-size:15px;color:var(--soft);margin:6px 0 2px}
-.label-title{font-variation-settings:var(--wide);font-weight:800;font-size:22px;line-height:1.15;margin:0 0 14px}
-.spec{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0;font-size:15px}
-.spec dt{color:var(--soft);font-variation-settings:var(--narrow)}
-.spec dd{margin:0;font-weight:600}
-.code{display:flex;align-items:flex-end;gap:12px;margin-top:16px;padding-top:12px;border-top:1.5px dashed var(--rule)}
-.code svg{height:40px;width:auto;fill:var(--ink)}
-.code span{font-variation-settings:var(--narrow);font-size:13px;color:var(--soft);letter-spacing:.08em}
+.hero{padding:64px 0 40px;display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:end}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5.2vw,56px);line-height:1.08;letter-spacing:-.015em;margin:0 0 22px;max-width:15em}
+.hero p{margin:0 0 12px;max-width:34em;color:#2b2a27}
+.who{border-left:1px solid var(--ink);padding-left:20px;font-family:var(--cond);font-size:15px;line-height:1.5}
+.who p{margin:0 0 10px}
+.who b{display:block;font-size:20px;font-weight:700;margin-bottom:2px}
 
-/* numeri chiave */
-.facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1.5px solid var(--ink);border-bottom:1px solid var(--rule)}
-.fact{padding:22px 20px 22px 0}
-.fact + .fact{padding-left:20px;border-left:1px solid var(--rule)}
-.fact b{display:block;font-variation-settings:var(--wide);font-weight:800;font-size:clamp(26px,3.4vw,36px);line-height:1.1}
-.fact span{font-size:15px;color:var(--soft)}
+/* registro prima/dopo */
+.ledger{background:var(--sheet);border:1px solid var(--ink);margin:8px 0 0}
+.ledger-h,.ledger-r{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;padding:12px 20px}
+.ledger-h{border-bottom:1px solid var(--ink)}
+.ledger-r{border-bottom:1px solid var(--faint);align-items:baseline}
+.ledger-r:last-child{border-bottom:0}
+.ledger-r .what{font-size:16px}
+.ledger-r .b{font-family:var(--mono);color:var(--before);font-size:16px}
+.ledger-r .a{font-family:var(--mono);color:var(--after);font-weight:600;font-size:16px}
+.src{font-size:14px;color:var(--soft);margin:10px 0 0}
 
-/* casi */
-section{padding:56px 0 8px}
-h2{font-stretch:125%;font-variation-settings:var(--wide);font-weight:800;font-size:30px;line-height:1.15;margin:0 0 8px}
-.intro{color:var(--soft);max-width:40em;margin:0 0 28px}
-h3{font-weight:700;font-size:15px;color:var(--soft);font-variation-settings:var(--narrow);margin:36px 0 0;padding-bottom:8px;border-bottom:1.5px solid var(--ink)}
-.case{border-bottom:1px solid var(--rule)}
-.case summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto 20px;gap:16px;align-items:baseline;padding:16px 0}
-.case summary::-webkit-details-marker{display:none}
-.case .t{font-weight:700;font-size:19px}
-.case .s{display:block;font-weight:400;color:var(--soft);font-size:16px;margin-top:2px}
-.case .n{font-variation-settings:var(--wide);font-weight:800;font-size:20px;text-align:right;white-space:nowrap}
-.case .n small{display:block;font-variation-settings:var(--narrow);font-weight:500;font-size:13px;color:var(--soft)}
-.case .x{width:20px;height:20px;align-self:center;position:relative}
-.case .x::before,.case .x::after{content:"";position:absolute;left:3px;right:3px;top:9px;height:2px;background:var(--ink);transition:transform .2s}
-.case .x::after{transform:rotate(90deg)}
-.case[open] .x::after{transform:rotate(0)}
-.case .body{padding:0 0 20px;max-width:46em}
-.case .body p{margin:0 0 10px}
-.case .body ul{margin:0 0 10px;padding-left:20px}
-.case .tools{font-size:14px;color:var(--soft)}
+/* capitoli */
+.chap{padding:72px 0 0}
+.chap-h{display:grid;grid-template-columns:120px 1fr;gap:24px;border-top:3px solid var(--ink);padding-top:14px;margin-bottom:8px}
+.chap-h .lab{padding-top:8px}
+h2{font-size:32px;line-height:1.15;margin:0 0 8px;letter-spacing:-.01em}
+.chap-h p{margin:0;color:var(--soft);max-width:36em}
 
-/* metodo */
-.method{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px;margin-top:8px}
-.method div{border-top:1px solid var(--rule);padding:16px 0}
-.method b{display:block;font-size:18px;margin-bottom:4px}
-.method p{margin:0;color:var(--soft)}
+.case{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:36px 0;border-bottom:1px solid var(--rule)}
+.case:last-child{border-bottom:0}
+.case .when{font-family:var(--mono);font-size:13px;color:var(--soft);padding-top:6px}
+h3{font-size:24px;line-height:1.25;margin:0 0 16px;letter-spacing:-.005em;max-width:28em}
+.pd{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);background:var(--sheet);margin:0 0 18px}
+.pd>div{padding:14px 16px}
+.pd>div+div{border-left:1px solid var(--ink)}
+.pd .lab{display:block;margin-bottom:4px}
+.pd .v{font-family:var(--mono);font-size:22px;line-height:1.25;font-weight:600}
+.pd .before .v{color:var(--before)}
+.pd .after .v{color:var(--after)}
+.pd .d{display:block;font-size:15px;color:var(--soft);margin-top:4px;line-height:1.45}
+.case p{margin:0 0 12px;max-width:38em}
+.case p b{font-weight:600}
+mark{background:linear-gradient(transparent 55%,var(--hi) 55%);color:inherit;padding:0 1px}
+.why{border-left:3px solid var(--after);padding:2px 0 2px 14px;color:#2b2a27}
+.stack{font-family:var(--mono);font-size:13px;color:var(--soft);margin-top:6px}
 
-/* progetti personali */
-.own{list-style:none;margin:0;padding:0}
-.own li{display:grid;grid-template-columns:220px 1fr;gap:16px;border-top:1px solid var(--rule);padding:14px 0}
-.own li b{font-weight:700}
-.own li p{margin:0;color:var(--soft)}
+/* grafico */
+figure{margin:6px 0 20px;background:var(--sheet);border:1px solid var(--rule);padding:16px 16px 10px}
+figure svg{display:block;width:100%;max-width:600px;height:auto}
+.chart{overflow-x:auto}
+.case>div{min-width:0}
+.short,.cols{margin-left:144px}
+figcaption{font-size:14px;color:var(--soft);margin-top:6px}
+.ax{font-family:var(--mono);font-size:10px;fill:var(--soft)}
+.vl{font-family:var(--mono);font-size:11px;font-weight:600}
 
-footer{margin-top:64px;background:var(--ink);color:#E9EDF1;padding:48px 0}
-footer h2{color:#fff}
-footer a{color:#fff}
-footer p{max-width:40em;color:#B9C3CF}
-.note{font-size:14px;color:var(--soft);margin-top:28px}
+/* lavori brevi */
+.short{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px;margin:12px 0 0}
+.short div{border-top:1px solid var(--rule);padding:16px 0}
+.short b{display:block;font-family:var(--cond);font-size:17px;font-weight:700;margin-bottom:4px}
+.short p{margin:0;font-size:16px;color:#2b2a27}
+.short .num{color:var(--after);font-weight:600}
+
+/* metodo e fuori lavoro */
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 40px}
+.cols div{border-top:1px solid var(--rule);padding:16px 0}
+.cols b{display:block;font-family:var(--cond);font-size:17px;font-weight:700;margin-bottom:4px}
+.cols p{margin:0;font-size:16px;color:#2b2a27}
+
+footer{margin-top:88px;padding:0 0 56px}
+footer .in{border-top:3px solid var(--ink);padding-top:28px}
+footer h2{font-size:28px}
+footer p{max-width:36em}
+.contacts{font-family:var(--cond);font-size:17px;display:flex;flex-wrap:wrap;gap:6px 22px;margin:16px 0 0;padding:0;list-style:none}
 
 @media (max-width:820px){
-  .top{grid-template-columns:1fr;gap:40px;padding:48px 0 40px}
-  .label{transform:none;margin-right:6px}
-  .facts{grid-template-columns:repeat(2,1fr)}
-  .fact:nth-child(3){padding-left:0;border-left:0}
-  .fact:nth-child(n+3){border-top:1px solid var(--rule)}
-  .method{grid-template-columns:1fr}
-  .own li{grid-template-columns:1fr;gap:2px}
-  .case summary{grid-template-columns:1fr 20px}
-  .case .n{grid-column:1;text-align:left;font-size:17px}
-  .case .x{grid-column:2;grid-row:1}
+  body{font-size:17px}
+  .wrap{padding:0 16px}
+  .mast nav{display:none}
+  .hero{grid-template-columns:1fr;gap:28px;padding:40px 0 28px}
+  .who{border-left:0;border-top:1px solid var(--ink);padding:14px 0 0}
+  .ledger-h{display:none}
+  .ledger-r{grid-template-columns:1fr 1fr;gap:2px 12px;padding:12px 14px}
+  .ledger-r .what{grid-column:1/-1;font-weight:600}
+  .chap{padding-top:52px}
+  .chap-h,.case{grid-template-columns:1fr;gap:4px}
+  .chap-h .lab{padding-top:0}
+  h2{font-size:27px}
+  h3{font-size:21px}
+  .case{padding:28px 0}
+  .pd{grid-template-columns:1fr}
+  .pd>div+div{border-left:0;border-top:1px solid var(--ink)}
+  .pd .v{font-size:19px}
+  .short,.cols{grid-template-columns:1fr;margin-left:0}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<main>
-<div class="wrap">
-  <header class="top">
+<header class="wrap mast">
+  <b>Saverio Moretti</b>
+  <nav aria-label="Sezioni">
+    <a href="#server">Server</a><a href="#catalogo">Catalogo</a><a href="#integrazioni">Integrazioni</a><a href="#ordini">Ordini e IVA</a><a href="#continuita">Continuità</a><a href="#contatti">Contatti</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="hero">
     <div>
-      <h1>Saverio Moretti</h1>
-      <p class="lead">Costruisco i sistemi che fanno girare un e-commerce: import, integrazioni con marketplace e gestionali, controlli che evitano gli errori prima che arrivino ai clienti. Lavoro dirigendo agenti AI e verificando ogni risultato.</p>
-      <ul class="contacts">
-        <li><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a></li>
-        <li><a href="https://it.linkedin.com/in/saverio-moretti-547245309">LinkedIn</a></li>
-        <li><a href="https://github.com/saverio-moretti-dev">GitHub</a></li>
-        <li>Arezzo, anche da remoto</li>
-      </ul>
+      <h1>Due anni fa caricavo prodotti a mano. Oggi quel catalogo ne conta più di 120.000.</h1>
+      <p>Dal 2024 lavoro su un e-commerce di informatica nuova e ricondizionata, su PrestaShop. Nel tempo mi sono occupato di quasi tutto quello che sta dietro al sito: il server, i dati del catalogo, i collegamenti con il gestionale e con i marketplace, gli ordini e l'IVA.</p>
+      <p>Qui sotto ci sono i lavori, ognuno con la situazione di partenza e quella di arrivo. Il codice è dell'azienda e non lo pubblico; i numeri vengono da log, misure e interrogazioni sul database, e ognuno ha la sua data.</p>
     </div>
-    <aside class="label" aria-label="Scheda tecnica">
-      <p class="label-name">Scheda tecnica</p>
-      <p class="label-title">Sviluppatore e integratore e-commerce</p>
-      <dl class="spec">
-        <dt>Piattaforma</dt><dd>PrestaShop, PHP, MariaDB</dd>
-        <dt>Integrazioni</dt><dd>Amazon SP-API, Back Market, Refurbed, gestionale Danea</dd>
-        <dt>Anche</dt><dd>Python, Node.js, TypeScript, C++, Swift</dd>
-        <dt>Metodo</dt><dd>agenti AI con test, copie di collaudo, ritorno indietro</dd>
-        <dt>Disponibile</dt><dd>Arezzo e da remoto</dd>
-      </dl>
-      <div class="code"><svg viewBox="0 0 165 40" role="img" aria-label="codice a barre decorativo"><rect x="0" y="0" width="1" height="40"/><rect x="3" y="0" width="3" height="40"/><rect x="7" y="0" width="3" height="40"/><rect x="12" y="0" width="1" height="40"/><rect x="14" y="0" width="1" height="40"/><rect x="16" y="0" width="3" height="40"/><rect x="21" y="0" width="3" height="40"/><rect x="26" y="0" width="1" height="40"/><rect x="29" y="0" width="3" height="40"/><rect x="33" y="0" width="3" height="40"/><rect x="38" y="0" width="1" height="40"/><rect x="41" y="0" width="3" height="40"/><rect x="45" y="0" width="2" height="40"/><rect x="48" y="0" width="2" height="40"/><rect x="51" y="0" width="1" height="40"/><rect x="54" y="0" width="2" height="40"/><rect x="58" y="0" width="3" height="40"/><rect x="63" y="0" width="2" height="40"/><rect x="67" y="0" width="3" height="40"/><rect x="72" y="0" width="1" height="40"/><rect x="74" y="0" width="2" height="40"/><rect x="77" y="0" width="1" height="40"/><rect x="79" y="0" width="3" height="40"/><rect x="83" y="0" width="3" height="40"/><rect x="87" y="0" width="2" height="40"/><rect x="90" y="0" width="2" height="40"/><rect x="94" y="0" width="2" height="40"/><rect x="98" y="0" width="1" height="40"/><rect x="101" y="0" width="1" height="40"/><rect x="104" y="0" width="1" height="40"/><rect x="107" y="0" width="1" height="40"/><rect x="110" y="0" width="3" height="40"/><rect x="114" y="0" width="1" height="40"/><rect x="117" y="0" width="3" height="40"/><rect x="121" y="0" width="3" height="40"/><rect x="126" y="0" width="1" height="40"/><rect x="128" y="0" width="1" height="40"/><rect x="130" y="0" width="3" height="40"/><rect x="135" y="0" width="3" height="40"/><rect x="140" y="0" width="1" height="40"/><rect x="143" y="0" width="3" height="40"/><rect x="147" y="0" width="3" height="40"/><rect x="152" y="0" width="1" height="40"/><rect x="155" y="0" width="3" height="40"/><rect x="159" y="0" width="2" height="40"/><rect x="162" y="0" width="2" height="40"/></svg><span>SM 2024–2026</span></div>
-    </aside>
-  </header>
+    <div class="who">
+      <b>Sviluppo, integrazioni, server</b>
+      <p>PHP e PrestaShop, Python, SQL (MariaDB, Firebird), Linux e nginx, API di Amazon e dei marketplace.</p>
+      <p>Arezzo, disponibile anche da remoto.</p>
+      <p><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a></p>
+    </div>
+  </section>
 
-  <div class="facts">
-    <div class="fact"><b>×12</b><span>il catalogo, da circa 10.000 a oltre 120.000 prodotti</span></div>
-    <div class="fact"><b>~20</b><span>moduli scritti da me, in produzione</span></div>
-    <div class="fact"><b>12</b><span>marketplace Amazon gestiti dal back office</span></div>
-    <div class="fact"><b>2,67 M</b><span>richieste analizzate per diagnosticare il sito</span></div>
+  <div class="ledger" role="table" aria-label="Prima e dopo, in sintesi">
+    <div class="ledger-h" role="row"><span class="lab" role="columnheader">Cosa</span><span class="lab" role="columnheader">Prima</span><span class="lab" role="columnheader">Dopo</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Prodotti a catalogo</span><span class="b" role="cell">~10.000 (2024)</span><span class="a" role="cell">oltre 120.000</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Server saturo, avvisi al giorno</span><span class="b" role="cell">142 (25/09/26)</span><span class="a" role="cell">1 (27/09/26)</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Aggiornamento sito dal gestionale</span><span class="b" role="cell">a mano, ogni mattina</span><span class="a" role="cell">ogni ora + sonda ogni 10 min</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Offerte Amazon, 12 marketplace</span><span class="b" role="cell">a mano, un paese alla volta</span><span class="a" role="cell">un file, con annullamento</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Correzione IVA proposta</span><span class="b" role="cell">~16.000 righe a rischio</span><span class="a" role="cell">1.058 corrette, 0 danni</span></div>
+    <div class="ledger-r" role="row"><span class="what" role="cell">Carico del server fermato come bot</span><span class="b" role="cell">nessun filtro</span><span class="a" role="cell">41,5%, 0 persone bloccate</span></div>
   </div>
+  <p class="src">Date nel formato giorno/mese/anno. Dove un numero è una stima lo scrivo.</p>
 
-  <section aria-labelledby="casi">
-    <h2 id="casi">Cosa ho risolto</h2>
-    <p class="intro">Due anni su un e-commerce di informatica nuova e ricondizionata. Il codice è dell'azienda e non è pubblico: qui ci sono il problema, la soluzione e i numeri. Tocca un caso per il dettaglio.</p>
+  <!-- SERVER -->
+  <section class="chap" id="server" aria-labelledby="h-server">
+    <div class="chap-h"><span class="lab">01</span><div><h2 id="h-server">Server e prestazioni</h2><p>Quando il sito o il server si bloccavano, toccava a me rimetterli in piedi, spesso in pochi minuti, e correggere gli errori lasciati da sviluppatori esterni. Qui sotto i tre casi documentati con i numeri.</p></div></div>
 
-    <h3>Catalogo e dati</h3>
-    <details class="case"><summary><span class="t">Un catalogo cresciuto dodici volte<span class="s">Da circa 10.000 a oltre 120.000 prodotti in due anni, senza perdere il controllo dei dati.</span></span><span class="n">×12<small>prodotti a catalogo</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Il catalogo si allargava a nuovi fornitori e marchi più in fretta di quanto si potesse caricare a mano.</p><p>Lavori che a mano avrebbero richiesto mesi si chiudono in pochi giorni.</p><ul><li>import massivi automatizzati dai listini dei fornitori, con validazione prima della scrittura</li><li>abbinamento per codice EAN con i prodotti già presenti, per non creare doppioni</li><li>schede e testi arricchiti con l'API batch di Claude e ricontrollati prima dell'import</li></ul><p class="tools">PHP, Python, PrestaShop, MariaDB, Claude Batch API</p></div></details>
-    <details class="case"><summary><span class="t">Import senza rischi<span class="s">Un import che non può rovinare il catalogo: prima mostra, poi scrive.</span></span><span class="n">= nativo<small>convalidato campo per campo</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>L'import nativo di PrestaShop scrive subito sul sito vero: un file sbagliato rovina migliaia di schede, senza ritorno.</p><p>Provato importando lo stesso file con il nativo e con il modulo su una copia del sito: risultato identico, campo per campo. In produzione dal 28/09/2026, circa 12.000 righe.</p><ul><li>il file caricato viene congelato e ogni prodotto fotografato prima di toccarlo</li><li>anteprima identica alla pagina reale, generata e poi annullata</li><li>mappatura delle colonne, lavoro a passi e scrittura solo dopo una conferma esplicita</li></ul><p class="tools">PHP, PrestaShop, MariaDB, cron, Docker</p></div></details>
-    <details class="case"><summary><span class="t">Il catalogo tradotto con l'AI dei PC dell'ufficio<span class="s">Modelli AI locali su una rete di computer, usati solo quando nessuno ci lavora.</span></span><span class="n">109.000<small>testi tradotti al giorno</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Tradurre in più lingue un catalogo di questa dimensione, a mano, era impossibile.</p><p>Circa 150.000 testi pronti per ciascuna lingua, a un ritmo di circa 109.000 testi al giorno.</p><ul><li>un traduttore con revisore automatico su modelli AI che girano in locale</li><li>una rete di PC dell'ufficio che lavorano fuori orario o quando sono liberi, e si fermano al primo tocco dell'operatore</li><li>un glossario condiviso per i termini tecnici</li></ul><p class="tools">Python, llama.cpp, modelli locali, PowerShell, PrestaShop</p></div></details>
-    <details class="case"><summary><span class="t">Codici prodotto sempre unici<span class="s">Una guardia che impedisce i codici doppi alla fonte.</span></span><span class="n">0<small>modifiche al core</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Duplicare un prodotto in PrestaShop copia anche il suo codice: nascono doppioni che rompono gli import e i marketplace.</p><ul><li>blocco del salvataggio se il codice esiste già su un altro prodotto</li><li>alla duplicazione la copia riceve da sola il primo codice libero della serie</li><li>interruttori indipendenti, tutti spenti di default: installato non cambia nulla finché non si decide</li></ul><p class="tools">PHP, PrestaShop</p></div></details>
+    <article class="case">
+      <div class="when">set 2026</div>
+      <div>
+        <h3>Il sito andava in saturazione decine di volte al giorno. In due giorni, una volta sola.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">142 avvisi/giorno</span><span class="d">il 25/09; media 81 al giorno dal 21 al 26/09, contro 2–4 nei mesi estivi</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">1 avviso/giorno</span><span class="d">il 27/09, il giorno dopo la correzione</span></div>
+        </div>
+        <figure class="chart">
+          <svg viewBox="0 0 440 214" role="img" aria-label="Media giornaliera degli avvisi di saturazione: marzo 7,0; aprile 5,6; maggio 12,9; giugno 2,3; luglio 2,8; agosto 3,7; 21-26 settembre 81,2; poi singoli giorni: 25 settembre 142; 26 settembre 47; 27 settembre 1.">
+<line x1="34" y1="170" x2="436" y2="170" stroke="#151515"/>
+<line x1="34" y1="100.0" x2="436" y2="100.0" stroke="#ECE9E2"/><text class="ax" x="30" y="104.0" text-anchor="end">75</text>
+<line x1="34" y1="30.0" x2="436" y2="30.0" stroke="#ECE9E2"/><text class="ax" x="30" y="34.0" text-anchor="end">150</text>
+<text class="ax" x="30" y="174" text-anchor="end">0</text>
+<rect x="42" y="163.5" width="28" height="6.5" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="56.0" y="158.5" text-anchor="middle" fill="#151515">7</text>
+<text class="ax" x="56.0" y="186" text-anchor="middle">mar</text>
+<rect x="80" y="164.8" width="28" height="5.2" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="94.0" y="159.8" text-anchor="middle" fill="#151515">5,6</text>
+<text class="ax" x="94.0" y="186" text-anchor="middle">apr</text>
+<rect x="118" y="158.0" width="28" height="12.0" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="132.0" y="153.0" text-anchor="middle" fill="#151515">12,9</text>
+<text class="ax" x="132.0" y="186" text-anchor="middle">mag</text>
+<rect x="156" y="167.9" width="28" height="2.1" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="170.0" y="162.9" text-anchor="middle" fill="#151515">2,3</text>
+<text class="ax" x="170.0" y="186" text-anchor="middle">giu</text>
+<rect x="194" y="167.4" width="28" height="2.6" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="208.0" y="162.4" text-anchor="middle" fill="#151515">2,8</text>
+<text class="ax" x="208.0" y="186" text-anchor="middle">lug</text>
+<rect x="232" y="166.5" width="28" height="3.5" fill="#B8B3A8" opacity="1"/>
+<text class="vl" x="246.0" y="161.5" text-anchor="middle" fill="#151515">3,7</text>
+<text class="ax" x="246.0" y="186" text-anchor="middle">ago</text>
+<rect x="270" y="94.2" width="28" height="75.8" fill="#8C3B2A" opacity="0.55"/>
+<text class="vl" x="284.0" y="89.2" text-anchor="middle" fill="#8C3B2A">81</text>
+<text class="ax" x="284.0" y="186" text-anchor="middle">21–26/9</text>
+<line x1="309" y1="10" x2="309" y2="176" stroke="#151515" stroke-dasharray="3 3"/>
+<rect x="320" y="37.5" width="28" height="132.5" fill="#8C3B2A" opacity="1"/>
+<text class="vl" x="334.0" y="32.5" text-anchor="middle" fill="#8C3B2A">142</text>
+<text class="ax" x="334.0" y="186" text-anchor="middle">25/9</text>
+<rect x="358" y="126.1" width="28" height="43.9" fill="#8C3B2A" opacity="0.75"/>
+<text class="vl" x="372.0" y="121.1" text-anchor="middle" fill="#8C3B2A">47</text>
+<text class="ax" x="372.0" y="186" text-anchor="middle">26/9</text>
+<rect x="396" y="169.0" width="28" height="1.0" fill="#11604A" opacity="1"/>
+<text class="vl" x="410.0" y="164.0" text-anchor="middle" fill="#11604A">1</text>
+<text class="ax" x="410.0" y="186" text-anchor="middle">27/9</text>
+<text class="ax" x="42" y="206">media al giorno, per mese</text><text class="ax" x="436" y="206" text-anchor="end">singoli giorni</text></svg>
+          <figcaption>Avvisi di saturazione dei processi PHP del server, 2026. La linea tratteggiata separa le medie mensili dai singoli giorni attorno alla correzione (26/09, ore 9:10).</figcaption>
+        </figure>
+        <p>Quando i processi che generano le pagine sono tutti occupati, i visitatori aspettano o ricevono un errore. Il tetto di processi non era cambiato: era cambiato il traffico.</p>
+        <p>Dai log ho isolato un programma che copiava il sito presentandosi come un normale browser. Da solo occupava il <b>18,2%</b> del tempo di elaborazione, fino al <b>34–37%</b> nei giorni peggiori. Il 26/09 alle 9:10 ho messo una regola che lo blocca. Gli avvisi sono scesi a <mark>47</mark> quel giorno e a <mark>1</mark> il giorno dopo.</p>
+        <p class="why">Settembre è stato il mese con più ordini dell'anno. Un sito che si blocca proprio allora perde vendite che non si vedono in nessun report.</p>
+        <p class="stack">nginx · log di accesso · PHP-FPM · Python per l'analisi</p>
+      </div>
+    </article>
 
-    <h3>Integrazioni</h3>
-    <details class="case"><summary><span class="t">Amazon su 12 marketplace dal back office<span class="s">Quello che si faceva a mano, marketplace per marketplace, ora parte da una lista di codici.</span></span><span class="n">239<small>test prima del rilascio</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Prezzi, quantità, titoli e chiusure delle offerte si gestivano a mano su Seller Central, un marketplace alla volta, senza traccia e senza ritorno.</p><p>In produzione dal 03/10/2026; circa 9.300 righe.</p><ul><li>scarico in Excel dello stato delle offerte, da una lista di codici o da un file</li><li>modifica in blocco dallo stesso Excel o con regole, con verifica a secco su Amazon prima di scrivere</li><li>chiusura e cancellazione con fotografia completa e conferma, e annullamento che rimette tutto com'era</li><li>ricerca in diretta di un codice su 12 marketplace in circa 7 secondi</li></ul><p class="tools">PHP, PrestaShop, Amazon SP-API, MariaDB</p></div></details>
-    <details class="case"><summary><span class="t">Il gestionale aggiorna il sito da solo<span class="s">Prezzi, quantità e pubblicazione passano dal gestionale al sito ogni ora.</span></span><span class="n">ogni ora<small>prima: a mano ogni mattina</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>L'aggiornamento del catalogo dal gestionale partiva a mano, una volta al giorno.</p><ul><li>un programma che legge il gestionale in sola lettura e invia solo le differenze</li><li>giro orario in orario d'ufficio e una sonda ogni 10 minuti per le urgenze</li><li>un proprio registro degli invii: il gestionale non viene mai toccato</li></ul><p class="tools">Python, Firebird, XML, PrestaShop</p></div></details>
-    <details class="case"><summary><span class="t">Back Market e Refurbed in un file<span class="s">Lo stato delle offerte sui marketplace del ricondizionato, scaricato dal back office.</span></span><span class="n">10.000<small>codici per lavoro</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Controllare le offerte sui marketplace del ricondizionato voleva dire aprirle una per una.</p><ul><li>scarico in Excel o CSV per codici, per gruppi da file o per tutto il catalogo</li><li>colonne scelte dall'utente, con profili pronti</li><li>sola lettura sui marketplace: il modulo non può modificare niente</li></ul><p class="tools">PHP, PrestaShop, API Back Market e Refurbed</p></div></details>
+    <article class="case">
+      <div class="when">set–ott 2026</div>
+      <div>
+        <h3>Prima di pagare un server più grande, ho misurato dove andava il lavoro di quello che c'era.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">La proposta</span><span class="v">server più potente</span><span class="d">l'unica soluzione offerta dall'hosting, con un costo mensile in più</span></div>
+          <div class="after"><span class="lab">Le misure</span><span class="v">CPU inattiva al 61,8%</span><span class="d">il problema non era la potenza; solo l'11,1% del carico serviva persone</span></div>
+        </div>
+        <p>Ho tenuto dei sensori sul server per dieci giorni e ho classificato <mark>2,67 milioni</mark> di richieste: visitatori, motori di ricerca, crawler di intelligenza artificiale, programmi che copiano i prezzi. Ogni mattina un agente AI rifaceva l'analisi sui dati della notte.</p>
+        <p>Cosa è venuto fuori:</p>
+        <p>— il database passava il <b>49,4%</b> del suo tempo ad aspettare la propria cache, cioè un problema di configurazione, non di hardware;<br>
+        — un modulo di terzi rallentava la home del <b>61%</b>, misurato su una copia del sito acceso e spento;<br>
+        — i 18 moduli scritti da me pesano <b>meno dello 0,01%</b> del tempo PHP: con e senza, la home risponde in 7.136 e 7.126 ms;<br>
+        — le regole contro i bot, provate su giorni diversi da quelli usati per scriverle, fermano il <mark>41,5%</mark> del carico e <b>0</b> persone.</p>
+        <p>Il risultato è un rapporto di 75 pagine con la fonte di ogni numero e gli interventi in ordine di costo, a partire da quelli gratuiti.</p>
+        <p class="why">Servire il carico inutile con un server più costoso avrebbe spostato il problema di qualche mese. Con le misure, la decisione si può prendere sapendo cosa si compra.</p>
+        <p class="stack">MariaDB · log nginx · campionamento PHP · Python · prove A/B su copie isolate</p>
+      </div>
+    </article>
 
-    <h3>Ordini e fiscalità</h3>
-    <details class="case"><summary><span class="t">IVA intracomunitaria verificata<span class="s">L'esenzione scatta solo quando è davvero dovuta.</span></span><span class="n">3<small>condizioni, tutte necessarie</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Ai clienti aziendali di altri paesi UE l'IVA va tolta, ma solo nei casi previsti dalla legge.</p><ul><li>partita IVA approvata a mano, ancora valida nel registro europeo VIES</li><li>merce che lascia davvero l'Italia: chiusa la scappatoia di fatturare all'estero e spedire in Italia</li><li>un unico punto del codice decide, usato da tutte le pagine e da tutti i controlli</li></ul><p class="tools">PHP, PrestaShop, servizio VIES</p></div></details>
-    <details class="case"><summary><span class="t">Una correzione IVA fermata in tempo<span class="s">Prima di correggere, ho misurato i dati veri.</span></span><span class="n">16.000<small>righe salvate da un errore</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>L'export degli ordini verso il gestionale assegnava l'IVA sbagliata ad alcune righe esenti.</p><p>La correzione più ovvia si basava su un campo che il database compila male: misurandolo, avrebbe tolto l'IVA a circa 16.000 righe regolarmente tassate.</p><p>La regola giusta si basa su un altro dato, affidabile, e tocca solo le 1.058 righe davvero esenti.</p><p class="tools">PHP, SQL, PrestaShop</p></div></details>
-    <details class="case"><summary><span class="t">Ordini rotti scoperti subito<span class="s">Un ordine rimasto a metà ora fa scattare un allarme.</span></span><span class="n">4 giorni<small>per scoprire il primo caso</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Un blocco del database poteva lasciare un ordine registrato a metà, senza righe e senza stato. Il primo caso fu notato dopo quattro giorni.</p><ul><li>ricostruita la causa dai log, al secondo</li><li>allarme automatico via email sugli ordini incompleti</li><li>sensori che registrano chi tiene bloccato il database, per i casi futuri</li></ul><p class="tools">PHP, SQL, MariaDB, log del server</p></div></details>
-    <details class="case"><summary><span class="t">Contrassegno e punti di ritiro<span class="s">Il contrassegno sparisce quando la consegna è a un locker.</span></span><span class="n">2<small>moduli di terzi con lo stesso errore</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Alcuni clienti sceglievano il contrassegno con consegna a un locker, che non può incassare.</p><p>La causa: i moduli dei corrieri cercavano un modulo di pagamento spento da anni, e il controllo non scattava mai.</p><p>Una correzione piccola e isolata, provata con un checkout vero su una copia del sito.</p><p class="tools">PHP, JavaScript, PrestaShop</p></div></details>
-    <details class="case"><summary><span class="t">Sconti per quantità rifatti da zero<span class="s">Il vecchio modulo poteva dare lo sconto di un cliente al carrello di un altro.</span></span><span class="n">1<small>regola per carrello, solo sua</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Il modulo di sconti precedente aveva un difetto che faceva finire una regola di sconto sul carrello sbagliato.</p><p>In produzione dal 28/09/2026.</p><ul><li>motore di calcolo puro e testato: entra un carrello, esce l'importo con la spiegazione</li><li>profili a tre livelli (prodotto, categoria, generale) con tetti obbligatori</li><li>la regola appartiene a quel carrello e, all'ordine, non si tocca più</li></ul><p class="tools">PHP, PrestaShop, test automatici</p></div></details>
-
-    <h3>Affidabilità e prestazioni</h3>
-    <details class="case"><summary><span class="t">Il server non era troppo piccolo<span class="s">Dieci giorni di misure al posto di un server più costoso.</span></span><span class="n">11,1%<small>del carico era di visitatori veri</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>L'hosting proponeva come unica soluzione il potenziamento del server.</p><p>Un rapporto di 75 pagine per la direzione, con la fonte di ogni numero.</p><ul><li>sensori in produzione per 10 giorni e analisi automatica ogni mattina con un agente AI</li><li>2,67 milioni di richieste classificate: visitatori, motori di ricerca, crawler AI, scraper</li><li>prove A/B dei moduli su una copia: uno rallentava la home del 61%</li><li>regole anti-bot provate su giorni diversi da quelli usati per costruirle: fermano il 41,5% del carico senza bloccare persone</li></ul><p class="tools">PHP, Python, MariaDB, analisi dei log</p></div></details>
-    <details class="case"><summary><span class="t">Una copia completa del sito, verificata<span class="s">Codice, file e database salvati e controllati byte per byte.</span></span><span class="n">18 GB<small>verificati con hash</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Non esisteva una copia completa e verificata del sito.</p><ul><li>copia in streaming di tutti i file e del database, senza scrivere nulla sul server</li><li>impronte calcolate sul server e confrontate con quelle della copia</li><li>un riepilogo dell'esito di ogni verifica</li></ul><p class="tools">Bash, SSH, tar, mysqldump, sha256</p></div></details>
-    <details class="case"><summary><span class="t">Strumenti che non si lasciano ingannare<span class="s">Accesso ai dati in sola lettura, messo alla prova.</span></span><span class="n">150<small>test avversariali</small></span><span class="x" aria-hidden="true"></span></summary><div class="body"><p>Agenti AI e script dovevano leggere i dati di quattro sistemi senza mai poterli modificare.</p><ul><li>una cassetta di attrezzi unica per database, gestionale e marketplace</li><li>150 prove che tentano di far passare una scrittura: valgono solo se vengono fermate</li></ul><p class="tools">Python, SQL, test di sicurezza</p></div></details>
-
+    <article class="case">
+      <div class="when">ott 2026</div>
+      <div>
+        <h3>Il collegamento con i marketplace si era fermato da cinque giorni. La causa era un campo troppo corto.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">errore a ogni giro</span><span class="d">dal 26/09: catalogo e ordini dei marketplace non sincronizzati; l'assistenza del fornitore sblocca a mano il 30/09</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">causa corretta il 01/10</span><span class="d">una riga nel modulo; lo stesso blocco non si ripresenta alla prossima sincronizzazione lunga</span></div>
+        </div>
+        <p>Il modulo di terzi che sincronizza il catalogo con i marketplace salvava la durata di ogni giro in un campo di 10 caratteri. Il giro del 26/09 era durato più di 1.000 secondi: il valore ne occupava 11, la validazione falliva e da lì ogni giro successivo andava in errore.</p>
+        <p>Lo sblocco dell'assistenza cancellava il sintomo, non la causa. Ho trovato la riga nei log degli errori e nel codice del modulo e ho portato il limite a 20, con una copia della versione originale e la nota per riapplicare la modifica dopo ogni aggiornamento del modulo.</p>
+        <p>Sullo stesso modulo avevo già fatto l'aggiornamento dalla versione 2.0 alla 2.5, con un ritorno indietro provato e due correzioni manuali di terzi recuperate e riportate.</p>
+        <p class="stack">PHP · PrestaShop · log delle eccezioni</p>
+      </div>
+    </article>
   </section>
 
-  <section aria-labelledby="metodo">
-    <h2 id="metodo">Come lavoro</h2>
-    <p class="intro">Gran parte del codice lo scrivono agenti AI che dirigo io. Il mio lavoro è decidere cosa va fatto, come si verifica e quando è pronto.</p>
-    <div class="method">
-      <div><b>Prima si misura</b><p>Nessuna correzione senza i dati reali: prima i numeri dal database o dai log, poi la modifica.</p></div>
-      <div><b>Una copia per ogni prova</b><p>Ogni modulo ha la sua copia isolata del sito, dove si prova tutto prima della produzione.</p></div>
-      <div><b>Sempre un ritorno indietro</b><p>Ogni rilascio ha un'etichetta, un backup e un comando per tornare alla versione precedente.</p></div>
-      <div><b>Tutto scritto</b><p>Decisioni, errori e lezioni restano documentati: oltre 600 documenti tecnici in due anni.</p></div>
+  <!-- CATALOGO -->
+  <section class="chap" id="catalogo" aria-labelledby="h-catalogo">
+    <div class="chap-h"><span class="lab">02</span><div><h2 id="h-catalogo">Catalogo e dati</h2><p>Un catalogo che passa da 10.000 a 120.000 prodotti non si tiene in ordine a mano. Ogni intervento sui dati qui sotto è passato da una prova, un backup e un comando per tornare indietro.</p></div></div>
+
+    <article class="case">
+      <div class="when">2024–2026</div>
+      <div>
+        <h3>Da circa 10.000 a oltre 120.000 prodotti, con gli strumenti per caricarli.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">~10.000 prodotti</span><span class="d">caricati uno alla volta dal pannello</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">oltre 120.000</span><span class="d">listini interi importati, con controllo dei codici prima della scrittura</span></div>
+        </div>
+        <p>L'azienda aggiungeva fornitori e marchi più in fretta di quanto si potesse caricare a mano. Ho costruito una catena che parte dal listino del fornitore: controlla i dati, cerca il codice EAN tra i prodotti già presenti per non creare doppioni, prepara i testi con un modello AI e li fa ricontrollare prima dell'import.</p>
+        <p>Il tempo risparmiato non l'ho misurato in ore. Il confronto che posso fare è questo: lavori che a mano avrebbero chiesto mesi si chiudono in pochi giorni.</p>
+        <p class="stack">PHP · Python · PrestaShop · MariaDB · API batch di Claude</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="when">lug 2026</div>
+      <div>
+        <h3>Sei caratteristiche su tutti i 100.808 prodotti: da oltre due ore di scrittura a 94 secondi.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">oltre 2 ore</span><span class="d">la durata stimata dal secondo pilota scrivendo riga per riga; caratteristiche vuote, con vocabolari diversi e righe orfane</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">345.404 righe in 94 s</span><span class="d">verifica finale: 0 righe rotte, 0 doppioni; 4 caratteristiche su 6 al 100% dei prodotti</span></div>
+        </div>
+        <p>Le sei caratteristiche che ogni prodotto deve avere (come condizione e garanzia) erano spesso vuote o scritte in modi diversi. Prima del giro completo ho fatto tre piloti su prodotti veri, da 10–12 prodotti ciascuno. Hanno trovato tre difetti che avrebbero colpito tutto il catalogo: il file di annullamento non si generava, la scrittura riga per riga sarebbe durata oltre due ore, un prodotto restava con una riga rotta invece che vuota.</p>
+        <p>Restano 303 prodotti senza condizione e 237 senza garanzia: nessuna fonte dice cosa siano, e li ho lasciati in un elenco da decidere invece di inventare un valore.</p>
+        <p class="stack">SQL · Python · MariaDB</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="when">lug 2026</div>
+      <div>
+        <h3>Un nuovo fornitore, sito e gestionale allineati: 1.410 articoli su 1.410.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">1.342 articoli solo sul sito</span><span class="d">il gestionale non li conosceva: prezzi e quantità sul sito non si aggiornavano mai</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">1.410 / 1.410</span><span class="d">tutti presenti in entrambi, verificati uno per uno</span></div>
+        </div>
+        <p>Lo stesso lavoro ha incluso: <b>159</b> prodotti nuovi, con le immagini di un import precedente riparate; i testi di <b>333</b> schede; <b>810</b> varianti in confezione multipla create su sito e gestionale; circa <b>2.185</b> schede portate allo stesso standard di disponibilità; <b>12</b> doppioni eliminati.</p>
+        <p>Sui 14 doppioni segnalati, quelli veri erano 4: gli altri erano prodotti diversi con descrizioni simili. Cancellarli in blocco avrebbe tolto dal sito prodotti in vendita.</p>
+        <p class="stack">Python · SQL · Firebird · PrestaShop</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="when">set 2026</div>
+      <div>
+        <h3>Un import che prima mostra e poi scrive.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">scrittura immediata</span><span class="d">con l'import standard, una colonna sbagliata rovina migliaia di schede senza ritorno</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">identico al nativo</span><span class="d">stesso file, stesso risultato campo per campo; in più anteprima e annullamento</span></div>
+        </div>
+        <p>Il modulo congela il file caricato, fotografa ogni prodotto prima di toccarlo, mostra un'anteprima uguale alla pagina reale e scrive solo dopo una conferma. Per fidarmi ho importato lo stesso file con il sistema standard e con il mio su una copia del sito e ho confrontato i risultati: identici. In produzione dal 28/09/2026.</p>
+        <p class="stack">PHP · PrestaShop · MariaDB · cron · Docker</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="when">2026</div>
+      <div>
+        <h3>Il catalogo tradotto dai computer dell'ufficio, quando nessuno li usa.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">nessuna traduzione</span><span class="d">decine di migliaia di schede, impossibili da tradurre a mano</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">~109.000 testi/giorno</span><span class="d">circa 150.000 testi pronti per lingua, su hardware già presente</span></div>
+        </div>
+        <p>Un traduttore e un revisore automatico su modelli AI che girano in locale. A farli girare sono i PC dell'ufficio: lavorano fuori orario o quando sono liberi e si fermano appena qualcuno tocca il mouse. Un glossario condiviso tiene fermi i termini tecnici.</p>
+        <p class="stack">Python · llama.cpp · PowerShell</p>
+      </div>
+    </article>
+  </section>
+
+  <!-- INTEGRAZIONI -->
+  <section class="chap" id="integrazioni" aria-labelledby="h-integrazioni">
+    <div class="chap-h"><span class="lab">03</span><div><h2 id="h-integrazioni">Integrazioni</h2><p>Sito, gestionale e marketplace devono dire la stessa cosa su prezzi e quantità. Prima lo garantiva una persona; ora lo fanno programmi che non possono scrivere dove non devono.</p></div></div>
+
+    <article class="case">
+      <div class="when">ott 2026</div>
+      <div>
+        <h3>Dodici marketplace Amazon gestiti da una sola pagina del back office.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">12 pannelli, a mano</span><span class="d">prezzi, quantità e titoli cambiati un paese alla volta, senza traccia e senza annullamento</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">1 file · ~7 s</span><span class="d">per cercare un codice su tutti i 12 marketplace; ogni modifica si annulla</span></div>
+        </div>
+        <p>Da una lista di codici si scarica lo stato delle offerte in Excel, lo si corregge e lo si ricarica. Prima di scrivere il sistema fa una prova a secco su Amazon; chiusure e cancellazioni salvano una fotografia completa dell'offerta, così l'annullamento rimette tutto com'era.</p>
+        <p>La versione in produzione è passata da <mark>239</mark> test prima del rilascio.</p>
+        <p class="stack">PHP · PrestaShop · Amazon SP-API · MariaDB</p>
+      </div>
+    </article>
+
+    <article class="case">
+      <div class="when">2026</div>
+      <div>
+        <h3>Il gestionale aggiorna il sito da solo, ogni ora.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Prima</span><span class="v">1 volta al giorno, a mano</span><span class="d">qualcuno avviava l'aggiornamento ogni mattina; un prezzo cambiato alle 11 arrivava il giorno dopo</span></div>
+          <div class="after"><span class="lab">Dopo</span><span class="v">ogni ora, 10–19</span><span class="d">più una sonda ogni 10 minuti per le urgenze</span></div>
+        </div>
+        <p>Il programma legge il gestionale in sola lettura e invia al sito solo le differenze, con un proprio registro degli invii. Il gestionale non viene mai modificato.</p>
+        <p class="stack">Python · Firebird · XML · PrestaShop</p>
+      </div>
+    </article>
+
+    <div class="short">
+      <div><b>Marketplace del ricondizionato in un file</b><p>Lo stato delle offerte su Back Market e Refurbed si scarica in Excel, fino a <span class="num">10.000</span> codici per lavoro. Il modulo è in sola lettura: non può modificare niente per errore.</p></div>
+      <div><b>Fornitori creati da soli</b><p>Sul sito comparivano fornitori che nessuno aveva creato. Causa: un modulo di terzi ignorava un'impostazione del negozio e a ogni prodotto nuovo creava un fornitore. Corretto il 20/07/2026.</p></div>
     </div>
   </section>
 
-  <section aria-labelledby="progetti">
-    <h2 id="progetti">Progetti personali</h2>
-    <ul class="own">
-      <li><b><a href="https://github.com/saverio-moretti-dev/guardaroba">Guardaroba</a></b><p>Gestionale condiviso per vendere online: app installabile, funzioni serverless, salvataggi concorrenti, coda offline. Pubblico, con test e storia completa.</p></li>
-      <li><b>Plugin audio</b><p>20 plugin e 14 moduli di elaborazione audio in C++/JUCE, circa 86.700 righe, misure automatiche e integrazione continua.</p></li>
-      <li><b>Sistema multi-agente</b><p>Un agente coordinatore che collega 7 progetti, traccia i passaggi di informazioni e tiene sotto controllo i costi dei modelli AI.</p></li>
-      <li><b>Sito bilingue</b><p>Astro e TypeScript, newsletter con protezione dai bot, pubblicazione automatica.</p></li>
-    </ul>
+  <!-- ORDINI -->
+  <section class="chap" id="ordini" aria-labelledby="h-ordini">
+    <div class="chap-h"><span class="lab">04</span><div><h2 id="h-ordini">Ordini e IVA</h2><p>Qui un errore non rallenta il sito: finisce in fattura.</p></div></div>
+
+    <article class="case">
+      <div class="when">lug 2026</div>
+      <div>
+        <h3>Una correzione IVA che avrebbe sbagliato 16.000 righe. L'ho fermata prima.</h3>
+        <div class="pd">
+          <div class="before"><span class="lab">Rischio</span><span class="v">~16.000 righe</span><span class="d">regolarmente tassate, a cui la correzione ovvia avrebbe tolto l'IVA</span></div>
+          <div class="after"><span class="lab">Esito</span><span class="v">1.058 righe corrette</span><span class="d">solo quelle davvero esenti; nessuna riga giusta toccata</span></div>
+        </div>
+        <p>L'export degli ordini verso il gestionale metteva l'IVA al 22% su righe vendute senza IVA, comprese le esportazioni fuori dall'Unione: <b>553</b> righe in quasi quattro anni. Simulando l'export di un ordine vero, il documento nel gestionale usciva con un'IVA che il cliente non aveva pagato.</p>
+        <p>La correzione proposta si basava su un campo del database che sembrava affidabile. Prima di applicarla l'ho misurato: era vuoto anche su moltissime righe tassate. Ho trovato il dato giusto e la regola finale tocca solo le righe esenti.</p>
+        <p class="stack">SQL · PHP · PrestaShop · gestionale Danea</p>
+      </div>
+    </article>
+
+    <div class="short">
+      <div><b>IVA intracomunitaria verificata</b><p>Ai clienti aziendali UE l'IVA si toglie solo se tre condizioni sono vere insieme: partita IVA approvata, valida nel registro VIES, e merce che lascia davvero l'Italia. <span class="num">338</span> clienti aziendali verificati e pre-approvati.</p></div>
+      <div><b>Ordini rotti scoperti subito</b><p>Un blocco del database poteva lasciare un ordine registrato a metà. Il primo caso era stato notato dopo <span class="num">4</span> giorni; ricostruita la causa dai log, al secondo, ora scatta un allarme automatico.</p></div>
+      <div><b>Contrassegno e locker</b><p>Alcuni clienti sceglievano il contrassegno con consegna a un punto di ritiro, che non può incassare. La causa era in <span class="num">2</span> moduli di terzi; corretta e provata con un checkout vero su una copia del sito.</p></div>
+      <div><b>Sconti per quantità rifatti da zero</b><p>Il vecchio modulo poteva applicare la regola di sconto di un carrello a un altro. Il nuovo calcola ogni sconto e scrive perché l'ha dato. In produzione dal 28/09/2026.</p></div>
+    </div>
   </section>
-</div>
+
+  <!-- CONTINUITA -->
+  <section class="chap" id="continuita" aria-labelledby="h-continuita">
+    <div class="chap-h"><span class="lab">05</span><div><h2 id="h-continuita">Sicurezza e continuità</h2><p>Sapere cosa c'è sul server, averne una copia buona e poterci lavorare senza rompere niente.</p></div></div>
+
+    <div class="short">
+      <div><b>Audit di sicurezza completo</b><p><span class="num">113</span> moduli, <span class="num">608</span> tabelle e <span class="num">56</span> override esaminati, in sola lettura. Rilievi consegnati in ordine di gravità; nessuna intrusione trovata.</p></div>
+      <div><b>Le modifiche nascoste al core</b><p><span class="num">22</span> file del cuore di PrestaShop risultavano modificati senza documentazione. Mappati tutti: un aggiornamento che ne sovrascrivesse 5 avrebbe reso non salvabili circa <span class="num">51.000</span> prodotti.</p></div>
+      <div><b>Una copia completa e verificata</b><p>File e database, circa <span class="num">18 GB</span>, copiati senza scrivere nulla sul server e confrontati con le impronte calcolate sul server.</p></div>
+      <div><b>Accesso ai dati in sola lettura, messo alla prova</b><p>Gli strumenti con cui agenti AI e script leggono database, gestionale e marketplace non possono scrivere: <span class="num">150</span> test provano a forzarli e valgono solo se vengono fermati.</p></div>
+    </div>
+  </section>
+
+  <!-- METODO -->
+  <section class="chap" aria-labelledby="h-metodo">
+    <div class="chap-h"><span class="lab">06</span><div><h2 id="h-metodo">Come lavoro con l'AI</h2><p>La maggior parte del codice la scrivono agenti AI che dirigo io, e lo dico apertamente. Il mio lavoro è capire il problema, decidere cosa costruire e verificare che funzioni.</p></div></div>
+    <div class="cols">
+      <div><b>Prima si misura</b><p>Nessuna correzione senza i dati reali. Il caso dell'IVA sopra è il motivo.</p></div>
+      <div><b>Una copia per ogni prova</b><p>Otto copie isolate del sito, una per progetto: si rompe lì, non in produzione.</p></div>
+      <div><b>Sempre un ritorno indietro</b><p>Ogni rilascio ha un backup e un comando per tornare alla versione precedente.</p></div>
+      <div><b>Più agenti, un patto</b><p>Sessioni parallele sulla stessa repo, ognuna sul suo territorio, con regole scritte su chi tocca cosa.</p></div>
+    </div>
+  </section>
+
+  <section class="chap" aria-labelledby="h-fuori">
+    <div class="chap-h"><span class="lab">07</span><div><h2 id="h-fuori">Fuori dal lavoro</h2><p>Progetti miei, fatti con lo stesso metodo.</p></div></div>
+    <div class="cols">
+      <div><b><a href="https://github.com/saverio-moretti-dev/guardaroba">Guardaroba</a></b><p>Un'app per gestire in due, da due telefoni, le vendite di abiti usati online. Codice pubblico, con i test e la storia completa.</p></div>
+      <div><b>Plugin audio</b><p>Venti effetti audio in C++, con misure automatiche che controllano che suonino come devono.</p></div>
+      <div><b>Un sistema di agenti</b><p>Un agente coordinatore che tiene allineati sette progetti e controlla quanto costano i modelli AI.</p></div>
+      <div><b>Musica</b><p>Produco musica elettronica come SEM Brana, e curo da solo anche il sito e la promozione.</p></div>
+    </div>
+  </section>
 </main>
-<footer>
-  <div class="wrap">
-    <h2>Parliamone</h2>
-    <p>Se cercate qualcuno che sappia far funzionare insieme e-commerce, gestionali e marketplace, e che usi l'AI con metodo, scrivetemi.</p>
-    <p><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a> · <a href="https://it.linkedin.com/in/saverio-moretti-547245309">LinkedIn</a> · <a href="https://github.com/saverio-moretti-dev">GitHub</a></p>
-  </div>
-</footer>
+
+<footer class="wrap" id="contatti"><div class="in">
+  <h2>Contatti</h2>
+  <p>Sviluppo, integrazioni, dati e server, con l'AI come strumento di lavoro. Per parlarne:</p>
+  <ul class="contacts">
+    <li><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a></li>
+    <li><a href="https://it.linkedin.com/in/saverio-moretti-547245309">LinkedIn</a></li>
+    <li><a href="https://github.com/saverio-moretti-dev">GitHub</a></li>
+    <li>Arezzo · anche da remoto</li>
+  </ul>
+</div></footer>
 </body>
 </html>

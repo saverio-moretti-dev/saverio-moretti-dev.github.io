@@ -81,7 +81,7 @@ a{color:inherit}
 svg text{font-family:var(--f-mono)}
 
 /* codice */
-pre.code{margin:0;overflow-x:auto;font:12.5px/1.6 var(--f-mono);color:#c9d1d9;background:var(--pan2);border-radius:8px;padding:16px 18px}
+pre.code{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0;margin:0;overflow-x:auto;font:12.5px/1.6 var(--f-mono);color:#c9d1d9;background:var(--pan2);border-radius:8px;padding:16px 18px}
 pre.code .c{color:#7d8792}
 pre.code .k{color:var(--acc)}pre.code .s{color:#e6c07b}
 .notes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--mute)}
@@ -123,16 +123,30 @@ table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:upperc
 .gal .nav:focus-visible{outline:2px solid var(--acc)}
 .gal .nav svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2}
 .gal .prev{left:10px}.gal .next{right:10px}
+.deck .shot{background:var(--pan2);min-height:340px;display:grid}
+.deck .slide{grid-area:1/1;padding:28px 64px;display:grid;align-content:center;gap:10px;opacity:0;visibility:hidden;transition:opacity .35s}
+.deck .slide.cur{opacity:1;visibility:visible}
+.deck .slide h4{font:700 24px/1.15 var(--f-disp);margin:0}
+.deck .slide p{margin:0;font-size:15px;max-width:52ch}
+.deck .slide .eyebrow{margin:0}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;font:12px var(--f-mono)}
+.flow span{border:1px solid #3a4148;border-radius:6px;padding:5px 9px;color:var(--ink)}
+.flow i{width:14px;height:1.5px;background:var(--acc)}
+@media (max-width:560px){.deck .slide{padding:24px 56px 24px 20px}.deck .prev{display:none}}
 .dots{display:flex;gap:6px}
 .dots button{all:unset;cursor:pointer;width:26px;height:5px;border-radius:3px;background:var(--line)}
 .dots button[aria-current="true"]{background:var(--acc)}
 .what{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px;margin:0}
 .what b{color:var(--acc);font-weight:600}
-.demo{position:relative;border-radius:8px;overflow:hidden;background:#000}
-.demo.on{aspect-ratio:1280/860}
-.demo iframe{display:block;width:1280px;height:860px;border:0;transform-origin:0 0}
-#c-multi.live .stage{grid-column:1/-1}
-.demo .go{position:absolute;inset:auto 0 0 0;display:flex;justify-content:center;padding:18px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.demo{position:relative;border-radius:8px;overflow:hidden;background:#000;aspect-ratio:1280/860;max-width:1040px;margin:0 auto}
+.demo iframe{display:block;width:1280px;height:860px;border:0;transform-origin:0 0;pointer-events:none}
+.demo.on iframe{pointer-events:auto}
+.demo .veil{all:unset;cursor:pointer;position:absolute;inset:0;display:grid;place-items:center;background:rgba(16,18,21,.45);transition:opacity .3s}
+.demo .veil:focus-visible{outline:2px solid var(--acc);outline-offset:-2px}
+.demo.on .veil{opacity:0;pointer-events:none}
+.case.wide{grid-template-columns:minmax(0,1fr)}
+.wide-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+@media (max-width:860px){.wide-top{grid-template-columns:minmax(0,1fr)}}
 .btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
 .btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
@@ -144,7 +158,8 @@ table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:upperc
 .contact dt{font:12px/1.9 var(--f-mono);color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
 .contact dd{margin:0}
 footer{border-top:1px solid var(--line);font:12px var(--f-mono);color:var(--mute)}
-footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer .in{padding-block:26px;display:grid;gap:6px}
+footer p{margin:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -240,15 +255,14 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
         <rect x="16" y="146" width="528" height="60" rx="8" fill="#1d2126" stroke="#3a4148"/>
         <circle cx="44" cy="176.0" r="12" fill="none" stroke="#62c7bf" stroke-width="1.5"/><text x="44" y="180.0" fill="#62c7bf" font-size="11" text-anchor="middle">2</text>
         <text x="70" y="172.0" fill="#e8ebee" font-size="13">Legge prezzo e quantità</text>
-        <text x="70" y="190.0" fill="#8f97a1" font-size="11">in diretta, su tutti i marketplace</text>
-        <circle cx="336" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="353" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="370" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="387" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="404" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="421" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="438" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="455" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="472" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="489" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="506" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="523" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/>
+        <text x="70" y="190.0" fill="#8f97a1" font-size="11">in diretta, su tutti i 12 marketplace</text>
         <path d="M44 206V228" stroke="#62c7bf" stroke-width="1.5"/>
         <rect x="16" y="228" width="528" height="58" rx="8" fill="#1d2126" stroke="#3a4148"/>
         <circle cx="44" cy="257.0" r="12" fill="none" stroke="#62c7bf" stroke-width="1.5"/><text x="44" y="261.0" fill="#62c7bf" font-size="11" text-anchor="middle">3</text>
         <text x="70" y="253.0" fill="#e8ebee" font-size="13">Modifica prezzi, quantità, titoli</text>
         <text x="70" y="271.0" fill="#8f97a1" font-size="11">uno alla volta o in massa, anche da Excel</text>
-        <path d="M16 316H40" stroke="#62c7bf" stroke-dasharray="4 4"/><text x="50" y="320" fill="#8f97a1" font-size="11">Annulla: rimette i valori salvati prima della modifica</text>
-        <path d="M16 342H40" stroke="#3a4148" stroke-width="2"/><text x="50" y="346" fill="#8f97a1" font-size="11">Chiudere un'offerta chiede sempre un codice di conferma</text>
+        <text x="16" y="320" fill="#8f97a1" font-size="11">Ogni modifica si può annullare: tornano i valori salvati prima.</text>
+        <text x="16" y="344" fill="#8f97a1" font-size="11">Per chiudere un'offerta serve sempre un codice di conferma.</text>
       </svg>
     </div>
   </article>
@@ -267,23 +281,22 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
     </div>
     <div class="stage">
       <div class="badge"><b>244</b><span>test</span></div>
-      <svg viewBox="0 0 560 330" role="img" aria-label="Il gestionale senza API e il sito PrestaShop collegati da un ponte in Python, che blocca gli articoli come farebbe il gestionale con un collega">
+      <svg viewBox="0 0 560 330" role="img" aria-label="Il gestionale senza API e il sito PrestaShop collegati da un ponte in Python che sincronizza ogni ora">
         <g fill="#8f97a1" font-size="11"><text x="16" y="34" fill="#e8ebee" font-size="13">Colleghi al lavoro nel gestionale</text>
           <circle cx="24" cy="56" r="6" fill="#3a4148"/><circle cx="42" cy="56" r="6" fill="#3a4148"/><circle cx="60" cy="56" r="6" fill="#3a4148"/><circle cx="78" cy="56" r="6" fill="#3a4148"/></g>
         <path d="M51 64V110" stroke="#3a4148" stroke-dasharray="3 3" fill="none"/>
         <rect x="16" y="110" width="150" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
-        <text x="91" y="144" fill="#e8ebee" font-size="13" text-anchor="middle">Gestionale</text>
-        <text x="91" y="164" fill="#8f97a1" font-size="11" text-anchor="middle">nessuna API</text>
-        <rect x="195" y="96" width="170" height="122" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
-        <text x="280" y="126" fill="#e8ebee" font-size="13" text-anchor="middle">Ponte in Python</text>
-        <g fill="#8f97a1" font-size="10" text-anchor="middle"><text x="280" y="152">blocca l'articolo come</text><text x="280" y="168">fa il gestionale quando</text><text x="280" y="184">un collega lo apre</text></g>
+        <text x="91" y="146" fill="#e8ebee" font-size="13" text-anchor="middle">Gestionale</text>
+        <text x="91" y="166" fill="#8f97a1" font-size="11" text-anchor="middle">nessuna API</text>
+        <rect x="195" y="110" width="170" height="80" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
+        <text x="280" y="146" fill="#e8ebee" font-size="13" text-anchor="middle">Ponte in Python</text>
+        <text x="280" y="166" fill="#8f97a1" font-size="11" text-anchor="middle">sincronizza ogni ora</text>
         <rect x="394" y="110" width="150" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
-        <text x="469" y="144" fill="#e8ebee" font-size="13" text-anchor="middle">Sito</text>
-        <text x="469" y="164" fill="#8f97a1" font-size="11" text-anchor="middle">PrestaShop</text>
+        <text x="469" y="146" fill="#e8ebee" font-size="13" text-anchor="middle">Sito</text>
+        <text x="469" y="166" fill="#8f97a1" font-size="11" text-anchor="middle">PrestaShop</text>
         <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M166 140H195M195 160H166"/><path d="M365 140H394M394 160H365"/></g>
-        <text x="380" y="92" fill="#8f97a1" font-size="10" text-anchor="middle">ogni ora</text>
-        <path d="M280 218V254" stroke="#62c7bf" stroke-dasharray="4 4" fill="none"/>
-        <g font-size="11" text-anchor="middle"><text x="280" y="276" fill="#e8ebee">Due scritture sullo stesso articolo?</text><text x="280" y="296" fill="#8f97a1">si annulla tutto e si riprova da capo:</text><text x="280" y="314" fill="#8f97a1">nessun dato lasciato a metà</text></g>
+        <g fill="#8f97a1" font-size="11"><text x="16" y="250">Il ponte blocca un articolo come fa il gestionale</text><text x="16" y="268">quando lo apre un collega: nessuno lo sovrascrive.</text>
+        <text x="16" y="298">Due scritture sullo stesso articolo? Si annulla</text><text x="16" y="316">e si riprova da capo: nessun dato lasciato a metà.</text></g>
       </svg>
     </div>
   </article>
@@ -300,19 +313,18 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
       </div></div></div>
     </div>
     <div class="stage">
-      <svg viewBox="0 0 560 250" role="img" aria-label="Tempo del server in 10 giorni: 11,1% visitatori reali, il resto motori di ricerca, scraper, crawler di AI e attività interne">
-        <text x="16" y="34" fill="#e8ebee" font-size="13">Tempo del server, 10 giorni</text>
-        <rect x="16" y="50" width="528" height="44" rx="6" fill="#2a3036"/>
-        <rect x="16" y="50" width="58.6" height="44" rx="6" fill="#62c7bf"/>
-        <text x="16" y="118" fill="#62c7bf" font-size="12">11,1% visitatori reali</text>
-        <text x="88" y="70" fill="#8f97a1" font-size="11">88,9% motori di ricerca, scraper, crawler di AI,</text><text x="88" y="84" fill="#8f97a1" font-size="11">attività interne</text>
-        <text x="16" y="170" fill="#e8ebee" font-size="13">Tempo PHP con le regole anti‑bot (simulazione)</text>
-        <rect x="16" y="186" width="528" height="20" rx="4" fill="#2a3036"/>
-        <rect x="16" y="186" width="219.1" height="20" rx="4" fill="none" stroke="#62c7bf" stroke-dasharray="4 3"/>
-        <text x="16" y="230" fill="#8f97a1" font-size="11">fino al 41,5% risparmiato</text>
-        <g fill="#8f97a1" font-size="10" text-anchor="middle"><text x="16" y="246" text-anchor="start">0</text><text x="280" y="246">50%</text><text x="544" y="246" text-anchor="end">100%</text></g>
+      <svg viewBox="0 0 560 250" role="img" aria-label="In 10 giorni solo l'11,1% del tempo del server serviva persone vere; bloccando i bot si risparmia fino al 41,5% del lavoro PHP, in simulazione">
+        <text x="16" y="30" fill="#e8ebee" font-size="13">Per chi lavorava il server (10 giorni di misure)</text>
+        <rect x="16" y="46" width="528" height="34" rx="6" fill="#2a3036"/>
+        <rect x="16" y="46" width="58.6" height="34" rx="6" fill="#62c7bf"/>
+        <text x="16" y="102" fill="#62c7bf" font-size="12">11,1% persone vere</text>
+        <text x="544" y="102" fill="#8f97a1" font-size="12" text-anchor="end">88,9% bot e attività interne</text>
+        <text x="16" y="160" fill="#e8ebee" font-size="13">Lavoro risparmiato bloccando i bot (simulazione)</text>
+        <rect x="16" y="176" width="528" height="34" rx="6" fill="#2a3036"/>
+        <rect x="16" y="176" width="219.1" height="34" rx="6" fill="#62c7bf" fill-opacity=".55"/>
+        <text x="16" y="232" fill="#62c7bf" font-size="12">fino al 41,5% in meno</text>
       </svg>
-      <div class="cap"><span>Misure sul sito di produzione, senza modificarlo.</span></div>
+      <div class="cap"><span>Bot: motori di ricerca, scraper, crawler di AI. Misure sul sito vero, senza modificarlo.</span></div>
     </div>
   </article>
 </section>
@@ -380,20 +392,24 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
       </div>
     </article>
 
-    <article class="case" id="c-multi" role="tabpanel" aria-labelledby="t-multi" hidden>
-      <div>
-        <h3>Multimeter: un analizzatore da studio in un solo file HTML</h3>
-        <p class="lead">Serve a guardare la musica mentre la ascolti: quanto è forte, come si distribuiscono bassi e acuti, quanto è largo lo stereo. Mi serviva per controllare i miei mix; si apre nel browser, niente da installare.</p>
-        <ul class="facts"><li><b>LUFS</b><span>livelli e loudness, cioè quanto forte la sente l'orecchio</span></li><li><b>FFT</b><span>analizzatore di frequenze e spettrogramma 2D e 3D</span></li><li><b>L/R</b><span>campo stereo: lissajous, polare, correlazione</span></li></ul>
-        <div class="t-only"><div><div class="pcc">
-          <div><h4>Sotto</h4><p>Web Audio API: AudioContext e AnalyserNode, ChannelSplitter per i canali, Canvas 2D per i grafici, MediaRecorder per esportare in video i visualizzatori sincronizzati con l'audio.</p></div>
-        </div></div></div>
-        <div class="links"><a class="btn ghost" href="demo/multimeter.html">Apri a schermo intero ↗</a></div>
+    <article class="case wide" id="c-multi" role="tabpanel" aria-labelledby="t-multi" hidden>
+      <div class="wide-top">
+        <div>
+          <h3>Multimeter: un analizzatore da studio in un solo file HTML</h3>
+          <p class="lead">Serve a guardare la musica mentre la ascolti: quanto è forte, come si distribuiscono bassi e acuti, quanto è largo lo stereo. Mi serviva per controllare i miei mix; si apre nel browser, niente da installare.</p>
+          <div class="t-only"><div><div class="pcc">
+            <div><h4>Sotto</h4><p>Web Audio API: AudioContext e AnalyserNode, ChannelSplitter per i canali, Canvas 2D per i grafici, MediaRecorder per esportare in video i visualizzatori sincronizzati con l'audio.</p></div>
+          </div></div></div>
+        </div>
+        <div>
+          <ul class="facts"><li><b>LUFS</b><span>livelli e loudness, cioè quanto forte la sente l'orecchio</span></li><li><b>FFT</b><span>analizzatore di frequenze e spettrogramma 2D e 3D</span></li><li><b>L/R</b><span>campo stereo: lissajous, polare, correlazione</span></li></ul>
+          <div class="links"><a class="btn ghost" href="demo/multimeter.html">Apri a schermo intero ↗</a></div>
+        </div>
       </div>
       <div class="stage">
         <div class="demo" id="demo">
-          <img src="img/multimeter.webp" alt="Multimeter mentre analizza una traccia" loading="lazy">
-          <div class="go"><button class="btn" type="button" id="demoGo">▶ Accendi la demo</button></div>
+          <iframe src="demo/multimeter.html" title="Multimeter, demo dal vivo" allow="autoplay" loading="lazy" tabindex="-1"></iframe>
+          <button type="button" class="veil" id="demoVeil"><span class="btn">Clicca per usarlo</span></button>
         </div>
         <div class="cap"><span>La demo carica «In my head», una mia traccia; puoi anche caricare un tuo file.</span></div>
       </div>
@@ -422,22 +438,12 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
         <p class="lead">Claude Code a ogni sessione riparte da zero, e io porto avanti più progetti insieme: plugin, musica, i miei strumenti. Ho costruito regole, strumenti e un archivio di conoscenze perché ogni sessione sappia da dove ripartire e cosa è già stato deciso.</p>
         <ul class="facts"><li><b>17</b><span>repository tenute allineate da uno script mio</span></li><li><b>3</b><span>comandi miei per passare il lavoro fra sessioni: /superagente, /passaggio, /riparti</span></li><li><b>1</b><span>app mia per il consumo dei token: tetti per sessione e per giorno</span></li></ul>
         <div class="t-only"><div><div class="pcc">
-          <div><h4>Come</h4><p>Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende solo se il compito lo chiede. Un superagente tiene il quadro generale, fa da tramite con me, distribuisce gli ordini e controlla le consegne.</p></div>
           <div><h4>Di chi è cosa</h4><p>Claude Code è di Anthropic. Regole, struttura, strumenti in Python e app dei token li ho progettati io.</p></div>
         </div></div></div>
       </div>
       <div class="stage">
-        <svg viewBox="0 0 560 300" role="img" aria-label="Io decido; il superagente coordina gli agenti dei progetti; ognuno riparte dalle note lasciate dalla sessione precedente">
-          <g font-size="12" text-anchor="middle">
-            <rect x="200" y="16" width="160" height="44" rx="8" fill="#1d2126" stroke="#3a4148"/><text x="280" y="36" fill="#e8ebee">io</text><text x="280" y="51" fill="#8f97a1" font-size="10">decido e approvo</text>
-            <rect x="180" y="88" width="200" height="50" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/><text x="280" y="109" fill="#e8ebee">superagente</text><text x="280" y="126" fill="#8f97a1" font-size="10">coordina, controlla le consegne</text>
-            <g fill="#1d2126" stroke="#3a4148"><rect x="24" y="176" width="150" height="44" rx="8"/><rect x="205" y="176" width="150" height="44" rx="8"/><rect x="386" y="176" width="150" height="44" rx="8"/></g>
-            <text x="99" y="203" fill="#e8ebee">agente plugin</text><text x="280" y="203" fill="#e8ebee">agente musica</text><text x="461" y="203" fill="#e8ebee">agente strumenti</text>
-            <g fill="#8f97a1" font-size="11"><text x="280" y="262">ogni sessione legge la nota lasciata dalla precedente</text><text x="280" y="280">e apre solo le conoscenze che servono al compito</text></g>
-          </g>
-          <g fill="none" stroke="#62c7bf" stroke-width="1.3"><path d="M280 60V88"/><path d="M280 138V157H99V176M280 157V176M280 157H461V176"/></g>
-          <g fill="none" stroke="#3a4148" stroke-dasharray="3 3"><path d="M99 220V242M280 220V242M461 220V242"/></g>
-        </svg>
+        <div class="gal deck" id="galAgenti"><div class="shot"><div class="slide"><p class="eyebrow">1 / 8</p><h4>Conoscenze ad albero</h4><p>Tutto ciò che si impara sta in stanze collegate a strati: una mappa, poi le stanze per argomento, poi le fonti. Ogni agente legge solo lo strato che gli serve: meno token, meno errori. Uno script segnala le stanze diventate vecchie.</p><div class="flow"><span>mappa</span><i></i><span>stanza</span><i></i><span>fonte</span></div></div><div class="slide"><p class="eyebrow">2 / 8</p><h4>Superagente e agenti</h4><p>Un agente per progetto, ognuno nel suo recinto: non legge i progetti degli altri. Il superagente coordina, distribuisce gli ordini, controlla le consegne e fa da tramite con me. Un ordine fra agenti vale solo se è scritto in un registro verificabile.</p><div class="flow"><span>io</span><i></i><span>superagente</span><i></i><span>agenti di progetto</span></div></div><div class="slide"><p class="eyebrow">3 / 8</p><h4>Comandi miei</h4><p>Tre comandi personalizzati per Claude Code. /passaggio scrive la nota per la sessione successiva. /riparti riprende da quella nota con il contesto minimo. /superagente ricrea il coordinatore e lo stato di tutti i progetti.</p><div class="flow"><span>/passaggio</span><i></i><span>/riparti</span><i></i><span>/superagente</span></div></div><div class="slide"><p class="eyebrow">4 / 8</p><h4>Prova cieca</h4><p>Prima di consegnare un testo, un sito o una proposta, lo faccio giudicare da agenti «ciechi»: senza memoria, senza file, solo ricerca web. Ognuno interpreta un ruolo inventato, per esempio un titolare o un cliente diffidente, e dice cosa non lo convince. Poi verifico che la prova sia valida.</p><div class="flow"><span>consegna</span><i></i><span>tester senza memoria</span><i></i><span>ruolo inventato</span><i></i><span>giudizio</span></div></div><div class="slide"><p class="eyebrow">5 / 8</p><h4>Processo a fasi</h4><p>Per i compiti in cui un errore costa: un agente fa la ricerca e la salva, io approvo il piano, poi costruzione, prove cieche e consegna.</p><div class="flow"><span>ricerca</span><i></i><span>piano approvato</span><i></i><span>costruzione</span><i></i><span>prove cieche</span><i></i><span>consegna</span></div></div><div class="slide"><p class="eyebrow">6 / 8</p><h4>Ricerche mai ripetute</h4><p>Ogni ricerca fatta finisce in un registro, con la sua conclusione. Prima di cercare di nuovo, uno script la ritrova: nessun agente rifà il lavoro di un altro.</p><div class="flow"><span>ricerca</span><i></i><span>registro</span><i></i><span>script che la ritrova</span></div></div><div class="slide"><p class="eyebrow">7 / 8</p><h4>Token razionati</h4><p>Un'app mia misura il consumo per sessione e per settimana, mette tetti giornalieri e pianifica i lavori non urgenti prima del ripristino settimanale.</p><div class="flow"><span>consumo</span><i></i><span>tetto</span><i></i><span>lavori pianificati</span></div></div><div class="slide"><p class="eyebrow">8 / 8</p><h4>Imparare da me</h4><p>Ogni correzione che faccio diventa una regola scritta che tutti gli agenti leggono. Il sistema si adatta a come lavoro io, e non ripete lo stesso errore.</p><div class="flow"><span>correzione</span><i></i><span>regola scritta</span><i></i><span>tutti gli agenti</span></div></div><button type="button" class="nav prev" aria-label="Scheda precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Scheda successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+        <div class="cap"><span class="gcap"></span><span class="dots"></span></div></div>
       </div>
     </article>
 
@@ -458,7 +464,7 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
 </section>
 </main>
 
-<footer><div class="in"><span>Saverio Moretti</span><span>Questo portfolio l'ho progettato io e l'ha scritto Claude Code, come i miei moduli.</span><span>Il lavoro dell'azienda è raccontato senza il suo codice.</span></div></footer>
+<footer><div class="in"><p>Questo sito l'ho progettato io; il codice l'ha scritto Claude Code, come per i miei moduli.</p><p>Il lavoro dell'azienda è raccontato senza il suo codice.</p><p>Saverio Moretti</p></div></footer>
 
 <script>
 /* interruttore In breve / Tecnico, ricordato fra le visite */
@@ -498,12 +504,21 @@ gallery('galGuard',[
  ['img/guardaroba-6770.webp','Foto pronte','<b>Foto pronte.</b> Scegli le foto e le condividi con l\'app di AI che scrive il testo; poi «Copia su Vinted».'],
  ['img/guardaroba-6768.webp','Pubblica','<b>Pubblica.</b> Bozze e annunci pronti: un tocco apre Vinted, un altro segna l\'articolo come pubblicato.']],'guardWhat');
 
-/* demo multimeter: si carica solo quando la chiedi */
-document.getElementById('demoGo').onclick=()=>{
-  const d=document.getElementById('demo');document.getElementById('c-multi').classList.add('live');d.classList.add('on');
-  d.innerHTML='<iframe src="demo/multimeter.html" title="Multimeter, demo dal vivo" allow="autoplay"></iframe>';
-  const f=d.firstChild,fit=()=>{f.style.transform='scale('+d.clientWidth/1280+')'};fit();new ResizeObserver(fit).observe(d);
-  d.scrollIntoView({behavior:'smooth',block:'nearest'})};
+(function(){const g=document.getElementById('galAgenti'),sl=[...g.querySelectorAll('.slide')],dots=g.querySelector('.dots'),cap=g.querySelector('.gcap');let i=0;
+  const show=k=>{i=(k+sl.length)%sl.length;sl.forEach((x,j)=>{x.classList.toggle('cur',j===i);x.setAttribute('aria-hidden',j!==i)});cap.textContent=sl[i].querySelector('h4').textContent;[...dots.children].forEach((d,j)=>d.setAttribute('aria-current',j===i))};
+  sl.forEach((x,j)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',x.querySelector('h4').textContent);b.onclick=()=>show(j);dots.append(b)});
+  g.querySelector('.prev').onclick=()=>show(i-1);g.querySelector('.next').onclick=()=>show(i+1);
+  let x0=null;const sh=g.querySelector('.shot');sh.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  sh.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null});show(0)})();
+
+/* demo multimeter: inattiva finché non la clicchi, così la pagina scorre;
+   torna inattiva quando il puntatore esce dal riquadro o tocchi fuori */
+const demo=document.getElementById('demo'),dfr=demo.querySelector('iframe');
+const fit=()=>{dfr.style.transform='scale('+demo.clientWidth/1280+')'};new ResizeObserver(fit).observe(demo);
+const demoOn=on=>{demo.classList.toggle('on',on);dfr.tabIndex=on?0:-1};
+document.getElementById('demoVeil').onclick=()=>{demoOn(true);dfr.focus()};
+demo.addEventListener('mouseleave',()=>demoOn(false));
+document.addEventListener('pointerdown',e=>{if(!demo.contains(e.target))demoOn(false)});
 </script>
 </body>
 </html>

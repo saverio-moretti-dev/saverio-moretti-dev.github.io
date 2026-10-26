@@ -38,11 +38,15 @@ Read on phone (from a CV PDF or email) and on desktop. Italian language. Linked 
 
 ## Evidence on Hand
 
-- Live multimeter: https://sem-brana-site.vercel.app/plugins/multi-metering/multi-metering.html (single HTML file, Web Audio API, Canvas).
+- Live multimeter: local copy `demo/multimeter.html` with the user's track `demo/audio/in-my-head.mp3`, embedded with a click-to-activate veil and a 4-step tutorial (remembered off in localStorage once completed).
 - Public repos: `saverio-moretti-dev/reversibleimport` (PrestaShop 8.1 module, tests), `saverio-moretti-dev/guardaroba` (PWA, Node functions on Vercel).
 - Token manager UI screenshots: `~/Desktop/SEM Brana/Brana studio/coding/plugin/claude-token-manager/docs/screenshots/` (desktop/mobile, light/dark).
 - Metrics: 183 scripts/apps/flows (≈50 in use), catalog 10k→120k+ products, ~20 modules + 7 fixed, Amazon 12 marketplaces / 239 tests, Danea sync 244 tests, bot study 11.1% real visitors / up to 41.5% PHP time blocked in simulation.
-- **Missing, to be provided by the user**: screenshots of audio plugin interfaces, guardaroba phone screenshots (or captured by us from a local run with fake data). Never fabricate.
+- Plugin images `img/plugin-*.webp` and guardaroba screenshots `img/guardaroba-*.webp` provided by the user (6769 excluded: shows the Vinted profile URL). Never fabricate.
+
+## Design (26/10, direction «B Banco» + «C» switch)
+
+Dark only, accent `#62c7bf`, Bricolage Grotesque + JetBrains Mono (ligatures off in code). Top bar switch «In breve / Tecnico» (`html.tech`, `.t-only`). First view = work (4 cases: code, SVG diagrams, numbers); personal workshop below (plugins, multimeter, guardaroba, agents) in galleries with arrows, no written instructions. The page is called «sito», never «portfolio». Old «Manuale d'officina» kept in `archivio/officina/`.
 
 ## Product Principles
 

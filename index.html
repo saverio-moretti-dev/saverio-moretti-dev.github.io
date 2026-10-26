@@ -548,7 +548,7 @@ const setTut=on=>{tutOn=on;tutBtn.setAttribute('aria-pressed',on);tutBtn.textCon
 setTut(tutOn);
 const doc=()=>{const d=dfr.contentDocument;return d&&d.readyState==='complete'&&d.getElementById('rightScroll')?d:null};
 const setStep=k=>{step=k;tips.forEach((t,j)=>t.classList.toggle('show',tutOn&&j===k));
-  const d=doc();if(d){['btnPause','btnLoop'].forEach(id=>d.getElementById(id).classList.toggle('tut-pulse',tutOn&&k===1));d.getElementById('rightCol').classList.toggle('tut-glow',tutOn&&k===2)}
+  const d=doc();if(d){['btnPause','btnLoop'].forEach(id=>d.getElementById(id).classList.toggle('tut-pulse',tutOn&&k===1));d.getElementById('btnPlay').classList.toggle('tut-pulse',tutOn&&k===0);d.getElementById('rightCol').classList.toggle('tut-glow',tutOn&&k===2)}
   if(k===3)setTimeout(()=>{if(step===3){setStep(4);setTut(false)}},2000)};
 const hook=d=>{hooked=true;
   d.head.insertAdjacentHTML('beforeend','<style>@keyframes tutp{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(98,199,191,.7)}50%{transform:scale(1.18);box-shadow:0 0 0 6px rgba(98,199,191,0)}}.tut-pulse{animation:tutp 1s ease-in-out infinite;border-color:#62c7bf!important;color:#62c7bf!important}@keyframes tutg{0%,100%{opacity:.25}50%{opacity:1}}#rightCol.tut-glow{position:relative}#rightCol.tut-glow::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border:5px solid #62c7bf;box-shadow:inset 0 0 30px rgba(98,199,191,.45);animation:tutg 1s ease-in-out infinite}</style>');

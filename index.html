@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Saverio Moretti — sviluppatore e-commerce, integrazioni API e automazione</title>
-<meta name="description" content="Sviluppatore e-commerce (PHP, PrestaShop, Python, API, strumenti AI) ad Arezzo, anche da remoto. Tre casi di lavoro, con metodo, misure e limiti.">
+<meta name="description" content="Sviluppatore e-commerce (PHP, PrestaShop, Python, API, strumenti AI) ad Arezzo, anche da remoto. Quattro casi di lavoro: import, Amazon, gestionale senza API, misura del server.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -39,6 +39,7 @@ p{margin:0 0 12px}
 .case dl{margin:0}
 .case dt{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:14px 0 2px}
 .case dd{margin:0}
+.case p b{font-weight:600}
 .skills{margin:0;padding:0;list-style:none}
 .skills li{padding:6px 0;border-bottom:1px solid var(--rule)}
 .skills b{font-weight:600}
@@ -60,68 +61,43 @@ p{margin:0 0 12px}
 <main>
 <h1>Sviluppatore e-commerce, integrazioni API e automazione</h1>
 <p class="where">Arezzo · disponibile anche da remoto</p>
-<p class="lead">Dal 2025 sviluppo e mantengo i moduli e le integrazioni di un e-commerce di informatica nuova e ricondizionata. Lavoro con PHP, Python, JavaScript e SQL su PrestaShop 8.1. Sono stato assunto a novembre 2024 come apprendista addetto alle vendite e ho cominciato dal catalogo: poi ho scritto gli strumenti che servivano.</p>
-<p>Ho scritto circa 20 moduli PrestaShop e ho modificato 7 moduli di terzi. Il catalogo contava 99.663 prodotti in anagrafica a luglio 2026.</p>
-<p class="note">Sviluppo con agenti AI (Claude Code). Specifico, decido l'architettura, rivedo e collaudo io; l'agente scrive gran parte del codice. Il codice di lavoro è dell'azienda e non è pubblico: qui trovi i casi, non il sorgente.</p>
+<p class="lead">Dal 2025 sviluppo e mantengo il back office PrestaShop e le integrazioni di un e-commerce di informatica nuova e ricondizionata. Assunto a novembre 2024, ho studiato il lavoro e i processi dell'azienda e, partendo dal catalogo, ho costruito gli strumenti che mancavano. Il catalogo è passato da circa 10.000 a oltre 120.000 prodotti, anche grazie all'importazione diretta di cataloghi interi.</p>
+<p>Ho scritto circa 20 moduli PrestaShop 8.1 e ho corretto, velocizzato e messo in sicurezza 7 moduli di terzi. Obiettivo: meno lavoro ripetitivo a mano, meno errori umani.</p>
+<p class="note">Metodo: Claude Code scrive la maggior parte del codice, io progetto logiche e flussi e verifico. Ogni modulo passa da una copia del sito in Docker e va in produzione con backup e ritorno alla versione precedente. Il codice di lavoro è dell'azienda: qui ci sono i casi, non il sorgente.</p>
 
 <section id="casi">
-<h2>Tre casi di lavoro</h2>
+<h2>Quattro casi di lavoro</h2>
 
 <article class="case">
-<h3>Import di catalogo con anteprima e annullamento</h3>
+<h3>Import CSV che si può riportare indietro</h3>
 <p class="when">In produzione da settembre 2026</p>
-<dl>
-<dt>Problema</dt>
-<dd>L'import nativo di PrestaShop scrive subito in produzione. Un file sbagliato rovina migliaia di schede e non c'è un modo semplice di tornare indietro.</dd>
-<dt>Cosa ho deciso</dt>
-<dd>Un modulo in cui il file caricato resta fisso durante il lavoro. Ogni prodotto viene salvato in una copia di backup prima della modifica. L'anteprima mostra la pagina vera. Il lavoro si può annullare.</dd>
-<dt>Come ho verificato</dt>
-<dd>Su una copia del sito ho importato lo stesso file con l'import nativo e con il mio, poi ho confrontato i prodotti campo per campo.</dd>
-<dt>Misura</dt>
-<dd>I risultati erano identici (confronto su copia del sito, settembre 2026).</dd>
-<dt>Cosa è andato storto</dt>
-<dd>Due errori JavaScript sono arrivati in produzione: un apostrofo toglieva la richiesta di conferma. Li ho corretti a ottobre 2026. Da allora provo l'interfaccia nel browser prima di rilasciare.</dd>
-<dt>Limite</dt>
-<dd>Il confronto riguarda i file che ho provato, non ogni file possibile.</dd>
-</dl>
+<p><b>Prima.</b> L'import nativo di PrestaShop non si può annullare. Se il server va in timeout l'import si ferma, i dati creati fino a lì restano orfani e non c'è un registro che dica cosa è fallito.</p>
+<p><b>Cosa ho costruito.</b> Ogni riga è scritta in transazione: se qualcosa va storto si annulla e non restano dati orfani. Il lavoro gira in cron, a passo controllato, e aspetta da solo se il server è carico. Prima di toccare un prodotto il modulo ne salva lo stato completo, così import, modifiche di massa e cancellazioni si possono riportare indietro. L'anteprima mostra la pagina vera del prodotto, scritta e poi annullata.</p>
+<p><b>Come l'ho verificato.</b> Su una copia del sito ho importato lo stesso file con il nativo e con il mio: risultati identici campo per campo. Due errori JavaScript sono comunque arrivati in produzione (un apostrofo toglieva la richiesta di conferma); corretti a ottobre, da allora provo l'interfaccia anche nel browser.</p>
 </article>
 
 <article class="case">
-<h3>Amazon dal back office, su 12 marketplace</h3>
+<h3>Amazon SP-API su 12 marketplace, dal back office</h3>
 <p class="when">Versione 0.5.0, in produzione da ottobre 2026</p>
-<dl>
-<dt>Problema</dt>
-<dd>Prezzi, quantità, titoli e chiusura delle offerte si cambiavano a mano, un marketplace alla volta.</dd>
-<dt>Cosa ho deciso</dt>
-<dd>Un modulo che usa Amazon SP-API. Parte da una lista di SKU e mostra le modifiche senza applicarle. Le applica da file. Le annulla rimettendo i valori di prima.</dd>
-<dt>Come ho verificato</dt>
-<dd>239 test su una copia del sito.</dd>
-<dt>Misura</dt>
-<dd>12 marketplace coperti dallo stesso modulo (ottobre 2026).</dd>
-<dt>Cosa è andato storto</dt>
-<dd>Le cancellazioni su Amazon non si possono annullare, a differenza di prezzi e quantità: l'annullamento del modulo non le copre.</dd>
-<dt>Limite</dt>
-<dd>Per questo le cancellazioni chiedono sempre un codice di conferma e si ricreano dalla copia salvata. È la versione 0.5.0.</dd>
-</dl>
+<p><b>Prima.</b> Prezzi, quantità, titoli e chiusure delle offerte si cambiavano a mano su Seller Central, un marketplace alla volta.</p>
+<p><b>Cosa ho costruito.</b> Ricerca per SKU, ASIN, EAN o nome sul catalogo Amazon; uno SKU letto in diretta su tutti i 12 marketplace. Modifiche singole o di massa a prezzi, quantità e titoli, anche da file Excel, con verifica su Amazon prima di scrivere e annullamento che rimette i valori di prima. Le cancellazioni chiedono sempre un codice di conferma e si ricreano dalla fotografia salvata.</p>
+<p><b>Come l'ho verificato.</b> 239 test su una copia del sito prima del rilascio. Si lavora su Amazon senza uscire da PrestaShop.</p>
 </article>
 
 <article class="case">
-<h3>Misurare le prestazioni prima di comprare un server più grande</h3>
+<h3>Gestionale Danea senza API</h3>
+<p class="when">Sincronizzazione oraria e import dal back office, 2026</p>
+<p><b>Prima.</b> Il gestionale sta su un PC dell'ufficio e non ha API. Gli import di massa si facevano solo da foglio Excel, con nessun altro utente collegato, e fallivano se un solo dato non era nel formato previsto. Niente controlli, niente mappatura, nessun modo di annullare.</p>
+<p><b>Cosa ho costruito.</b> Un programma ponte sul PC dell'ufficio che lavora sul database del gestionale e prende i lavori dal sito. Import e modifiche di massa sono possibili anche con i colleghi collegati. La mappatura delle colonne impara gli abbinamenti e si salva come modello; l'anteprima simula il risultato sull'archivio vero; si prova su un archivio di test; il lavoro si corregge in corso d'opera, si annulla dal modulo e si ripristina una versione precedente sugli stessi prodotti.</p>
+<p><b>Come l'ho verificato.</b> La sincronizzazione oraria con il sito ha 244 test. Prima di scrivere sul gestionale ho studiato come si comporta con dodici persone collegate, con esperimenti solo su un archivio di prova.</p>
+</article>
+
+<article class="case">
+<h3>Misurare il sito prima di comprare un server più grande</h3>
 <p class="when">Settembre-ottobre 2026</p>
-<dl>
-<dt>Problema</dt>
-<dd>Si pensava che servisse un server più potente.</dd>
-<dt>Cosa ho deciso</dt>
-<dd>Misurare prima di spendere. Ho osservato il sito di produzione per 10 giorni senza modificarlo.</dd>
-<dt>Come ho verificato</dt>
-<dd>Ho scritto regole contro i bot su una settimana di dati e le ho controllate sui giorni successivi. Gli interventi li ho preparati e provati su una copia del sito.</dd>
-<dt>Misura</dt>
-<dd>L'11,1% del tempo del server serviva visitatori reali. Questo smentiva la tesi che servisse un server più potente. Le regole fermano richieste che valevano il 41,5% del tempo di calcolo PHP totale (misura su 10 giorni, settembre-ottobre 2026).</dd>
-<dt>Cosa è andato storto</dt>
-<dd>Le regole potevano bloccare persone vere. Nei dati di verifica le regole non hanno bloccato nessun visitatore riconosciuto con certezza come persona.</dd>
-<dt>Limite</dt>
-<dd>La verifica vale per i giorni che ho misurato; i bot cambiano e le regole vanno ricontrollate. La decisione finale era dell'azienda.</dd>
-</dl>
+<p><b>Prima.</b> Il sito era lento nelle ore di punta e l'unica soluzione proposta era un server più potente.</p>
+<p><b>Cosa ho fatto.</b> Dieci giorni di misure sul sito di produzione, senza modificarlo. Risultato: solo l'11,1% del tempo del server serviva visitatori reali; il resto erano motori di ricerca, scraper, crawler di AI e attività interne.</p>
+<p><b>Come l'ho verificato.</b> Ho scritto regole contro i bot su una settimana di dati e le ho provate sulla successiva: in simulazione fermerebbero fino al 41,5% del tempo PHP, senza bloccare nessuna persona certa. Gli interventi sono pronti e provati su una copia; la decisione era dell'azienda.</p>
 </article>
 </section>
 
@@ -129,19 +105,19 @@ p{margin:0 0 12px}
 <h2>Competenze</h2>
 <ul class="skills">
 <li><b>Linguaggi:</b> PHP, Python, JavaScript, SQL</li>
-<li><b>E-commerce:</b> PrestaShop 8.1 su PHP 8.1 (script e cron su PHP 8.3) (moduli, hook, override), MariaDB e MySQL</li>
-<li><b>Integrazioni e API:</b> Amazon SP-API, API REST, gestionale con database Firebird, import ed export di massa da CSV, Excel e XML</li>
+<li><b>E-commerce:</b> PrestaShop 8.1 (moduli, hook, override), PHP 8.1, cron su PHP 8.3, MariaDB e MySQL</li>
+<li><b>Integrazioni:</b> Amazon SP-API, API REST, gestionale Danea Easyfatt su database Firebird, import ed export di massa da CSV ed Excel</li>
 <li><b>Strumenti:</b> Docker, Git, cron</li>
-<li><b>Strumenti AI:</b> Claude Code, Claude Batch API, modelli locali (llama.cpp, Ollama)</li>
+<li><b>AI:</b> Claude Code, Claude Batch API, modelli locali (llama.cpp, Ollama)</li>
 </ul>
 </section>
 
 <section id="altro">
 <h2>Progetti personali</h2>
-<p><b>Plugin audio.</b> Circa venti effetti audio in C++ per i miei brani, con misure automatiche che controllano che suonino come devono e un collaudo finale in Logic Pro. Non ancora pubblicati.</p>
-<p><b>Strumenti per lavorare con Claude Code.</b> Un agente coordinatore che tiene allineati i miei progetti, una barra nel terminale che mostra il consumo della sessione e della settimana, e regole scritte per spendere meno. Due skill: «processo generale» (ricerca, piano approvato, costruzione, collaudo) e «prova cieca», che fa giudicare un lavoro a tester senza contesto. Questo portfolio e il CV sono passati da lì.</p>
-<p><b>Guardaroba.</b> <a href="https://github.com/saverio-moretti-dev/guardaroba">guardaroba</a>: applicazione web per gestire in due le vendite di abiti usati online. 8 test, 13 commit.</p>
-<p><b>Musica.</b> Produco musica con il nome SEM Brana e gestisco da solo promozione e sito.</p>
+<p><b>Sistema di agenti per Claude Code.</b> Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende più in profondità solo se il compito lo chiede, così nessuno lavora con un contesto enorme e chi lavora ha il contesto giusto. Un superagente conosce il quadro generale, fa da tramite fra me e gli altri agenti, distribuisce gli ordini e controlla le consegne. Intorno ci sono strumenti per consumare meno token: comandi per passare il lavoro da una sessione all'altra e una barra del consumo nel terminale. Un'app di gestione unisce tutto: ordini diretti al superagente, consumi giornalieri e settimanali, tetti per sessione o per giorno, e la pianificazione dei lavori non urgenti poco prima del ripristino settimanale, per usare i token al 100%.</p>
+<p><b>Plugin audio in C++.</b> In sviluppo: una suite per tutti i processi di dinamica, da compressori, gate e limiter a multibanda, de-reverb e soppressori di risonanze, e in futuro modelli di macchine analogiche. Studio e misuro il comportamento dei plugin professionali di riferimento e ne unisco le caratteristiche migliori. Oggi: 20 plugin di utilità completi e 14 moduli di dinamica in sviluppo, collaudati con auval e in Logic Pro.</p>
+<p><b>Guardaroba.</b> <a href="https://github.com/saverio-moretti-dev/guardaroba">guardaroba</a>: applicazione web per gestire in due le vendite di abiti usati online.</p>
+<p><b>Musica.</b> Produco musica elettronica come SEM Brana e gestisco da solo promozione e sito.</p>
 </section>
 
 <section id="contatti">

@@ -158,6 +158,8 @@ table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:upperc
 .tip.l::before{left:-5px;top:calc(var(--a) - 5px)}
 .tip.r::before{right:-5px;top:calc(var(--a) - 5px)}
 .tip.u::before{top:-5px;left:calc(var(--a) - 5px)}
+.tip.c{font-size:17px;padding:12px 20px}
+.tip.c::before{display:none}
 .case.wide{grid-template-columns:minmax(0,1fr)}
 .wide-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
 @media (max-width:860px){.wide-top{grid-template-columns:minmax(0,1fr)}}
@@ -426,6 +428,7 @@ footer p{margin:0}
           <div class="tip l" aria-live="polite">Premi play per iniziare</div>
           <div class="tip u" aria-live="polite">Qua puoi controllare la traccia: prova a mettere in pausa o a creare un loop</div>
           <div class="tip r" aria-live="polite">Ogni modulo ha molte impostazioni controllabili da qua. Scorri per vederle tutte</div>
+          <div class="tip c" aria-live="polite">Buon divertimento!</div>
         </div>
         <div class="cap"><span>La demo carica «In my head», una mia traccia; puoi anche caricare un tuo file.</span></div>
       </div>
@@ -450,15 +453,15 @@ footer p{margin:0}
 
     <article class="case" id="c-agenti" role="tabpanel" aria-labelledby="t-agenti" hidden>
       <div>
-        <h3>Un sistema mio per lavorare con Claude Code su più progetti</h3>
-        <p class="lead">Claude Code a ogni sessione riparte da zero, e io porto avanti più progetti insieme: plugin, musica, i miei strumenti. Ho costruito regole, strumenti e un archivio di conoscenze perché ogni sessione sappia da dove ripartire e cosa è già stato deciso.</p>
+        <h3>Un sistema mio per Claude Code: meno token, lavoro migliore</h3>
+        <p class="lead">Claude Code a ogni sessione riparte da zero, e io porto avanti più progetti insieme con un piano dai consumi limitati. Il sistema che ho costruito fa due cose insieme: spende meno token, perché ogni sessione legge solo ciò che le serve e non rifà il lavoro già fatto; e alza la qualità, perché parte da decisioni già prese e ogni risultato viene collaudato prima di arrivare a me.</p>
         <ul class="facts"><li><b>17</b><span>repository tenute allineate da uno script mio</span></li><li><b>3</b><span>comandi miei per passare il lavoro fra sessioni: /superagente, /passaggio, /riparti</span></li><li><b>1</b><span>app mia per il consumo dei token: tetti per sessione e per giorno</span></li></ul>
         <div class="t-only"><div><div class="pcc">
           <div><h4>Di chi è cosa</h4><p>Claude Code è di Anthropic. Regole, struttura, strumenti in Python e app dei token li ho progettati io.</p></div>
         </div></div></div>
       </div>
       <div class="stage">
-        <div class="gal deck" id="galAgenti"><div class="shot"><div class="slide"><p class="eyebrow">1 / 8</p><h4>Conoscenze ad albero</h4><p>Tutto ciò che si impara sta in stanze collegate a strati: una mappa, poi le stanze per argomento, poi le fonti. Ogni agente legge solo lo strato che gli serve: meno token, meno errori. Uno script segnala le stanze diventate vecchie.</p><div class="flow"><span>mappa</span><i></i><span>stanza</span><i></i><span>fonte</span></div></div><div class="slide"><p class="eyebrow">2 / 8</p><h4>Superagente e agenti</h4><p>Un agente per progetto, ognuno nel suo recinto: non legge i progetti degli altri. Il superagente coordina, distribuisce gli ordini, controlla le consegne e fa da tramite con me. Un ordine fra agenti vale solo se è scritto in un registro verificabile.</p><div class="flow"><span>io</span><i></i><span>superagente</span><i></i><span>agenti di progetto</span></div></div><div class="slide"><p class="eyebrow">3 / 8</p><h4>Comandi miei</h4><p>Tre comandi personalizzati per Claude Code. /passaggio scrive la nota per la sessione successiva. /riparti riprende da quella nota con il contesto minimo. /superagente ricrea il coordinatore e lo stato di tutti i progetti.</p><div class="flow"><span>/passaggio</span><i></i><span>/riparti</span><i></i><span>/superagente</span></div></div><div class="slide"><p class="eyebrow">4 / 8</p><h4>Prova cieca</h4><p>Prima di consegnare un testo, un sito o una proposta, lo faccio giudicare da agenti «ciechi»: senza memoria, senza file, solo ricerca web. Ognuno interpreta un ruolo inventato, per esempio un titolare o un cliente diffidente, e dice cosa non lo convince. Poi verifico che la prova sia valida.</p><div class="flow"><span>consegna</span><i></i><span>tester senza memoria</span><i></i><span>ruolo inventato</span><i></i><span>giudizio</span></div></div><div class="slide"><p class="eyebrow">5 / 8</p><h4>Processo a fasi</h4><p>Per i compiti in cui un errore costa: un agente fa la ricerca e la salva, io approvo il piano, poi costruzione, prove cieche e consegna.</p><div class="flow"><span>ricerca</span><i></i><span>piano approvato</span><i></i><span>costruzione</span><i></i><span>prove cieche</span><i></i><span>consegna</span></div></div><div class="slide"><p class="eyebrow">6 / 8</p><h4>Ricerche mai ripetute</h4><p>Ogni ricerca fatta finisce in un registro, con la sua conclusione. Prima di cercare di nuovo, uno script la ritrova: nessun agente rifà il lavoro di un altro.</p><div class="flow"><span>ricerca</span><i></i><span>registro</span><i></i><span>script che la ritrova</span></div></div><div class="slide"><p class="eyebrow">7 / 8</p><h4>Token razionati</h4><p>Un'app mia misura il consumo per sessione e per settimana, mette tetti giornalieri e pianifica i lavori non urgenti prima del ripristino settimanale.</p><div class="flow"><span>consumo</span><i></i><span>tetto</span><i></i><span>lavori pianificati</span></div></div><div class="slide"><p class="eyebrow">8 / 8</p><h4>Imparare da me</h4><p>Ogni correzione che faccio diventa una regola scritta che tutti gli agenti leggono. Il sistema si adatta a come lavoro io, e non ripete lo stesso errore.</p><div class="flow"><span>correzione</span><i></i><span>regola scritta</span><i></i><span>tutti gli agenti</span></div></div><button type="button" class="nav prev" aria-label="Scheda precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Scheda successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+        <div class="gal deck" id="galAgenti"><div class="shot"><div class="slide"><p class="eyebrow">1 / 8</p><h4>Conoscenze ad albero</h4><p>Tutto ciò che si impara sta in stanze collegate a strati: una mappa, poi le stanze per argomento, poi le fonti. Ogni agente legge solo lo strato che gli serve: meno token, meno errori. Uno script segnala le stanze diventate vecchie.</p><div class="flow"><span>mappa</span><i></i><span>stanza</span><i></i><span>fonte</span></div></div><div class="slide"><p class="eyebrow">2 / 8</p><h4>Superagente e agenti</h4><p>Un agente per progetto, ognuno nel suo recinto: non legge i progetti degli altri. Il superagente coordina, distribuisce gli ordini, controlla le consegne e fa da tramite con me. Un ordine fra agenti vale solo se è scritto in un registro verificabile.</p><div class="flow"><span>io</span><i></i><span>superagente</span><i></i><span>agenti di progetto</span></div></div><div class="slide"><p class="eyebrow">3 / 8</p><h4>Comandi miei</h4><p>Tre comandi personalizzati per Claude Code. /passaggio scrive la nota per la sessione successiva. /riparti riprende da quella nota: pochi token invece di rileggere tutto, e nessuna decisione dimenticata. /superagente ricrea il coordinatore e lo stato di tutti i progetti.</p><div class="flow"><span>/passaggio</span><i></i><span>/riparti</span><i></i><span>/superagente</span></div></div><div class="slide"><p class="eyebrow">4 / 8</p><h4>Prova cieca</h4><p>Prima di consegnare un testo, un sito o una proposta, lo faccio giudicare da agenti «ciechi»: senza memoria, senza file, solo ricerca web. Ognuno interpreta un ruolo inventato, per esempio un titolare o un cliente diffidente, e dice cosa non lo convince. Poi verifico che la prova sia valida.</p><div class="flow"><span>consegna</span><i></i><span>tester senza memoria</span><i></i><span>ruolo inventato</span><i></i><span>giudizio</span></div></div><div class="slide"><p class="eyebrow">5 / 8</p><h4>Processo a fasi</h4><p>Per i compiti in cui un errore costa: un agente fa la ricerca e la salva, io approvo il piano, poi costruzione, prove cieche e consegna.</p><div class="flow"><span>ricerca</span><i></i><span>piano approvato</span><i></i><span>costruzione</span><i></i><span>prove cieche</span><i></i><span>consegna</span></div></div><div class="slide"><p class="eyebrow">6 / 8</p><h4>Ricerche mai ripetute</h4><p>Ogni ricerca fatta finisce in un registro, con la sua conclusione. Prima di cercare di nuovo, uno script la ritrova: nessun agente rifà il lavoro di un altro, e nessun token si spende due volte.</p><div class="flow"><span>ricerca</span><i></i><span>registro</span><i></i><span>script che la ritrova</span></div></div><div class="slide"><p class="eyebrow">7 / 8</p><h4>Token razionati</h4><p>Un'app mia misura il consumo per sessione e per settimana, mette tetti giornalieri e pianifica i lavori non urgenti prima del ripristino settimanale.</p><div class="flow"><span>consumo</span><i></i><span>tetto</span><i></i><span>lavori pianificati</span></div></div><div class="slide"><p class="eyebrow">8 / 8</p><h4>Imparare da me</h4><p>Ogni correzione che faccio diventa una regola scritta che tutti gli agenti leggono. Il sistema si adatta a come lavoro io e non ripete lo stesso errore: meno correzioni, meno token spesi a rifare.</p><div class="flow"><span>correzione</span><i></i><span>regola scritta</span><i></i><span>tutti gli agenti</span></div></div><button type="button" class="nav prev" aria-label="Scheda precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Scheda successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
         <div class="cap"><span class="gcap"></span><span class="dots"></span></div></div>
       </div>
     </article>
@@ -540,17 +543,21 @@ document.addEventListener('pointerdown',e=>{if(!demo.contains(e.target))demoOn(f
    che è scalato e sul telefono li renderebbe illeggibili */
 const tips=[...demo.querySelectorAll('.tip')],tutBtn=document.getElementById('tutBtn');
 let step=-1,tutOn=true,hooked=false;
+try{tutOn=localStorage.getItem('tutorial')!=='no'}catch(e){}
+const setTut=on=>{tutOn=on;tutBtn.setAttribute('aria-pressed',on);tutBtn.textContent='Tutorial: '+(on?'sì':'no');try{localStorage.setItem('tutorial',on?'sì':'no')}catch(e){}};
+setTut(tutOn);
 const doc=()=>{const d=dfr.contentDocument;return d&&d.readyState==='complete'&&d.getElementById('rightScroll')?d:null};
 const setStep=k=>{step=k;tips.forEach((t,j)=>t.classList.toggle('show',tutOn&&j===k));
-  const d=doc();if(d)['btnPause','btnLoop'].forEach(id=>d.getElementById(id).classList.toggle('tut-pulse',tutOn&&k===1))};
+  const d=doc();if(d){['btnPause','btnLoop'].forEach(id=>d.getElementById(id).classList.toggle('tut-pulse',tutOn&&k===1));d.getElementById('rightCol').classList.toggle('tut-glow',tutOn&&k===2)}
+  if(k===3)setTimeout(()=>{if(step===3){setStep(4);setTut(false)}},2000)};
 const hook=d=>{hooked=true;
-  d.head.insertAdjacentHTML('beforeend','<style>@keyframes tutp{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(98,199,191,.7)}50%{transform:scale(1.18);box-shadow:0 0 0 6px rgba(98,199,191,0)}}.tut-pulse{animation:tutp 1s ease-in-out infinite;border-color:#62c7bf!important;color:#62c7bf!important}</style>');
+  d.head.insertAdjacentHTML('beforeend','<style>@keyframes tutp{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(98,199,191,.7)}50%{transform:scale(1.18);box-shadow:0 0 0 6px rgba(98,199,191,0)}}.tut-pulse{animation:tutp 1s ease-in-out infinite;border-color:#62c7bf!important;color:#62c7bf!important}@keyframes tutg{0%,100%{opacity:.25}50%{opacity:1}}#rightCol.tut-glow{position:relative}#rightCol.tut-glow::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;border:5px solid #62c7bf;box-shadow:inset 0 0 30px rgba(98,199,191,.45);animation:tutg 1s ease-in-out infinite}</style>');
   ['btnPause','btnLoop'].forEach(id=>d.getElementById(id).addEventListener('click',()=>{if(step===1)setStep(2)}));
   d.getElementById('rightScroll').addEventListener('scroll',()=>{if(step===2)setStep(3)},{passive:true})};
 /* posiziona il suggerimento vicino al suo comando, ricalcolato a ogni fotogramma:
    segue ridimensionamenti, rotazione del telefono e la scala dell'iframe */
 const place=(t,x,y,side)=>{const W=demo.clientWidth,H=demo.clientHeight,w=t.offsetWidth,h=t.offsetHeight;
-  let l=side==='l'?x+12:side==='r'?x-12-w:x-20,tp=side==='u'?y+12:y-h/2;
+  let l=side==='l'?x+12:side==='r'?x-12-w:side==='c'?x-w/2:x-20,tp=side==='u'?y+12:y-h/2;
   l=Math.max(8,Math.min(l,W-8-w));tp=Math.max(8,Math.min(tp,H-8-h));
   t.style.transform=`translate(${l}px,${tp}px)`;t.style.visibility='visible';t.style.setProperty('--a',(side==='u'?x-l:y-tp)+'px')};
 const loop=()=>{const d=doc();
@@ -558,10 +565,11 @@ const loop=()=>{const d=doc();
     if(step===0&&dfr.contentWindow.AV.isPlaying)setStep(1);
     if(step===0){const r=R('btnPlay');place(tips[0],r.right*s,(r.top+r.bottom)/2*s,'l')}
     if(step===1){const r=R('btnPause'),c=R('tlControls');place(tips[1],(r.left+r.right)/2*s,c.bottom*s,'u')}
-    if(step===2){const r=R('rightCol');place(tips[2],r.left*s,(r.top+60)*s,'r')}}
-  if(tutOn&&step>=0&&step<3)requestAnimationFrame(loop)};
+    if(step===2){const r=R('rightCol');place(tips[2],r.left*s,(r.top+60)*s,'r')}
+    if(step===3)place(tips[3],demo.clientWidth/2,demo.clientHeight/2,'c')}
+  if(tutOn&&step>=0&&step<4)requestAnimationFrame(loop)};
 document.getElementById('demoVeil').addEventListener('click',()=>{if(tutOn&&step<0){setStep(0);loop()}});
-tutBtn.onclick=()=>{tutOn=!tutOn;tutBtn.setAttribute('aria-pressed',tutOn);tutBtn.textContent='Tutorial: '+(tutOn?'sì':'no');
+tutBtn.onclick=()=>{setTut(!tutOn);
   if(tutOn){setStep(demo.classList.contains('on')?0:-1);loop()}else setStep(step)};
 </script>
 </body>

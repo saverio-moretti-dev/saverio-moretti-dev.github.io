@@ -2,578 +2,489 @@
 <html lang="it">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Saverio Moretti — sviluppatore e-commerce, integrazioni e automazione</title>
-<meta name="description" content="Strumenti costruiti per un e-commerce PrestaShop e progetti personali, mostrati come tavole tecniche: com'erano le cose prima, cosa ho costruito, come l'ho collaudato.">
+<meta name="description" content="Costruisco gli strumenti che mancano a un e-commerce, poi li collaudo. Moduli PrestaShop, integrazioni API, automazione.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
+/* Banco scuro come le interfacce dei plugin: palco grande + selettore; interruttore In breve / Tecnico */
 :root{
-  --paper:#e6e8e4; --sheet:#f6f7f3; --ink:#17191b; --soft:#4f5357; --rule:#c3c7c0; --hair:#d9dcd5;
-  --red:#cf3f16; --red-ink:#b23510; --blue:#1f4f80; --face-top:#fcfcfa; --face-l:#dfe2dc; --face-r:#c8ccc4;
-  --cond:"Barlow Condensed","Arial Narrow",sans-serif; --body:"Barlow",system-ui,sans-serif;
-  --gut:clamp(16px,4vw,48px);
+  --bg:#101215;--pan:#171a1e;--pan2:#1d2126;--ink:#e8ebee;--mute:#8f97a1;--line:#272c32;--acc:#62c7bf;--acc-dim:rgba(98,199,191,.10);
+  --f-disp:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --w:1180px;color-scheme:dark
 }
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:64px}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--body);font-variant-numeric:tabular-nums}
-::selection{background:var(--red);color:#fff}
-a{color:var(--blue);text-decoration-thickness:1px;text-underline-offset:3px}
-a:hover{text-decoration-thickness:2px}
-:focus-visible{outline:2px solid var(--red);outline-offset:3px}
-h1,h2,h3{font-family:var(--cond);font-weight:700;line-height:1.05;letter-spacing:-.005em;margin:0;text-wrap:balance}
-p{margin:0 0 .8em}
-.wrap{max-width:1240px;margin:0 auto;padding:0 var(--gut)}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--f-disp)}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.in{max-width:var(--w);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.mono{font-family:var(--f-mono)}
+.mute{color:var(--mute)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 
-/* testata del manuale: indice delle tavole */
-.bar{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--paper)}
-.bar .wrap{display:flex;align-items:stretch;gap:0;min-height:48px;overflow-x:auto;scrollbar-width:none}
-.bar .wrap::-webkit-scrollbar{display:none}
-.bar b{font:600 17px/48px var(--cond);letter-spacing:.02em;white-space:nowrap;padding-right:20px;margin-right:4px;border-right:1px solid #3a3d40}
-.bar a{color:var(--paper);text-decoration:none;font:500 16px/48px var(--cond);padding:0 14px;white-space:nowrap;border-right:1px solid #3a3d40}
-.bar a span{color:#9a9e9f;margin-right:6px}
-.bar a:hover,.bar a[aria-current]{background:var(--red);color:#fff}
-.bar a:hover span,.bar a[aria-current] span{color:#fff}
+/* barra */
+.top{position:sticky;top:0;z-index:20;background:rgba(16,18,21,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.top .name{font-weight:700;text-decoration:none;white-space:nowrap}
+.top nav{display:flex;gap:18px;font-size:14px}
+.top nav a{text-decoration:none;color:var(--mute)}.top nav a:hover{color:var(--ink)}
+.sw{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:999px;padding:3px;position:relative;font:500 13px var(--f-disp);min-width:200px}
+.sw button{all:unset;cursor:pointer;text-align:center;padding:6px 12px;border-radius:999px;position:relative;z-index:1;color:var(--mute);transition:color .25s}
+.sw button[aria-pressed="true"]{color:var(--bg)}
+.sw button:focus-visible{outline:2px solid var(--acc)}
+.sw .knob{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:999px;background:var(--acc);transition:transform .3s cubic-bezier(.3,.7,.2,1)}
+.tech .sw .knob{transform:translateX(100%)}
+@media (max-width:760px){.top nav{display:none}.sw{min-width:0}}
 
-/* tavola: foglio con cornice e cartiglio */
-.plate{background:var(--sheet);border:1.5px solid var(--ink);margin:40px 0;position:relative}
-.plate-head{display:grid;grid-template-columns:auto 1fr auto;border-bottom:1.5px solid var(--ink)}
-.plate-head .no{font:700 15px/1 var(--cond);padding:14px 16px;border-right:1.5px solid var(--ink);display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:84px}
-.plate-head .no strong{font-size:34px}
-.plate-head h2{font-size:clamp(26px,3.4vw,40px);padding:14px 20px;align-self:center}
-.plate-head .date{font:500 15px/1.3 var(--cond);padding:14px 16px;border-left:1px solid var(--rule);color:var(--soft);align-self:stretch;display:flex;align-items:center;max-width:220px}
-.plate-body{padding:28px 24px 32px}
+/* livelli di lettura */
+.t-only{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
+.t-only>div{overflow:hidden;min-width:0}
+.tech .t-only{grid-template-rows:1fr}
 
-/* tavola 1 */
-.t1{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);border-bottom:1.5px solid var(--ink)}
-.t1 .draw{border-right:1.5px solid var(--ink);padding:18px 8px 6px;position:relative;display:flex;align-items:center}
-.t1 h1{font-size:clamp(40px,5.6vw,76px);line-height:.98;margin:0 0 18px}
-.t1 .side{padding:28px 26px;display:flex;flex-direction:column;gap:18px}
-.t1 .lead{font-size:20px;line-height:1.5;margin:0}
-.legend{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
-.legend li{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule)}
-.legend .n{font:700 16px/1 var(--cond);width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center}
-.legend .v{font:700 22px/1 var(--cond);white-space:nowrap}
-.legend span.t{font-size:16px;line-height:1.35}
-.legend span.t b{font-weight:600}
+/* apertura */
+.hero{padding-block:clamp(40px,7vw,88px) clamp(24px,4vw,40px)}
+.hero h1{font:800 clamp(36px,6vw,74px)/1.0 var(--f-disp);letter-spacing:-.035em;margin:0 0 18px;max-width:17ch;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--acc)}
+.hero p{margin:0;max-width:60ch;color:var(--mute);font-size:18px}
 
-svg.explode{width:100%;height:auto;display:block}
-.explode .f-top{fill:var(--face-top);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
-.explode .f-l{fill:var(--face-l);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
-.explode .f-r{fill:var(--face-r);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
-.explode .base .f-top{fill:#fff3ec}
-.explode .f-in{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4}
-.explode .axis{stroke:var(--red);stroke-width:1.2;stroke-dasharray:14 5 2 5}
-.explode .leader{fill:none;stroke:var(--ink);stroke-width:1}
-.explode .ball{fill:var(--red)}
-.explode .ballnum{fill:#fff;font:700 21px var(--cond);text-anchor:middle}
-.explode .lbl{fill:var(--ink);font:600 27px var(--cond)}
-.explode .dim line{stroke:var(--soft);stroke-width:1}
-.explode .dim text{fill:var(--soft);font:500 19px var(--cond);text-anchor:middle}
+/* selettore + palco */
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tabs button{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:2px;transition:border-color .2s,background .2s}
+.tabs button b{font-weight:600;font-size:15px;line-height:1.25}
+.tabs button small{font:12px var(--f-mono);color:var(--mute)}
+.tabs button[aria-selected="true"]{border-color:var(--acc);background:var(--acc-dim)}
+.tabs button:hover{border-color:#3a4148}
+@media (max-width:760px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* cartiglio */
-.titleblock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));font-size:15px}
-.titleblock div{padding:10px 16px;border-right:1px solid var(--rule)}
-.titleblock div:last-child{border-right:0}
-.titleblock small{display:block;font:500 13px/1.2 var(--cond);color:var(--soft);letter-spacing:.03em}
-.titleblock strong{font:600 18px/1.3 var(--cond);overflow-wrap:anywhere}
-.btn{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--paper);text-decoration:none;font:600 19px/1 var(--cond);padding:14px 20px;border:1.5px solid var(--ink);transition:background .2s,color .2s}
-.btn:hover{background:var(--red);border-color:var(--red);color:#fff}
-.btn.ghost{background:transparent;color:var(--ink)}
-.btn.ghost:hover{background:var(--ink);color:var(--paper)}
-.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2}
-.actions{display:flex;flex-wrap:wrap;gap:10px}
+.case>*{min-width:0}
+.case{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.25fr);gap:clamp(24px,4vw,56px);align-items:start;padding-block:clamp(22px,3vw,34px)}
+@media (max-width:860px){.case{grid-template-columns:minmax(0,1fr)}}
+.case h3{font:700 clamp(24px,2.8vw,34px)/1.1 var(--f-disp);letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance}
+.case .lead{margin:0 0 18px;font-size:17px}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.facts li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.facts b{font:500 15px var(--f-mono);color:var(--acc);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pcc{display:grid;gap:14px;padding-top:22px}
+.pcc h4{font:500 12px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 2px}
+.pcc p{margin:0;font-size:15px;max-width:58ch}
+.when{font:12px var(--f-mono);color:var(--mute);margin:0 0 8px}
 
-/* stazioni: prima, costruito, collaudo */
-.stations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1.5px solid var(--ink)}
-.st{padding:22px 22px 18px;border-right:1px solid var(--rule)}
-.st:last-child{border-right:0;background:#fbf1ea}
-.st h3{font-size:24px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
-.st h3 i{font-style:normal;font:700 14px/1 var(--cond);border:1.5px solid currentColor;padding:4px 7px}
-.st:last-child h3{color:var(--red-ink)}
-.st p{font-size:16.5px;line-height:1.55}
-.reading{display:flex;align-items:baseline;gap:10px;border-top:1px dashed var(--rule);padding-top:12px;margin-top:10px}
-.reading strong{font:700 44px/1 var(--cond);color:var(--ink)}
-.reading span{font-size:15px;line-height:1.3;color:var(--soft)}
+.stage{background:var(--pan);border:1px solid var(--line);border-radius:12px;padding:clamp(14px,2vw,22px);min-width:0;position:relative}
+.stage .cap{font:12px var(--f-mono);color:var(--mute);margin-top:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.badge{position:absolute;top:14px;right:14px;text-align:right;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.badge b{display:block;font:800 30px/1 var(--f-disp);color:var(--acc);letter-spacing:-.02em}
+.badge span{font:11px var(--f-mono);color:var(--mute)}
+svg text{font-family:var(--f-mono)}
 
-.figure{padding:24px;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
-.figure svg{width:100%;height:auto;display:block}
-.figcap{font:500 15px/1.4 var(--cond);color:var(--soft);display:flex;gap:10px}
-.figcap b{color:var(--ink);white-space:nowrap}
-.dg text{font-family:var(--cond);fill:var(--ink)}
-.dg .box{fill:var(--face-top);stroke:var(--ink);stroke-width:1.5}
-.dg .box.hot{fill:#fff3ec;stroke:var(--red)}
-.dg .ln{fill:none;stroke:var(--ink);stroke-width:1.3}
-.dg .ln.red{stroke:var(--red)}
-.dg .ln.dash{stroke-dasharray:5 5}
-.dg .t{font-size:19px;font-weight:600}
-.dg .s{font-size:15px;fill:var(--soft)}
-.dg .red-t{fill:var(--red-ink)}
+/* codice */
+pre.code{margin:0;overflow-x:auto;font:12.5px/1.6 var(--f-mono);color:#c9d1d9;background:var(--pan2);border-radius:8px;padding:16px 18px}
+pre.code .c{color:#7d8792}
+pre.code .k{color:var(--acc)}pre.code .s{color:#e6c07b}
+.notes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--mute)}
+.notes li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.notes li span{font:500 12px var(--f-mono);color:var(--acc)}
 
-/* codice vero */
-.code{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);border-top:1.5px solid var(--ink)}
-.code pre{margin:0;background:var(--ink);color:#e8e4da;padding:20px 22px;overflow-x:auto;font:400 13.5px/1.6 ui-monospace,"SF Mono",Menlo,Consolas,monospace;tab-size:4}
-.code pre .c{color:#9fa49c}
-.code pre .k{color:#f0a57f}
-.code pre mark{background:none;color:#fff;box-shadow:inset 3px 0 0 var(--red);padding-left:6px;margin-left:-9px}
-.code .notes{padding:20px 22px;font-size:16px}
-.code .notes ol{margin:0;padding-left:22px}
-.code .notes li{margin-bottom:10px}
-.code .notes li::marker{font:700 17px var(--cond);color:var(--red-ink)}
+/* numeri */
+.nums{border-block:1px solid var(--line);margin-top:clamp(28px,4vw,48px)}
+.nums .in{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:clamp(24px,3vw,36px)}
+.nums b{display:block;font:800 clamp(30px,3.6vw,44px)/1 var(--f-disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.nums span{font-size:14px;color:var(--mute)}
+@media (max-width:760px){.nums .in{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* grafico misure */
-.bars{display:grid;gap:14px;padding:24px}
-.bars .row{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center}
-.bars .row>span{font:600 18px/1.2 var(--cond)}
-.bars .track{height:46px;background:repeating-linear-gradient(90deg,transparent 0 calc(10% - 1px),var(--hair) calc(10% - 1px) 10%);border:1px solid var(--ink);position:relative;display:flex}
-.bars .seg{height:100%;display:flex;align-items:center;padding:0 10px;font:700 20px/1 var(--cond);white-space:nowrap;overflow:hidden}
-.bars .seg.real{background:var(--red);color:#fff}
-.bars .seg.other{background:repeating-linear-gradient(-45deg,var(--face-l) 0 6px,var(--face-r) 6px 12px);color:var(--ink)}
-.bars .seg.cut{background:var(--ink);color:var(--paper)}
-.scale{display:grid;grid-template-columns:200px 1fr;gap:14px}
-.scale div{display:flex;justify-content:space-between;font:500 14px var(--cond);color:var(--soft)}
+section.blk{padding-block:clamp(48px,7vw,96px)}
+.eyebrow{font:500 12px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0 0 10px}
+h2{font:800 clamp(28px,4vw,46px)/1.04 var(--f-disp);letter-spacing:-.03em;margin:0 0 14px;max-width:22ch;text-wrap:balance}
+.intro{color:var(--mute);max-width:62ch;margin:0 0 clamp(24px,4vw,40px);font-size:17px}
 
-/* metodo */
-.flow{list-style:none;margin:0;padding:24px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:f}
-.flow li{border:1.5px solid var(--ink);margin-right:-1.5px;padding:16px 14px;background:var(--face-top);position:relative;counter-increment:f}
-.flow li::before{content:counter(f);font:700 15px/1 var(--cond);color:#fff;background:var(--ink);display:inline-grid;place-items:center;width:24px;height:24px;margin-bottom:10px}
-.flow li.hot{background:#fff3ec}
-.flow li.hot::before{background:var(--red)}
-.flow b{display:block;font:700 21px/1.1 var(--cond);margin-bottom:6px}
-.flow span{font-size:15.5px;line-height:1.45;display:block}
+/* metodo: sequenza vera */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:s}
+.steps li{counter-increment:s;padding:18px 18px 0 0;border-top:2px solid var(--line);position:relative}
+.steps li::before{content:counter(s);position:absolute;top:-13px;left:0;width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--acc);font:500 12px/20px var(--f-mono);text-align:center;color:var(--acc)}
+.steps b{display:block;margin:6px 0 4px}
+.steps p{margin:0;font-size:14px;color:var(--mute)}
+@media (max-width:860px){.steps{grid-template-columns:1fr;gap:22px}.steps li{border-top:0;border-left:2px solid var(--line);padding:0 0 0 22px}.steps li::before{top:0;left:-13px}}
+table.mat{width:100%;border-collapse:collapse;font-size:14px;margin-top:28px}
+table.mat th,table.mat td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.tw{overflow-x:auto}
 
-/* officina personale */
-.shot{border-top:1.5px solid var(--ink);background:#0b0d0f;position:relative}
-.shot img{display:block;width:100%;height:auto}
-.spec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-top:1.5px solid var(--ink)}
-.spec>div{padding:22px 24px}
-.spec>div+div{border-left:1px solid var(--rule)}
-table.parts{width:100%;border-collapse:collapse;font-size:15.5px}
-table.parts th{font:600 14px/1.2 var(--cond);text-align:left;color:var(--soft);border-bottom:1.5px solid var(--ink);padding:6px 8px 6px 0}
-table.parts td{border-bottom:1px solid var(--rule);padding:8px 8px 8px 0;vertical-align:top;line-height:1.4}
-table.parts td:first-child{font:700 16px var(--cond);color:var(--red-ink);white-space:nowrap;width:1%}
-.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-.two>section{padding:24px}
-.two>section+section{border-left:1.5px solid var(--ink)}
-.two h3{font-size:30px;margin-bottom:12px}
-.mini{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--ink)}
-.mini li{padding:12px;border-right:1px solid var(--rule)}
-.mini li:last-child{border-right:0}
-.mini strong{display:block;font:700 34px/1 var(--cond)}
-.mini span{font-size:14.5px;line-height:1.3;display:block;margin-top:4px}
+/* officina */
+.off{background:var(--pan);border-top:1px solid var(--line)}
+.gallery{display:grid;gap:12px}
+.gallery .shot{border-radius:8px;overflow:hidden;background:#000}
+.dots{display:flex;gap:6px}
+.dots button{all:unset;cursor:pointer;width:26px;height:5px;border-radius:3px;background:var(--line)}
+.dots button[aria-current="true"]{background:var(--acc)}
+.what{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px;margin:0}
+.what b{color:var(--acc);font-weight:600}
+.phones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.phones img{border-radius:12px;border:1px solid var(--line)}
+@media (max-width:560px){.phones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.demo{position:relative;border-radius:8px;overflow:hidden;background:#000}
+.demo iframe{display:block;width:100%;height:min(720px,80vh);border:0}
+.demo .go{position:absolute;inset:auto 0 0 0;display:flex;justify-content:center;padding:18px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
+.btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 
-/* chiusura */
-.close{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);margin:40px 0 64px}
-.close>div{padding:32px 28px}
-.close h2{font-size:clamp(34px,4.6vw,58px)}
-.close p{color:#cfcabd;font-size:18px;max-width:46ch}
-.close .btn{background:var(--red);border-color:var(--red);color:#fff}
-.close .btn:hover{background:var(--paper);border-color:var(--paper);color:var(--ink)}
-.close .btn.ghost{background:transparent;border-color:#6b6f72;color:var(--paper)}
-.close dl{margin:0;padding-left:24px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:16px;border-left:1px solid #3a3d40}
-.close>div:last-child{border-left:1px solid #3a3d40}
-.close dt{font:500 15px/1.6 var(--cond);color:#9a9e9f}
-.close dd{margin:0}
-.close a{color:var(--paper)}
-footer{font:500 14px var(--cond);color:var(--soft);padding-bottom:32px}
-
-/* il momento: la vista esplosa si apre al caricamento */
-@media (prefers-reduced-motion:no-preference){
-  .js .explode .part{transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .6s ease-out;transition-delay:calc(var(--i)*90ms)}
-  .js .explode:not(.open) .part{transform:translateY(calc((4 - var(--i)) * -38px + 152px))}
-  .js .explode:not(.open) .part .leader,.js .explode:not(.open) .part .ball,.js .explode:not(.open) .part .ballnum,.js .explode:not(.open) .part .lbl{opacity:0}
-  .js .explode .leader,.js .explode .ball,.js .explode .ballnum,.js .explode .lbl{transition:opacity .5s ease-out .9s}
-  .js .explode:not(.open) .dim{opacity:0}
-  .js .explode .dim{transition:opacity .6s ease-out 1.2s}
-}
-
-@media (max-width:900px){
-  .t1,.code,.spec,.two,.close{grid-template-columns:minmax(0,1fr)}
-  .t1 .draw{border-right:0;border-bottom:1.5px solid var(--ink)}
-  .two>section+section,.spec>div+div,.close>div:last-child{border-left:0;border-top:1.5px solid var(--ink)}
-  .close>div:last-child{border-top-color:#3a3d40}
-  .close dl{border-left:0}
-  .stations{grid-template-columns:minmax(0,1fr)}
-  .st{border-right:0;border-bottom:1px solid var(--rule)}
-  .flow{grid-template-columns:minmax(0,1fr)}
-  .flow li{margin-right:0;margin-bottom:-1.5px}
-  .titleblock{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-  .titleblock div:nth-child(2){border-right:0}
-  .titleblock div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
-}
-@media (max-width:560px){
-  body{font-size:17px}
-  .plate{margin:24px 0}
-  .plate-head{grid-template-columns:auto 1fr}
-  .plate-head .date{grid-column:1/-1;border-left:0;border-top:1px solid var(--rule);max-width:none;padding:8px 16px}
-  .plate-head .no{min-width:64px;padding:10px 12px}
-  .plate-head .no strong{font-size:26px}
-  .plate-head h2{padding:12px 14px}
-  .plate-body,.figure,.bars,.flow,.two>section,.spec>div{padding-left:16px;padding-right:16px}
-  .bars .row,.scale{grid-template-columns:minmax(0,1fr)}
-  .scale>span{display:none}
-  .mini{grid-template-columns:minmax(0,1fr)}
-  .mini li{border-right:0;border-bottom:1px solid var(--rule)}
-  .t1 .side{padding:22px 16px}
-  .legend .v{font-size:19px}
-  .explode .lbl{display:none}
-  .explode .ball{r:30px}
-  .explode .ballnum{font-size:32px;transform:translateY(5px)}
-  .figure{overflow-x:auto}
-  .figure svg{min-width:720px}
-  .figure::after{content:"Scorri il disegno di lato";font:500 14px var(--cond);color:var(--soft)}
-}
+/* contatti */
+.contact h2{max-width:none}
+.contact dl{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;margin:24px 0 0;font-size:15px}
+.contact dt{font:12px/1.9 var(--f-mono);color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.contact dd{margin:0}
+footer{border-top:1px solid var(--line);font:12px var(--f-mono);color:var(--mute)}
+footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js')</script>
 
-<nav class="bar" aria-label="Tavole">
-  <div class="wrap">
-    <b>Saverio Moretti</b>
-    <a href="#tav1"><span>1</span>Sistema</a>
-    <a href="#tav2"><span>2</span>Import</a>
-    <a href="#tav3"><span>3</span>Amazon</a>
-    <a href="#tav4"><span>4</span>Gestionale</a>
-    <a href="#tav5"><span>5</span>Misure</a>
-    <a href="#tav6"><span>6</span>Metodo</a>
-    <a href="#tav7"><span>7</span>Officina personale</a>
-    <a href="#contatti"><span>→</span>Contatti</a>
+<header class="top">
+  <div class="in">
+    <a class="name" href="#">Saverio Moretti</a>
+    <nav aria-label="Sezioni"><a href="#lavoro">Lavoro</a><a href="#metodo">Metodo</a><a href="#officina">Officina</a><a href="#contatti">Contatti</a></nav>
+    <div class="sw" role="group" aria-label="Livello di dettaglio"><span class="knob"></span><button type="button" aria-pressed="true" data-m="0">In breve</button><button type="button" aria-pressed="false" data-m="1">Tecnico</button></div>
   </div>
-</nav>
+</header>
 
-<main class="wrap">
+<main>
+<div class="in hero">
+  <h1>Costruisco gli strumenti che mancano a un e‑commerce. <em>Poi li collaudo.</em></h1>
+  <p>Dal 2025 sviluppo il back office PrestaShop e le integrazioni di un e‑commerce di informatica nuova e ricondizionata. Arezzo, anche da remoto.</p>
+</div>
 
-<!-- TAVOLA 1 -->
-<article class="plate" id="tav1" aria-labelledby="h-tav1" style="margin-top:28px">
-  <div class="t1">
-    <div class="draw">
-<svg class="explode" viewBox="0 0 960 925" role="img" aria-labelledby="t1"><title id="t1">Vista esplosa del sistema costruito per l'e-commerce: catalogo, ponte verso il gestionale, Amazon, import reversibile, sito.</title><line class="axis" x1="250.0" y1="138.0" x2="250.0" y2="850.0"/><g class="part base" style="--i:4"><polygon class="f-top" points="250.0,661.0 431.9,766.0 250.0,871.0 68.1,766.0"/><polygon class="f-l" points="68.1,766.0 250.0,871.0 250.0,895.0 68.1,790.0"/><polygon class="f-r" points="431.9,766.0 250.0,871.0 250.0,895.0 431.9,790.0"/><polygon class="f-in" points="250.0,683.0 393.8,766.0 250.0,849.0 106.2,766.0"/><path class="leader" d="M431.9,766.0 L471.9,748.0 L585,748.0"/><circle class="ball" cx="608" cy="748.0" r="19"/><text class="ballnum" x="608" y="754.0">1</text><text class="lbl" x="638" y="755.0">Catalogo prodotti</text></g><g class="part" style="--i:3"><polygon class="f-top" points="250.0,519.0 431.9,624.0 250.0,729.0 68.1,624.0"/><polygon class="f-l" points="68.1,624.0 250.0,729.0 250.0,753.0 68.1,648.0"/><polygon class="f-r" points="431.9,624.0 250.0,729.0 250.0,753.0 431.9,648.0"/><polygon class="f-in" points="250.0,541.0 393.8,624.0 250.0,707.0 106.2,624.0"/><path class="leader" d="M431.9,624.0 L471.9,606.0 L585,606.0"/><circle class="ball" cx="608" cy="606.0" r="19"/><text class="ballnum" x="608" y="612.0">2</text><text class="lbl" x="638" y="613.0">Ponte verso il gestionale</text></g><g class="part" style="--i:2"><polygon class="f-top" points="250.0,377.0 431.9,482.0 250.0,587.0 68.1,482.0"/><polygon class="f-l" points="68.1,482.0 250.0,587.0 250.0,611.0 68.1,506.0"/><polygon class="f-r" points="431.9,482.0 250.0,587.0 250.0,611.0 431.9,506.0"/><polygon class="f-in" points="250.0,399.0 393.8,482.0 250.0,565.0 106.2,482.0"/><path class="leader" d="M431.9,482.0 L471.9,464.0 L585,464.0"/><circle class="ball" cx="608" cy="464.0" r="19"/><text class="ballnum" x="608" y="470.0">3</text><text class="lbl" x="638" y="471.0">Amazon SP-API, 12 marketplace</text></g><g class="part" style="--i:1"><polygon class="f-top" points="250.0,235.0 431.9,340.0 250.0,445.0 68.1,340.0"/><polygon class="f-l" points="68.1,340.0 250.0,445.0 250.0,469.0 68.1,364.0"/><polygon class="f-r" points="431.9,340.0 250.0,445.0 250.0,469.0 431.9,364.0"/><polygon class="f-in" points="250.0,257.0 393.8,340.0 250.0,423.0 106.2,340.0"/><path class="leader" d="M431.9,340.0 L471.9,322.0 L585,322.0"/><circle class="ball" cx="608" cy="322.0" r="19"/><text class="ballnum" x="608" y="328.0">4</text><text class="lbl" x="638" y="329.0">Import CSV reversibile</text></g><g class="part" style="--i:0"><polygon class="f-top" points="250.0,93.0 431.9,198.0 250.0,303.0 68.1,198.0"/><polygon class="f-l" points="68.1,198.0 250.0,303.0 250.0,327.0 68.1,222.0"/><polygon class="f-r" points="431.9,198.0 250.0,303.0 250.0,327.0 431.9,222.0"/><polygon class="f-in" points="250.0,115.0 393.8,198.0 250.0,281.0 106.2,198.0"/><path class="leader" d="M431.9,198.0 L471.9,180.0 L585,180.0"/><circle class="ball" cx="608" cy="180.0" r="19"/><text class="ballnum" x="608" y="186.0">5</text><text class="lbl" x="638" y="187.0">Sito, script e automazioni</text></g><g class="dim"><line x1="34" y1="93.0" x2="34" y2="895.0"/><line x1="26" y1="93.0" x2="42" y2="93.0"/><line x1="26" y1="895.0" x2="42" y2="895.0"/><text transform="translate(20,494.0) rotate(-90)">catalogo da 10.000 a oltre 120.000 prodotti</text></g></svg>
+<!-- LAVORO: la prima vista. Niente schermate aziendali: codice pubblico, schemi disegnati, numeri. -->
+<section id="lavoro" class="in" aria-label="Lavoro">
+  <div class="tabs" role="tablist" aria-label="Casi di lavoro">
+    <button role="tab" id="t-import" aria-controls="c-import" aria-selected="true"><b>Import CSV annullabile</b><small>identico al nativo</small></button>
+    <button role="tab" id="t-amazon" aria-controls="c-amazon" aria-selected="false"><b>Amazon, 12 marketplace</b><small>239 test</small></button>
+    <button role="tab" id="t-gest" aria-controls="c-gest" aria-selected="false"><b>Gestionale senza API</b><small>244 test</small></button>
+    <button role="tab" id="t-misure" aria-controls="c-misure" aria-selected="false"><b>Misure sul traffico</b><small>11,1% reale</small></button>
+  </div>
+
+  <article class="case" id="c-import" role="tabpanel" aria-labelledby="t-import">
+    <div>
+      <p class="when">In produzione da settembre 2026</p>
+      <h3>Import CSV che si può riportare indietro</h3>
+      <p class="lead">L'import nativo di PrestaShop non si annulla e, se si ferma a metà, lascia dati orfani. Il mio salva il prima di ogni prodotto e torna indietro con un clic.</p>
+      <ul class="facts"><li><b>1:1</b><span>stesso file, stesso risultato del nativo, campo per campo</span></li><li><b>annulla</b><span>annullabili anche modifiche di massa e cancellazioni</span></li><li><b>GitHub</b><span>versione pubblica riscritta da zero, con test</span></li></ul>
+      <div class="t-only"><div><div class="pcc">
+        <div><h4>Prima</h4><p>Se il server va in timeout l'import si ferma a metà, lascia dati orfani e non dice cosa è fallito.</p></div>
+        <div><h4>Costruito</h4><p>Ogni riga in transazione, lavoro in cron a passo controllato, stato completo del prodotto salvato prima di toccarlo. L'anteprima mostra la pagina vera del prodotto, scritta e poi annullata.</p></div>
+        <div><h4>Collaudo</h4><p>Stesso file importato con il nativo e con il mio, su una copia del sito: risultati identici campo per campo. Due errori JavaScript sono arrivati in produzione; corretti a ottobre, da allora provo l'interfaccia anche nel browser.</p></div>
+      </div></div></div>
     </div>
-    <div class="side">
-      <h1 id="h-tav1">Costruisco gli strumenti che mancano a un e-commerce. Poi li collaudo.</h1>
-      <p class="lead">Dal 2025 sviluppo il back office PrestaShop e le integrazioni di un e-commerce di informatica nuova e ricondizionata. Qui sotto, pezzo per pezzo, com'è fatto e come l'ho provato.</p>
-      <ol class="legend" aria-label="Legenda dei pezzi">
-        <li><span class="n">1</span><span class="t"><b>Catalogo</b>: prodotti, da circa 10.000</span><span class="v">120.000+</span></li>
-        <li><span class="n">2</span><span class="t"><b>Ponte al gestionale</b>: test sulla sincronizzazione</span><span class="v">244</span></li>
-        <li><span class="n">3</span><span class="t"><b>Amazon</b>: marketplace dal back office</span><span class="v">12</span></li>
-        <li><span class="n">4</span><span class="t"><b>Import</b>: annullabile, identico al nativo</span><span class="v">1:1</span></li>
-        <li><span class="n">5</span><span class="t"><b>Script e automazioni</b>: scritti, circa 50 in uso</span><span class="v">183</span></li>
-      </ol>
-    </div>
-  </div>
-  <div class="titleblock">
-    <div><small>Ruolo</small><strong>Sviluppatore e-commerce, integrazioni API e automazione</strong></div>
-    <div><small>Dove</small><strong>Arezzo, anche da remoto</strong></div>
-    <div><small>Strumenti</small><strong>PHP · Python · JavaScript · SQL · Claude Code</strong></div>
-    <div><small>Contatto</small><strong><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a></strong></div>
-  </div>
-</article>
-
-<!-- TAVOLA 2: IMPORT -->
-<article class="plate" id="tav2" aria-labelledby="h-tav2">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>2</strong></div>
-    <h2 id="h-tav2">Import CSV che si può riportare indietro</h2>
-    <div class="date">In produzione da settembre 2026</div>
-  </header>
-  <div class="figure">
-    <svg class="dg" viewBox="0 0 1160 250" role="img" aria-labelledby="d2">
-      <title id="d2">Il file passa da anteprima, controllo, fotografia dello stato e scrittura in transazione; da ogni import si può tornare indietro.</title>
-      <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#17191b"/></marker>
-      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#cf3f16"/></marker></defs>
-      <rect class="box" x="10" y="60" width="170" height="90"/><text class="t" x="28" y="98">File CSV</text><text class="s" x="28" y="124">dal fornitore</text>
-      <rect class="box" x="240" y="60" width="190" height="90"/><text class="t" x="258" y="98">Anteprima</text><text class="s" x="258" y="124">pagina vera, poi annullata</text>
-      <rect class="box" x="490" y="60" width="190" height="90"/><text class="t" x="508" y="98">Fotografia</text><text class="s" x="508" y="124">stato prima di toccare</text>
-      <rect class="box hot" x="740" y="40" width="210" height="130"/><text class="t" x="758" y="78">Transazione</text><text class="s" x="758" y="104">riga per riga, in cron,</text><text class="s" x="758" y="126">rallenta se il server</text><text class="s" x="758" y="148">è carico</text>
-      <rect class="box" x="1010" y="60" width="140" height="90"/><text class="t" x="1028" y="98">Catalogo</text><text class="s" x="1028" y="124">aggiornato</text>
-      <path class="ln" d="M180,105 H236" marker-end="url(#ar)"/><path class="ln" d="M430,105 H486" marker-end="url(#ar)"/><path class="ln" d="M680,105 H736" marker-end="url(#ar)"/><path class="ln" d="M950,105 H1006" marker-end="url(#ar)"/>
-      <path class="ln red dash" d="M1080,150 V215 H585 V154" marker-end="url(#arr)"/>
-      <text class="t red-t" x="640" y="240">Annulla: rimette i valori fotografati</text>
-      <path class="ln red" d="M845,40 V16"/><text class="s red-t" x="835" y="24" text-anchor="end">errore → si annulla, nessun dato orfano</text>
-    </svg>
-    <div class="figcap"><b>Fig. 2.1</b> Percorso di una riga. La linea rossa tratteggiata è il ritorno indietro, possibile per import, modifiche di massa e cancellazioni.</div>
-  </div>
-  <div class="stations">
-    <section class="st"><h3><i>A</i>Prima</h3><p>L'import nativo di PrestaShop non si può annullare. Se il server va in timeout si ferma a metà, lascia dati orfani e non dice cosa è fallito.</p></section>
-    <section class="st"><h3><i>B</i>Costruito</h3><p>Ogni riga in transazione, lavoro in cron a passo controllato, stato completo del prodotto salvato prima di toccarlo. L'anteprima mostra la pagina vera del prodotto, scritta e poi annullata.</p></section>
-    <section class="st"><h3><i>C</i>Collaudo</h3><p>Stesso file importato con il nativo e con il mio, su una copia del sito: risultati identici campo per campo. Due errori JavaScript sono arrivati in produzione; corretti a ottobre, da allora provo l'interfaccia anche nel browser.</p>
-      <div class="reading"><strong>1:1</strong><span>campo per campo<br>contro l'import nativo</span></div></section>
-  </div>
-  <div class="code">
-<pre aria-label="Estratto di codice da reversibleimport, src/Importer.php"><span class="c">// reversibleimport · src/Importer.php (versione pubblica, scritta da zero)</span>
-<span class="k">public function</span> apply(Plan $plan, string $fileName): int
+    <div class="stage">
+      <pre class="code" aria-label="Estratto di codice PHP"><span class="c">// reversibleimport · src/Importer.php</span>
+<span class="k">public function</span> apply(Plan $plan, <span class="k">string</span> $fileName): <span class="k">int</span>
 {
     $this->catalog->begin();
     <span class="k">try</span> {
         $batchId = $this->catalog->createBatch($fileName, count(...));
         <span class="k">foreach</span> ($plan->changes <span class="k">as</span> $change) {
-            <span class="c">// Fra anteprima e conferma passano minuti: se il valore</span>
-            <span class="c">// è cambiato, l'anteprima non è più vera.</span>
-<mark>            $current = $this->catalog->currentValues($change->productId);
-            <span class="k">if</span> ($current === null || !$this->same(...)) {
-                <span class="k">throw new</span> StalePlanException($change);
-            }</mark>
-<mark>            $this->catalog->saveSnapshot($batchId, $change);</mark>
+            $current = $this->catalog->currentValues($change->productId);
+            <span class="k">if</span> ($current === <span class="k">null</span> || !$this->same(...)) {
+                <span class="k">throw new</span> StalePlanException($change);   <span class="c">// ①</span>
+            }
+            $this->catalog->saveSnapshot($batchId, $change); <span class="c">// ②</span>
             $this->write($change->productId, $change->field, $change->after);
         }
         $this->catalog->commit();
     } <span class="k">catch</span> (\Throwable $e) {
-<mark>        $this->catalog->rollback();</mark>
+        $this->catalog->rollback();                      <span class="c">// ③</span>
         <span class="k">throw</span> $e;
     }
     <span class="k">return</span> $batchId;
 }</pre>
-    <div class="notes">
-      <ol>
-        <li>Prima di scrivere ricontrolla che il prodotto sia ancora come nell'anteprima: se qualcuno l'ha cambiato nel frattempo, si ferma.</li>
-        <li>Salva la fotografia del valore vecchio: è quella che permette di tornare indietro.</li>
-        <li>Se qualcosa va storto, si annulla tutto il blocco: non restano dati a metà.</li>
-      </ol>
-      <p style="margin-top:14px">Il modulo di lavoro è dell'azienda. Questa è una versione ridotta, scritta da zero e provata su PrestaShop 8.1.7, con test.</p>
-      <a class="btn ghost" href="https://github.com/saverio-moretti-dev/reversibleimport">Apri il codice su GitHub
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      <ul class="notes">
+        <li><span>①</span>Se qualcuno ha cambiato il prodotto dopo l'anteprima, si ferma.</li>
+        <li><span>②</span>Salva il valore vecchio: è ciò che permette di tornare indietro.</li>
+        <li><span>③</span>Se qualcosa va storto si annulla tutto il blocco: niente dati a metà.</li>
+      </ul>
+      <div class="cap"><span>Il modulo di lavoro è dell'azienda; questo è la versione pubblica, provata su PrestaShop 8.1.7.</span><a href="https://github.com/saverio-moretti-dev/reversibleimport">Codice su GitHub ↗</a></div>
     </div>
-  </div>
-</article>
+  </article>
 
-<!-- TAVOLA 3: AMAZON -->
-<article class="plate" id="tav3" aria-labelledby="h-tav3">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>3</strong></div>
-    <h2 id="h-tav3">Amazon SP-API su 12 marketplace, dal back office</h2>
-    <div class="date">Versione 0.5.0, in produzione da ottobre 2026</div>
-  </header>
-  <div class="figure">
-    <svg class="dg" viewBox="0 0 1160 300" role="img" aria-labelledby="d3">
-      <title id="d3">Uno SKU cercato nel back office viene letto in diretta su dodici marketplace; ogni modifica è verificata su Amazon prima di scrivere e si può annullare.</title>
-      <rect class="box hot" x="10" y="105" width="230" height="90"/><text class="t" x="28" y="143">Back office</text><text class="s" x="28" y="169">SKU, ASIN, EAN o nome</text>
-      <rect class="box" x="330" y="105" width="210" height="90"/><text class="t" x="348" y="143">Verifica</text><text class="s" x="348" y="169">su Amazon, prima di scrivere</text>
-      <path class="ln" d="M240,150 H326" marker-end="url(#ar)"/>
-      <g id="mk"></g>
-      <text class="s" x="980" y="292">un prodotto, letto in diretta su tutti e 12</text>
-    </svg>
-    <div class="figcap"><b>Fig. 3.1</b> Ricerca, verifica, scrittura. Le cancellazioni chiedono sempre un codice di conferma e si ricreano dalla fotografia salvata.</div>
-  </div>
-  <div class="stations">
-    <section class="st"><h3><i>A</i>Prima</h3><p>Prezzi, quantità, titoli e chiusure delle offerte si cambiavano a mano su Seller Central, un marketplace alla volta.</p></section>
-    <section class="st"><h3><i>B</i>Costruito</h3><p>Ricerca sul catalogo Amazon; uno SKU letto in diretta su tutti i marketplace. Modifiche singole o di massa a prezzi, quantità e titoli, anche da Excel, con annullamento che rimette i valori di prima.</p></section>
-    <section class="st"><h3><i>C</i>Collaudo</h3><p>Test su una copia del sito prima del rilascio. Si lavora su Amazon senza uscire da PrestaShop.</p>
-      <div class="reading"><strong>239</strong><span>test prima<br>del rilascio</span></div></section>
-  </div>
-</article>
+  <article class="case" id="c-amazon" role="tabpanel" aria-labelledby="t-amazon" hidden>
+    <div>
+      <p class="when">Versione 0.5.0, in produzione da ottobre 2026</p>
+      <h3>Amazon SP‑API su 12 marketplace, dal back office</h3>
+      <p class="lead">Prezzi, quantità, titoli e chiusure delle offerte si cambiavano a mano su Seller Central, un marketplace alla volta. Ora si fa da PrestaShop, su tutti insieme.</p>
+      <ul class="facts"><li><b>12</b><span>marketplace letti e modificati da un'unica schermata</span></li><li><b>239</b><span>test su una copia del sito prima del rilascio</span></li><li><b>annulla</b><span>annullamento che rimette i valori di prima</span></li></ul>
+      <div class="t-only"><div><div class="pcc">
+        <div><h4>Costruito</h4><p>Ricerca sul catalogo Amazon; uno SKU letto in diretta su tutti i marketplace. Modifiche singole o di massa a prezzi, quantità e titoli, anche da Excel.</p></div>
+        <div><h4>Sicurezza</h4><p>Le cancellazioni chiedono sempre un codice di conferma e si ricreano dalla fotografia salvata.</p></div>
+        <div><h4>Collaudo</h4><p>239 test su una copia del sito prima del rilascio.</p></div>
+      </div></div></div>
+    </div>
+    <div class="stage">
+      <div class="badge"><b>239</b><span>test</span></div>
+      <svg viewBox="0 0 560 320" role="img" aria-label="Schema: dal back office PrestaShop, ricerca, verifica e scrittura verso 12 marketplace Amazon">
+        <rect x="16" y="128" width="132" height="64" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <text x="82" y="156" fill="#e8ebee" font-size="13" text-anchor="middle">PrestaShop</text>
+        <text x="82" y="175" fill="#8f97a1" font-size="11" text-anchor="middle">back office</text>
+        <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M148 160H196"/><path d="M308 160H352"/></g>
+        <rect x="196" y="104" width="112" height="112" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
+        <text x="252" y="140" fill="#e8ebee" font-size="12" text-anchor="middle">ricerca</text>
+        <text x="252" y="164" fill="#e8ebee" font-size="12" text-anchor="middle">verifica</text>
+        <text x="252" y="188" fill="#e8ebee" font-size="12" text-anchor="middle">scrittura</text>
+        <g id="mk"></g>
+        <text x="460" y="300" fill="#8f97a1" font-size="11" text-anchor="middle">12 marketplace</text>
+        <path d="M252 216 V262 H82 V192" fill="none" stroke="#62c7bf" stroke-dasharray="4 4"/>
+        <text x="167" y="280" fill="#8f97a1" font-size="11" text-anchor="middle">annulla: valori di prima</text>
+      </svg>
+      <div class="cap"><span>Schema disegnato qui: niente schermate del modulo aziendale.</span></div>
+    </div>
+  </article>
 
-<!-- TAVOLA 4: DANEA -->
-<article class="plate" id="tav4" aria-labelledby="h-tav4">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>4</strong></div>
-    <h2 id="h-tav4">Un gestionale senza API, collegato al sito</h2>
-    <div class="date">Automazione dal 2025; ponte e import dal back office, 2026</div>
-  </header>
-  <div class="figure">
-    <svg class="dg" viewBox="0 0 1160 270" role="img" aria-labelledby="d4">
-      <title id="d4">Il sito mette in coda i lavori; un programma ponte in Python sul PC dell'ufficio li prende e scrive sul database del gestionale con backup, transazione e lo stesso blocco degli articoli usato dal gestionale.</title>
-      <rect class="box" x="10" y="80" width="220" height="100"/><text class="t" x="28" y="120">Sito PrestaShop</text><text class="s" x="28" y="146">import, mappatura,</text><text class="s" x="28" y="166">anteprima, annulla</text>
-      <rect class="box hot" x="430" y="60" width="270" height="140"/><text class="t" x="448" y="98">Ponte in Python</text><text class="s" x="448" y="124">PC dell'ufficio</text><text class="s" x="448" y="148">backup → transazione</text><text class="s" x="448" y="170">→ blocco articolo</text>
-      <rect class="box" x="900" y="80" width="250" height="100"/><text class="t" x="918" y="120">Gestionale Danea</text><text class="s" x="918" y="146">database Firebird,</text><text class="s" x="918" y="166">colleghi collegati</text>
-      <path class="ln" d="M230,115 H426" marker-end="url(#ar)"/><text class="s" x="262" y="104">prende i lavori</text>
-      <path class="ln" d="M426,150 H234" marker-end="url(#ar)"/><text class="s" x="262" y="172">esito, ogni ora</text>
-      <path class="ln" d="M700,130 H896" marker-end="url(#ar)"/>
-      <g transform="translate(780,92)"><rect x="0" y="12" width="26" height="20" fill="#cf3f16"/><path d="M5,12 V6 a8,8 0 0 1 16,0 V12" fill="none" stroke="#cf3f16" stroke-width="3"/></g>
-      <text class="s red-t" x="716" y="236">articolo aperto da un collega: non si tocca</text>
-    </svg>
-    <div class="figcap"><b>Fig. 4.1</b> Il ponte prende sugli articoli lo stesso blocco che mette il gestionale quando un collega li apre. Se due scritture si scontrano, la transazione si rifà da capo.</div>
-  </div>
-  <div class="stations">
-    <section class="st"><h3><i>A</i>Prima</h3><p>Il gestionale non ha API. Gli import di massa si facevano solo da Excel, con nessun altro collegato, e fallivano per un solo dato fuori formato. Niente controlli, niente annullamento.</p></section>
-    <section class="st"><h3><i>B</i>Costruito</h3><p>Import e modifiche di massa anche con i colleghi collegati. La mappatura delle colonne impara gli abbinamenti e si salva come modello; l'anteprima simula il risultato sull'archivio vero; si ripristina una versione precedente sugli stessi prodotti.</p></section>
-    <section class="st"><h3><i>C</i>Collaudo</h3><p>Prima di scrivere con i colleghi collegati ho studiato su un archivio di prova come reagisce il database con dodici utenti insieme.</p>
-      <div class="reading"><strong>244</strong><span>test sulla<br>sincronizzazione oraria</span></div></section>
-  </div>
-</article>
+  <article class="case" id="c-gest" role="tabpanel" aria-labelledby="t-gest" hidden>
+    <div>
+      <p class="when">Automazione dal 2025; ponte e import dal back office, 2026</p>
+      <h3>Un gestionale senza API, collegato al sito</h3>
+      <p class="lead">Il gestionale non ha API: gli import di massa si facevano solo da Excel, con nessun altro collegato, e fallivano per un solo dato fuori formato. Ora si lavora anche con i colleghi collegati.</p>
+      <ul class="facts"><li><b>244</b><span>test sulla sincronizzazione oraria</span></li><li><b>12</b><span>utenti simulati insieme, su un archivio di prova</span></li><li><b>annulla</b><span>ripristino della versione precedente sugli stessi prodotti</span></li></ul>
+      <div class="t-only"><div><div class="pcc">
+        <div><h4>Costruito</h4><p>Import e modifiche di massa anche con i colleghi collegati. La mappatura delle colonne impara gli abbinamenti e si salva come modello; l'anteprima simula il risultato sull'archivio vero.</p></div>
+        <div><h4>Come</h4><p>Il ponte prende sugli articoli lo stesso blocco che mette il gestionale quando un collega li apre. Se due scritture si scontrano, la transazione si rifà da capo.</p></div>
+        <div><h4>Collaudo</h4><p>Prima di scrivere con i colleghi collegati ho studiato su un archivio di prova come reagisce il database con dodici utenti insieme.</p></div>
+      </div></div></div>
+    </div>
+    <div class="stage">
+      <div class="badge"><b>244</b><span>test</span></div>
+      <svg viewBox="0 0 560 300" role="img" aria-label="Schema: gestionale senza API, ponte in Python, sito PrestaShop">
+        <rect x="16" y="110" width="140" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <text x="86" y="142" fill="#e8ebee" font-size="13" text-anchor="middle">Gestionale</text>
+        <text x="86" y="162" fill="#8f97a1" font-size="11" text-anchor="middle">Firebird · senza API</text>
+        <rect x="210" y="96" width="140" height="108" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
+        <text x="280" y="130" fill="#e8ebee" font-size="13" text-anchor="middle">Ponte</text>
+        <text x="280" y="150" fill="#8f97a1" font-size="11" text-anchor="middle">Python</text>
+        <text x="280" y="180" fill="#62c7bf" font-size="10" text-anchor="middle">blocco come un collega</text>
+        <rect x="404" y="110" width="140" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <text x="474" y="142" fill="#e8ebee" font-size="13" text-anchor="middle">PrestaShop</text>
+        <text x="474" y="162" fill="#8f97a1" font-size="11" text-anchor="middle">sito</text>
+        <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M156 140H210M210 160H156"/><path d="M350 140H404M404 160H350"/></g>
+        <g fill="#8f97a1" font-size="11">
+          <text x="86" y="60" text-anchor="middle">colleghi collegati</text>
+          <circle cx="56" cy="80" r="6" fill="#3a4148"/><circle cx="76" cy="80" r="6" fill="#3a4148"/><circle cx="96" cy="80" r="6" fill="#3a4148"/><circle cx="116" cy="80" r="6" fill="#3a4148"/>
+        </g>
+        <path d="M280 204V246" stroke="#62c7bf" stroke-dasharray="4 4" fill="none"/>
+        <text x="280" y="266" fill="#8f97a1" font-size="11" text-anchor="middle">scontro → la transazione si rifà da capo</text>
+      </svg>
+      <div class="cap"><span>Schema disegnato qui: niente schermate del gestionale.</span></div>
+    </div>
+  </article>
 
-<!-- TAVOLA 5: MISURE -->
-<article class="plate" id="tav5" aria-labelledby="h-tav5">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>5</strong></div>
-    <h2 id="h-tav5">Misurare prima di comprare un server più grande</h2>
-    <div class="date">Settembre-ottobre 2026</div>
-  </header>
-  <div class="bars" role="img" aria-label="Solo l'11,1% del tempo del server serviva visitatori reali. In simulazione, le regole contro i bot fermerebbero fino al 41,5% del tempo PHP senza bloccare nessun cliente.">
-    <div class="row"><span>Tempo del server, 10 giorni</span>
-      <div class="track"><div class="seg real" style="width:11.1%">11,1%</div><div class="seg other" style="flex:1">motori di ricerca, scraper, crawler di AI, attività interne</div></div></div>
-    <div class="row"><span>Tempo PHP con le regole anti-bot</span>
-      <div class="track"><div class="seg cut" style="width:41.5%">fino al 41,5% risparmiato</div></div></div>
-    <div class="scale"><span></span><div><span>0</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div></div>
-  </div>
-  <div class="stations">
-    <section class="st"><h3><i>A</i>Prima</h3><p>Il sito era lento nelle ore di punta e l'unica soluzione proposta era un server più potente.</p></section>
-    <section class="st"><h3><i>B</i>Fatto</h3><p>Dieci giorni di misure sul sito di produzione, senza modificarlo. Solo l'11,1% del tempo del server serviva visitatori reali.</p></section>
-    <section class="st"><h3><i>C</i>Collaudo</h3><p>Regole contro i bot scritte su una settimana di dati e provate sulla successiva. Gli interventi sono pronti e provati su una copia; la decisione era dell'azienda.</p>
-      <div class="reading"><strong>0</strong><span>clienti bloccati<br>(chi aveva carrello o ordine)</span></div></section>
-  </div>
-</article>
+  <article class="case" id="c-misure" role="tabpanel" aria-labelledby="t-misure" hidden>
+    <div>
+      <p class="when">Settembre–ottobre 2026</p>
+      <h3>Misurare prima di comprare un server più grande</h3>
+      <p class="lead">Il sito era lento nelle ore di punta e l'unica proposta era un server più potente. Dieci giorni di misure hanno mostrato dove andava davvero il tempo del server.</p>
+      <ul class="facts"><li><b>11,1%</b><span>del tempo del server serviva visitatori reali</span></li><li><b>41,5%</b><span>tempo PHP risparmiabile con le regole anti‑bot, in simulazione</span></li><li><b>0</b><span>clienti bloccati (chi aveva carrello o ordine)</span></li></ul>
+      <div class="t-only"><div><div class="pcc">
+        <div><h4>Fatto</h4><p>Dieci giorni di misure sul sito di produzione, senza modificarlo.</p></div>
+        <div><h4>Collaudo</h4><p>Regole contro i bot scritte su una settimana di dati e provate sulla successiva. Gli interventi sono pronti e provati su una copia; la decisione era dell'azienda.</p></div>
+      </div></div></div>
+    </div>
+    <div class="stage">
+      <svg viewBox="0 0 560 250" role="img" aria-label="Tempo del server in 10 giorni: 11,1% visitatori reali, il resto motori di ricerca, scraper, crawler di AI e attività interne">
+        <text x="16" y="34" fill="#e8ebee" font-size="13">Tempo del server, 10 giorni</text>
+        <rect x="16" y="50" width="528" height="44" rx="6" fill="#2a3036"/>
+        <rect x="16" y="50" width="58.6" height="44" rx="6" fill="#62c7bf"/>
+        <text x="16" y="118" fill="#62c7bf" font-size="12">11,1% visitatori reali</text>
+        <text x="544" y="118" fill="#8f97a1" font-size="12" text-anchor="end">motori di ricerca, scraper, crawler di AI, attività interne</text>
+        <text x="16" y="170" fill="#e8ebee" font-size="13">Tempo PHP con le regole anti‑bot (simulazione)</text>
+        <rect x="16" y="186" width="528" height="20" rx="4" fill="#2a3036"/>
+        <rect x="16" y="186" width="219.1" height="20" rx="4" fill="none" stroke="#62c7bf" stroke-dasharray="4 3"/>
+        <text x="16" y="230" fill="#8f97a1" font-size="11">fino al 41,5% risparmiato</text>
+        <g fill="#8f97a1" font-size="10" text-anchor="middle"><text x="16" y="246" text-anchor="start">0</text><text x="280" y="246">50%</text><text x="544" y="246" text-anchor="end">100%</text></g>
+      </svg>
+      <div class="cap"><span>Misure sul sito di produzione, senza modificarlo.</span></div>
+    </div>
+  </article>
+</section>
 
-<!-- TAVOLA 6: METODO -->
-<article class="plate" id="tav6" aria-labelledby="h-tav6">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>6</strong></div>
-    <h2 id="h-tav6">Come lavoro: progetto io, scrive Claude Code, verifico io</h2>
-    <div class="date">Ogni modulo, sempre</div>
-  </header>
-  <ol class="flow">
-    <li><b>Studio</b><span>Il lavoro e i processi dell'azienda, partendo dal catalogo: cosa si fa a mano, dove nascono gli errori.</span></li>
-    <li><b>Progetto</b><span>Logiche e flussi li decido io. Claude Code scrive la maggior parte del codice.</span></li>
-    <li class="hot"><b>Copia del sito</b><span>Ogni modulo passa da una copia in Docker con dati veri, prima di toccare la produzione.</span></li>
-    <li class="hot"><b>Collaudo</b><span>Test e confronto con il risultato atteso, campo per campo. Poi l'interfaccia nel browser.</span></li>
-    <li><b>Produzione</b><span>Con backup e ritorno alla versione precedente, sempre pronti.</span></li>
+<div class="nums" aria-label="In numeri">
+  <div class="in">
+    <div><b>183</b><span>script, app e flussi da febbraio 2025, circa 50 in uso</span></div>
+    <div><b>~20</b><span>moduli PrestaShop 8.1 scritti da me</span></div>
+    <div><b>7</b><span>moduli di terzi corretti, velocizzati e messi in sicurezza</span></div>
+    <div><b>120.000+</b><span>prodotti in catalogo, da circa 10.000</span></div>
+  </div>
+</div>
+
+<section id="metodo" class="in blk">
+  <p class="eyebrow">Metodo</p>
+  <h2>Progetto io, scrive Claude Code, verifico io.</h2>
+  <p class="intro">Ogni modulo segue gli stessi passi, sempre nello stesso ordine.</p>
+  <ol class="steps">
+    <li><b>Studio</b><p>Il lavoro e i processi dell'azienda, partendo dal catalogo: cosa si fa a mano, dove nascono gli errori.</p></li>
+    <li><b>Progetto</b><p>Logiche e flussi li decido io. Claude Code scrive la maggior parte del codice.</p></li>
+    <li><b>Copia del sito</b><p>Ogni modulo passa da una copia in Docker con dati veri, prima di toccare la produzione.</p></li>
+    <li><b>Collaudo</b><p>Test e confronto con il risultato atteso, campo per campo. Poi l'interfaccia nel browser.</p></li>
+    <li><b>Produzione</b><p>Con backup e ritorno alla versione precedente, sempre pronti.</p></li>
   </ol>
-  <div class="spec">
-    <div>
-      <table class="parts">
-        <thead><tr><th>Rif.</th><th>Componente</th><th>Quantità</th></tr></thead>
-        <tbody>
-          <tr><td>M-01</td><td>Moduli PrestaShop 8.1 scritti da me</td><td>circa 20</td></tr>
-          <tr><td>M-02</td><td>Moduli di terzi corretti, velocizzati e messi in sicurezza</td><td>7</td></tr>
-          <tr><td>M-03</td><td>Script, app e flussi da febbraio 2025</td><td>183, circa 50 in uso</td></tr>
-          <tr><td>M-04</td><td>Prodotti in catalogo, anche con l'import diretto di cataloghi interi</td><td>da 10.000 a 120.000+</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <table class="parts">
-        <thead><tr><th>Rif.</th><th>Materiale</th><th>Dove</th></tr></thead>
-        <tbody>
-          <tr><td>L-01</td><td>PHP, SQL (MariaDB, MySQL)</td><td>moduli, hook, override, template Smarty; PHP 8.1 e 8.3</td></tr>
-          <tr><td>L-02</td><td>Python</td><td>ponte verso il gestionale (Firebird)</td></tr>
-          <tr><td>L-03</td><td>JavaScript, HTML, CSS</td><td>widget nei temi, strumenti in una pagina</td></tr>
-          <tr><td>L-04</td><td>Docker, Git, cron</td><td>copie del sito, rilasci, lavori programmati</td></tr>
-          <tr><td>L-05</td><td>Claude Code, Batch API, llama.cpp, Ollama</td><td>scrittura del codice, lavori in blocco, modelli locali</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</article>
+  <div class="t-only"><div><div class="tw"><table class="mat">
+    <thead><tr><th>Strumenti</th><th>Dove li uso</th></tr></thead>
+    <tbody>
+      <tr><td>PHP, SQL (MariaDB, MySQL)</td><td>moduli, hook, override, template Smarty; PHP 8.1 e 8.3</td></tr>
+      <tr><td>Python</td><td>ponte verso il gestionale (Firebird)</td></tr>
+      <tr><td>JavaScript, HTML, CSS</td><td>widget nei temi, strumenti in una pagina</td></tr>
+      <tr><td>Docker, Git, cron</td><td>copie del sito, rilasci, lavori programmati</td></tr>
+      <tr><td>Claude Code, Batch API, llama.cpp, Ollama</td><td>scrittura del codice, lavori in blocco, modelli locali</td></tr>
+    </tbody>
+  </table></div></div></div>
+</section>
 
-<!-- TAVOLA 7: OFFICINA PERSONALE -->
-<article class="plate" id="tav7" aria-labelledby="h-tav7">
-  <header class="plate-head">
-    <div class="no">Tav.<strong>7</strong></div>
-    <h2 id="h-tav7">Officina personale: strumenti fatti per i miei problemi</h2>
-    <div class="date">Nel tempo libero</div>
-  </header>
-  <div class="plate-body" style="padding-bottom:20px">
-    <h3 style="font-size:32px;margin-bottom:10px">Multimeter audio: un analizzatore da studio in un solo file HTML</h3>
-    <p style="max-width:70ch">Carichi un file audio o video e il browser lo analizza in tempo reale con la Web Audio API: decodifica, canali separati, analisi FFT nel tempo e in frequenza, grafici disegnati su Canvas. Niente da installare.</p>
-    <div class="actions"><a class="btn" href="https://sem-brana-site.vercel.app/plugins/multi-metering/multi-metering.html">Provalo adesso
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a></div>
-  </div>
-  <figure class="shot" style="margin:0">
-    <img src="img/multimeter.webp" width="1600" height="1000" alt="Il multimeter mentre suona un brano: forma d'onda in alto, livelli L, R e LR a -12,3 dB, analizzatore di frequenze, campo stereo con correlazione 0,967 e spettrogramma 3D.">
-  </figure>
-  <div class="spec">
-    <div>
-      <table class="parts">
-        <thead><tr><th>Mod.</th><th>Cosa misura</th></tr></thead>
-        <tbody>
-          <tr><td>01</td><td>Livelli L/R e Mid/Side, loudness LUFS</td></tr>
-          <tr><td>02</td><td>Analizzatore di frequenze</td></tr>
-          <tr><td>03</td><td>Campo stereo: lissajous, polare, correlazione</td></tr>
-          <tr><td>04</td><td>Spettrogramma 2D e 3D</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <p style="font-size:16px">Timeline con zoom e loop, layout e colori configurabili, preset, ed export video dei visualizzatori sincronizzati con l'audio. Sotto: AudioContext e AnalyserNode, ChannelSplitter per i canali, Canvas 2D per i grafici, MediaRecorder per il video.</p>
-    </div>
-  </div>
-  <div class="two">
-    <section aria-labelledby="h-guard">
-      <h3 id="h-guard">Guardaroba</h3>
-      <p>Dopo un trasloco dovevo liberare spazio, così io e la mia compagna abbiamo iniziato a vendere su Vinted vestiti e oggetti usati. Stare dietro a foto, descrizioni e dati di ogni annuncio era complicato: ho scritto un'app.</p>
-      <p>Foto salvate in cloud; foto condivise con un'app di AI per farsi scrivere i testi, che si copiano su Vinted con due tocchi; collegamento a Redrip per gestire il guardaroba dal computer. La usiamo ogni giorno in due, da due telefoni, sullo stesso archivio.</p>
-      <ul class="mini">
-        <li><strong>0</strong><span>framework: HTML e JavaScript</span></li>
-        <li><strong>2</strong><span>telefoni sullo stesso archivio, senza sovrascriversi</span></li>
-        <li><strong>offline</strong><span>coda che non perde foto e modifiche</span></li>
-      </ul>
-      <p style="margin-top:16px"><a href="https://github.com/saverio-moretti-dev/guardaroba">Codice su GitHub</a></p>
-    </section>
-    <section aria-labelledby="h-plug">
-      <h3 id="h-plug">Plugin audio in C++</h3>
-      <p>Studio e sviluppo processori audio. Ho iniziato istruendo Claude con ricerche, codice open source e analisi dei plugin professionali, e ho costruito una base personale di conoscenze, con trascrizioni integrali di manuali di ingegneria del suono.</p>
-      <p>Ora sviluppo una suite per la dinamica: compressori, gate, limiter, multibanda, de-reverb, soppressori di risonanze. Misuro il comportamento dei plugin di riferimento e ne unisco le caratteristiche migliori.</p>
-      <ul class="mini">
-        <li><strong>20</strong><span>plugin di utilità completi</span></li>
-        <li><strong>14</strong><span>moduli di dinamica in sviluppo</span></li>
-        <li><strong>auval</strong><span>e Logic Pro per il collaudo</span></li>
-      </ul>
-    </section>
-  </div>
-  <div class="two" style="border-top:1.5px solid var(--ink)">
-    <section aria-labelledby="h-agenti">
-      <h3 id="h-agenti">Sistema di agenti per Claude Code</h3>
-      <p>Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende solo se il compito lo chiede. Un superagente tiene il quadro generale, fa da tramite con me, distribuisce gli ordini e controlla le consegne.</p>
-      <p>Intorno, un'app per il consumo dei token: tetti per sessione o per giorno e i lavori non urgenti pianificati prima del ripristino settimanale.</p>
-    </section>
-    <section aria-labelledby="h-musica">
-      <h3 id="h-musica">Musica</h3>
-      <p>Produco musica elettronica come SEM Brana e gestisco da solo promozione e sito, con varie integrazioni di AI nella gestione. Il multimeter è nato lì: mi serviva per ascoltare i miei mix.</p>
-    </section>
-  </div>
-</article>
+<!-- OFFICINA: sotto il lavoro. Le immagini sono qui, per chi arriva a guardare. -->
+<section id="officina" class="off blk">
+  <div class="in">
+    <p class="eyebrow">Officina personale · nel tempo libero</p>
+    <h2>Lo stesso metodo, sui miei problemi.</h2>
+    <p class="intro">Musica, casa, strumenti di lavoro: quando manca qualcosa, lo costruisco.</p>
 
-<section class="close" id="contatti" aria-labelledby="h-c">
-  <div>
-    <h2 id="h-c">Hai un lavoro che in azienda si fa ancora a mano?</h2>
-    <p style="margin-top:14px">Scrivimi: ne parliamo, lo misuro e ti dico cosa costruirei.</p>
-    <div class="actions" style="margin-top:22px">
-      <a class="btn" href="mailto:saveriomoretti94@gmail.com">Scrivimi una email
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg></a>
-      <a class="btn ghost" href="https://github.com/saverio-moretti-dev">GitHub</a>
+    <div class="tabs" role="tablist" aria-label="Progetti personali">
+      <button role="tab" id="t-plug" aria-controls="c-plug" aria-selected="true"><b>Plugin audio</b><small>C++ · in Logic Pro</small></button>
+      <button role="tab" id="t-multi" aria-controls="c-multi" aria-selected="false"><b>Multimeter</b><small>prova dal vivo</small></button>
+      <button role="tab" id="t-guard" aria-controls="c-guard" aria-selected="false"><b>Guardaroba</b><small>app sul telefono</small></button>
+      <button role="tab" id="t-agenti" aria-controls="c-agenti" aria-selected="false"><b>Agenti per Claude Code</b><small>sistema di lavoro</small></button>
     </div>
-  </div>
-  <div>
-    <dl>
-      <dt>Email</dt><dd><a href="mailto:saveriomoretti94@gmail.com">saveriomoretti94@gmail.com</a></dd>
-      <dt>GitHub</dt><dd><a href="https://github.com/saverio-moretti-dev">github.com/saverio-moretti-dev</a></dd>
-      <dt>Dove</dt><dd>Arezzo, anche da remoto</dd>
-      <dt>Lingue</dt><dd>Italiano; inglese B1, leggo e scrivo documentazione tecnica</dd>
-    </dl>
+
+    <article class="case" id="c-plug" role="tabpanel" aria-labelledby="t-plug">
+      <div>
+        <h3>Plugin audio in C++</h3>
+        <p class="lead">Un plugin audio è un effetto che si apre dentro un programma per fare musica (qui Logic Pro) e cambia il suono di una traccia. Li scrivo io, interfaccia compresa.</p>
+        <p class="what" id="plugWhat"></p>
+        <ul class="facts" style="margin-top:18px"><li><b>20</b><span>plugin di utilità completi</span></li><li><b>14</b><span>moduli di dinamica in sviluppo</span></li><li><b>auval</b><span>e Logic Pro per il collaudo</span></li></ul>
+        <div class="t-only"><div><div class="pcc">
+          <div><h4>Come</h4><p>Ho iniziato istruendo Claude con ricerche, codice open source e analisi dei plugin professionali, e ho costruito una base personale di conoscenze, con trascrizioni integrali di manuali di ingegneria del suono.</p></div>
+          <div><h4>Ora</h4><p>Una suite per la dinamica: compressori, gate, limiter, multibanda, de‑reverb, soppressori di risonanze. Misuro il comportamento dei plugin di riferimento e ne unisco le caratteristiche migliori.</p></div>
+        </div></div></div>
+      </div>
+      <div class="stage">
+        <div class="gallery"><div class="shot"><img id="plugImg" src="img/plugin-eq.webp" width="1080" height="1080" alt="" loading="lazy"></div></div>
+        <div class="cap"><span id="plugCap"></span><span class="dots" id="plugDots"></span></div>
+      </div>
+    </article>
+
+    <article class="case" id="c-multi" role="tabpanel" aria-labelledby="t-multi" hidden>
+      <div>
+        <h3>Multimeter: un analizzatore da studio in un solo file HTML</h3>
+        <p class="lead">Serve a guardare la musica mentre la ascolti: quanto è forte, come si distribuiscono bassi e acuti, quanto è largo lo stereo. Mi serviva per controllare i miei mix; si apre nel browser, niente da installare.</p>
+        <ul class="facts"><li><b>LUFS</b><span>livelli e loudness, cioè quanto forte la sente l'orecchio</span></li><li><b>FFT</b><span>analizzatore di frequenze e spettrogramma 2D e 3D</span></li><li><b>L/R</b><span>campo stereo: lissajous, polare, correlazione</span></li></ul>
+        <div class="t-only"><div><div class="pcc">
+          <div><h4>Sotto</h4><p>Web Audio API: AudioContext e AnalyserNode, ChannelSplitter per i canali, Canvas 2D per i grafici, MediaRecorder per esportare in video i visualizzatori sincronizzati con l'audio.</p></div>
+        </div></div></div>
+        <div class="links"><a class="btn ghost" href="demo/multimeter.html">Apri a schermo intero ↗</a></div>
+      </div>
+      <div class="stage">
+        <div class="demo" id="demo">
+          <img src="img/multimeter.webp" alt="Multimeter mentre analizza una traccia" loading="lazy">
+          <div class="go"><button class="btn" type="button" id="demoGo">▶ Accendi la demo</button></div>
+        </div>
+        <div class="cap"><span>La demo carica una mia traccia; puoi anche caricare un tuo file.</span></div>
+      </div>
+    </article>
+
+    <article class="case" id="c-guard" role="tabpanel" aria-labelledby="t-guard" hidden>
+      <div>
+        <h3>Guardaroba</h3>
+        <p class="lead">Dopo un trasloco io e la mia compagna abbiamo iniziato a vendere su Vinted vestiti e oggetti usati. Stare dietro a foto, descrizioni e dati di ogni annuncio era complicato: ho scritto un'app.</p>
+        <ul class="facts"><li><b>2</b><span>telefoni sullo stesso archivio, senza sovrascriversi</span></li><li><b>offline</b><span>una coda che non perde foto e modifiche</span></li><li><b>0</b><span>framework: HTML e JavaScript</span></li></ul>
+        <div class="t-only"><div><div class="pcc">
+          <div><h4>Come</h4><p>Foto salvate in cloud; foto condivise con un'app di AI per farsi scrivere i testi, che si copiano su Vinted con due tocchi; collegamento a Redrip per gestire il guardaroba dal computer.</p></div>
+        </div></div></div>
+        <div class="links"><a class="btn ghost" href="https://github.com/saverio-moretti-dev/guardaroba">Codice su GitHub ↗</a></div>
+      </div>
+      <div class="stage">
+        <div class="phones">
+          <img src="img/guardaroba-6766.webp" width="585" height="1266" alt="Nuovo articolo: scatta o scegli le foto" loading="lazy">
+          <img src="img/guardaroba-6767.webp" width="585" height="1266" alt="Elenco articoli con stato: da creare, bozza, pubblicata" loading="lazy">
+          <img src="img/guardaroba-6770.webp" width="585" height="1266" alt="Foto pronte da condividere e copiare su Vinted" loading="lazy">
+          <img src="img/guardaroba-6768.webp" width="585" height="1266" alt="Pagina Pubblica con bozze e annunci" loading="lazy">
+        </div>
+        <div class="cap"><span>Nuovo articolo · elenco · foto pronte · pubblicazione</span></div>
+      </div>
+    </article>
+
+    <article class="case" id="c-agenti" role="tabpanel" aria-labelledby="t-agenti" hidden>
+      <div>
+        <h3>Sistema di agenti per Claude Code</h3>
+        <p class="lead">Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende solo se il compito lo chiede. Un superagente tiene il quadro generale, fa da tramite con me, distribuisce gli ordini e controlla le consegne.</p>
+        <p class="mute" style="margin:0">Intorno, un'app per il consumo dei token: tetti per sessione o per giorno e i lavori non urgenti pianificati prima del ripristino settimanale.</p>
+      </div>
+      <div class="stage">
+        <svg viewBox="0 0 560 280" role="img" aria-label="Schema: io, superagente, agenti di progetto, stanze di conoscenza">
+          <g font-size="12" text-anchor="middle">
+            <rect x="230" y="16" width="100" height="40" rx="8" fill="#1d2126" stroke="#3a4148"/><text x="280" y="41" fill="#e8ebee">io</text>
+            <rect x="200" y="88" width="160" height="44" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/><text x="280" y="115" fill="#e8ebee">superagente</text>
+            <g fill="#1d2126" stroke="#3a4148"><rect x="24" y="168" width="140" height="40" rx="8"/><rect x="210" y="168" width="140" height="40" rx="8"/><rect x="396" y="168" width="140" height="40" rx="8"/></g>
+            <text x="94" y="193" fill="#e8ebee">agente carriera</text><text x="280" y="193" fill="#e8ebee">agente plugin</text><text x="466" y="193" fill="#e8ebee">agente musica</text>
+            <text x="280" y="262" fill="#8f97a1" font-size="11">ognuno scende nelle stanze di conoscenza solo se serve</text>
+          </g>
+          <g fill="none" stroke="#62c7bf" stroke-width="1.3"><path d="M280 56V88"/><path d="M280 132V150H94V168M280 150V168M280 150H466V168"/></g>
+          <g fill="none" stroke="#3a4148" stroke-dasharray="3 3"><path d="M94 208V236M280 208V236M466 208V236"/></g>
+        </svg>
+      </div>
+    </article>
+
+    <p class="mute" style="margin:28px 0 0;font-size:14.5px;max-width:62ch">Produco anche musica elettronica come SEM Brana e gestisco da solo promozione e sito, con varie integrazioni di AI nella gestione. Il multimeter è nato lì.</p>
   </div>
 </section>
-<footer>Disegni, codice e misure di Saverio Moretti. Il lavoro dell'azienda è raccontato senza il codice, che è suo.</footer>
+
+<section id="contatti" class="in blk contact">
+  <p class="eyebrow">Contatti</p>
+  <h2>Hai un lavoro che in azienda si fa ancora a mano?</h2>
+  <p class="intro" style="margin:0">Scrivimi: ne parliamo, lo misuro e ti dico cosa costruirei.</p>
+  <div class="links"><a class="btn" href="mailto:saveriomoretti94@gmail.com">Scrivimi una email</a><a class="btn ghost" href="https://github.com/saverio-moretti-dev">GitHub ↗</a></div>
+  <dl>
+    <dt>Email</dt><dd>saveriomoretti94@gmail.com</dd>
+    <dt>Dove</dt><dd>Arezzo, anche da remoto</dd>
+    <dt>Lingue</dt><dd>Italiano; inglese B1, leggo e scrivo documentazione tecnica</dd>
+  </dl>
+</section>
 </main>
 
+<footer><div class="in"><span>Saverio Moretti</span><span>Il lavoro dell'azienda è raccontato senza il suo codice.</span></div></footer>
+
 <script>
-// dodici marketplace a ventaglio nella fig. 3.1
-(function(){
-  var g=document.getElementById('mk'); if(!g) return;
-  var ns='http://www.w3.org/2000/svg', x0=540, y0=150, html='';
-  for(var i=0;i<12;i++){
-    var y=18+i*22.5, x=900;
-    html+='<path class="ln" d="M'+x0+','+y0+' C700,'+y0+' 760,'+y+' '+(x-4)+','+y+'"/>'+
-          '<rect class="box" x="'+x+'" y="'+(y-9)+'" width="60" height="18"/>'+
-          '<text class="s" x="'+(x+70)+'" y="'+(y+5)+'">'+(i+1)+'</text>';
-  }
-  g.innerHTML=html;
-})();
-// la vista esplosa si apre quando la pagina è pronta
-(function(){
-  var s=document.querySelector('svg.explode'); if(!s) return;
-  requestAnimationFrame(function(){requestAnimationFrame(function(){s.classList.add('open')})});
-})();
-// tavola corrente nella barra
-(function(){
-  if(!('IntersectionObserver' in window)) return;
-  var links={}; document.querySelectorAll('.bar a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){
-    if(e.isIntersecting){Object.values(links).forEach(function(a){a.removeAttribute('aria-current')});
-      var a=links[e.target.id]; if(a){a.setAttribute('aria-current','true'); var w=a.parentNode; w.scrollLeft=a.offsetLeft-w.clientWidth/2+a.clientWidth/2}}
-  })},{rootMargin:'-45% 0px -50% 0px'});
-  document.querySelectorAll('main [id]').forEach(function(el){if(links[el.id]) io.observe(el)});
-})();
+/* interruttore In breve / Tecnico, ricordato fra le visite */
+const root=document.documentElement,sw=[...document.querySelectorAll('.sw button')];
+function mode(t){root.classList.toggle('tech',t);sw.forEach(b=>b.setAttribute('aria-pressed',(b.dataset.m==='1')===t));try{localStorage.setItem('tech',t?'1':'0')}catch(e){}}
+sw.forEach(b=>b.onclick=()=>mode(b.dataset.m==='1'));
+try{if(localStorage.getItem('tech')==='1')mode(true)}catch(e){}
+
+/* schede: ogni gruppo di tab mostra un pannello alla volta */
+document.querySelectorAll('[role=tablist]').forEach(list=>{
+  const tabs=[...list.querySelectorAll('[role=tab]')];
+  const pick=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})};
+  tabs.forEach((t,i)=>{t.onclick=()=>pick(t);t.onkeydown=e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(d){const n=tabs[(i+d+tabs.length)%tabs.length];pick(n);n.focus()}}});
+  pick(tabs.find(t=>t.getAttribute('aria-selected')==='true'));
+});
+
+/* 12 marketplace nello schema Amazon */
+const mk=document.getElementById('mk');
+for(let i=0;i<12;i++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle'),col=i%3,row=Math.floor(i/3);
+  c.setAttribute('cx',400+col*60);c.setAttribute('cy',96+row*52);c.setAttribute('r',14);c.setAttribute('fill','#1d2126');c.setAttribute('stroke','#62c7bf');mk.append(c)}
+const fan=document.createElementNS('http://www.w3.org/2000/svg','path');fan.setAttribute('d','M352 160 L386 96 M352 160 L386 148 M352 160 L386 200 M352 160 L386 252');fan.setAttribute('stroke','#62c7bf');fan.setAttribute('fill','none');fan.setAttribute('opacity','.5');mk.append(fan);
+
+/* galleria plugin: cosa fa ognuno, in parole semplici */
+const P=[
+ ['img/plugin-eq.webp','basic_eq','<b>Equalizzatore.</b> Alza o abbassa singole zone di frequenza, dai bassi agli acuti. La curva è ciò che il plugin fa; sotto si vede lo spettro del suono in tempo reale.'],
+ ['img/plugin-comp.webp','basic_comp','<b>Compressore.</b> Riduce la differenza fra parti forti e deboli: i colpi più forti vengono abbassati. A sinistra la curva di risposta, al centro quanto sta riducendo, momento per momento.'],
+ ['img/plugin-lfo.webp','basic_lfo','<b>LFO.</b> Un oscillatore lento che muove nel tempo un altro parametro, per esempio il volume o un filtro, e fa «respirare» il suono.'],
+ ['img/plugin-filter.webp','double_filter','<b>Doppio filtro.</b> Due filtri, in serie o in parallelo, che tagliano i bassi o gli acuti. La curva bianca mostra cosa passa.']];
+let pi=0;const dots=document.getElementById('plugDots');
+function plug(i){pi=i;const[s,n,w]=P[i];const im=document.getElementById('plugImg');im.src=s;im.alt=n+' aperto in Logic Pro';document.getElementById('plugCap').textContent=n+' · in Logic Pro';document.getElementById('plugWhat').innerHTML=w;[...dots.children].forEach((d,j)=>d.setAttribute('aria-current',j===i))}
+P.forEach((p,j)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',p[1]);b.onclick=()=>plug(j);dots.append(b)});
+plug(0);
+
+/* demo multimeter: si carica solo quando la chiedi */
+document.getElementById('demoGo').onclick=()=>{const d=document.getElementById('demo');d.innerHTML='<iframe src="demo/multimeter.html" title="Multimeter, demo dal vivo" allow="autoplay"></iframe>'};
 </script>
 </body>
 </html>

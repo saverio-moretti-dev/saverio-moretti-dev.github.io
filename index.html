@@ -102,11 +102,12 @@ h2{font:800 clamp(28px,4vw,46px)/1.04 var(--f-disp);letter-spacing:-.03em;margin
 
 /* metodo: sequenza vera */
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:s}
-.steps li{counter-increment:s;padding:18px 18px 0 0;border-top:2px solid var(--line);position:relative}
-.steps li::before{content:counter(s);position:absolute;top:-13px;left:0;width:24px;height:24px;border-radius:50%;background:var(--bg);border:2px solid var(--acc);font:500 12px/20px var(--f-mono);text-align:center;color:var(--acc)}
-.steps b{display:block;margin:6px 0 4px}
-.steps p{margin:0;font-size:14px;color:var(--mute)}
-@media (max-width:860px){.steps{grid-template-columns:1fr;gap:22px}.steps li{border-top:0;border-left:2px solid var(--line);padding:0 0 0 22px}.steps li::before{top:0;left:-13px}}
+.steps li{counter-increment:s;padding:44px 12px 0;position:relative;text-align:center}
+.steps li::before{content:counter(s);position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:28px;box-sizing:border-box;border-radius:50%;background:var(--bg);border:2px solid var(--acc);display:grid;place-items:center;font:500 12px/1 var(--f-mono);color:var(--acc);z-index:1}
+.steps li:not(:last-child)::after{content:"";position:absolute;top:13px;left:50%;width:100%;height:2px;background:var(--line)}
+.steps b{display:block;margin:0 0 4px}
+.steps p{margin:0 auto;font-size:14px;color:var(--mute);max-width:24ch}
+@media (max-width:860px){.steps{grid-template-columns:1fr;gap:24px}.steps li{text-align:left;padding:2px 0 0 46px}.steps li::before{left:0;transform:none}.steps li:not(:last-child)::after{top:28px;left:13px;width:2px;height:calc(100% + 24px - 28px)}.steps p{margin:0;max-width:none}}
 table.mat{width:100%;border-collapse:collapse;font-size:14px;margin-top:28px}
 table.mat th,table.mat td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
@@ -114,18 +115,23 @@ table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:upperc
 
 /* officina */
 .off{background:var(--pan);border-top:1px solid var(--line)}
-.gallery{display:grid;gap:12px}
-.gallery .shot{border-radius:8px;overflow:hidden;background:#000}
+.gal .shot{position:relative;border-radius:8px;overflow:hidden;background:#000;touch-action:pan-y}
+.gal.phone .shot{background:transparent;display:grid;place-items:center}
+.gal.phone .shot img{max-height:min(560px,70vh);width:auto;border-radius:16px;border:1px solid var(--line)}
+.gal .nav{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(16,18,21,.78);border:1px solid #3a4148;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.gal .nav:hover{border-color:var(--acc)}
+.gal .nav:focus-visible{outline:2px solid var(--acc)}
+.gal .nav svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2}
+.gal .prev{left:10px}.gal .next{right:10px}
 .dots{display:flex;gap:6px}
 .dots button{all:unset;cursor:pointer;width:26px;height:5px;border-radius:3px;background:var(--line)}
 .dots button[aria-current="true"]{background:var(--acc)}
 .what{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:14.5px;margin:0}
 .what b{color:var(--acc);font-weight:600}
-.phones{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.phones img{border-radius:12px;border:1px solid var(--line)}
-@media (max-width:560px){.phones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .demo{position:relative;border-radius:8px;overflow:hidden;background:#000}
-.demo iframe{display:block;width:100%;height:min(720px,80vh);border:0}
+.demo.on{aspect-ratio:1280/860}
+.demo iframe{display:block;width:1280px;height:860px;border:0;transform-origin:0 0}
+#c-multi.live .stage{grid-column:1/-1}
 .demo .go{position:absolute;inset:auto 0 0 0;display:flex;justify-content:center;padding:18px;background:linear-gradient(transparent,rgba(0,0,0,.75))}
 .btn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:var(--bg);font-weight:600;padding:10px 18px;border-radius:999px;text-decoration:none}
 .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
@@ -154,8 +160,8 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
 
 <main>
 <div class="in hero">
-  <h1>Costruisco gli strumenti che mancano a un e‑commerce. <em>Poi li collaudo.</em></h1>
-  <p>Dal 2025 sviluppo il back office PrestaShop e le integrazioni di un e‑commerce di informatica nuova e ricondizionata. Arezzo, anche da remoto.</p>
+  <h1>Costruisco con l'AI gli strumenti che mancano a un e‑commerce. <em>Poi li collaudo.</em></h1>
+  <p>Dal 2025 sviluppo il back office PrestaShop e le integrazioni di un e‑commerce di informatica nuova e ricondizionata. Vivo ad Arezzo e lavoro anche da remoto.</p>
 </div>
 
 <!-- LAVORO: la prima vista. Niente schermate aziendali: codice pubblico, schemi disegnati, numeri. -->
@@ -224,21 +230,26 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
     </div>
     <div class="stage">
       <div class="badge"><b>239</b><span>test</span></div>
-      <svg viewBox="0 0 560 320" role="img" aria-label="Schema: dal back office PrestaShop, ricerca, verifica e scrittura verso 12 marketplace Amazon">
-        <rect x="16" y="128" width="132" height="64" rx="8" fill="#1d2126" stroke="#3a4148"/>
-        <text x="82" y="156" fill="#e8ebee" font-size="13" text-anchor="middle">PrestaShop</text>
-        <text x="82" y="175" fill="#8f97a1" font-size="11" text-anchor="middle">back office</text>
-        <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M148 160H196"/><path d="M308 160H352"/></g>
-        <rect x="196" y="104" width="112" height="112" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
-        <text x="252" y="140" fill="#e8ebee" font-size="12" text-anchor="middle">ricerca</text>
-        <text x="252" y="164" fill="#e8ebee" font-size="12" text-anchor="middle">verifica</text>
-        <text x="252" y="188" fill="#e8ebee" font-size="12" text-anchor="middle">scrittura</text>
-        <g id="mk"></g>
-        <text x="460" y="300" fill="#8f97a1" font-size="11" text-anchor="middle">12 marketplace</text>
-        <path d="M252 216 V262 H82 V192" fill="none" stroke="#62c7bf" stroke-dasharray="4 4"/>
-        <text x="167" y="280" fill="#8f97a1" font-size="11" text-anchor="middle">annulla: valori di prima</text>
+      <svg viewBox="0 0 560 360" role="img" aria-label="Dal back office di PrestaShop: cerca il prodotto, legge prezzo e quantità su 12 marketplace, modifica; annulla rimette i valori di prima">
+        <text x="16" y="34" fill="#e8ebee" font-size="13">Senza aprire Seller Central:</text>
+        <rect x="16" y="66" width="528" height="58" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <circle cx="44" cy="95.0" r="12" fill="none" stroke="#62c7bf" stroke-width="1.5"/><text x="44" y="99.0" fill="#62c7bf" font-size="11" text-anchor="middle">1</text>
+        <text x="70" y="91.0" fill="#e8ebee" font-size="13">Cerca il prodotto</text>
+        <text x="70" y="109.0" fill="#8f97a1" font-size="11">per SKU o nel catalogo Amazon</text>
+        <path d="M44 124V146" stroke="#62c7bf" stroke-width="1.5"/>
+        <rect x="16" y="146" width="528" height="60" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <circle cx="44" cy="176.0" r="12" fill="none" stroke="#62c7bf" stroke-width="1.5"/><text x="44" y="180.0" fill="#62c7bf" font-size="11" text-anchor="middle">2</text>
+        <text x="70" y="172.0" fill="#e8ebee" font-size="13">Legge prezzo e quantità</text>
+        <text x="70" y="190.0" fill="#8f97a1" font-size="11">in diretta, su tutti i marketplace</text>
+        <circle cx="336" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="353" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="370" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="387" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="404" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="421" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="438" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="455" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="472" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="489" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="506" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/><circle cx="523" cy="176" r="6" fill="rgba(98,199,191,.15)" stroke="#62c7bf"/>
+        <path d="M44 206V228" stroke="#62c7bf" stroke-width="1.5"/>
+        <rect x="16" y="228" width="528" height="58" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <circle cx="44" cy="257.0" r="12" fill="none" stroke="#62c7bf" stroke-width="1.5"/><text x="44" y="261.0" fill="#62c7bf" font-size="11" text-anchor="middle">3</text>
+        <text x="70" y="253.0" fill="#e8ebee" font-size="13">Modifica prezzi, quantità, titoli</text>
+        <text x="70" y="271.0" fill="#8f97a1" font-size="11">uno alla volta o in massa, anche da Excel</text>
+        <path d="M16 316H40" stroke="#62c7bf" stroke-dasharray="4 4"/><text x="50" y="320" fill="#8f97a1" font-size="11">Annulla: rimette i valori salvati prima della modifica</text>
+        <path d="M16 342H40" stroke="#3a4148" stroke-width="2"/><text x="50" y="346" fill="#8f97a1" font-size="11">Chiudere un'offerta chiede sempre un codice di conferma</text>
       </svg>
-      <div class="cap"><span>Schema disegnato qui: niente schermate del modulo aziendale.</span></div>
     </div>
   </article>
 
@@ -256,26 +267,24 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
     </div>
     <div class="stage">
       <div class="badge"><b>244</b><span>test</span></div>
-      <svg viewBox="0 0 560 300" role="img" aria-label="Schema: gestionale senza API, ponte in Python, sito PrestaShop">
-        <rect x="16" y="110" width="140" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
-        <text x="86" y="142" fill="#e8ebee" font-size="13" text-anchor="middle">Gestionale</text>
-        <text x="86" y="162" fill="#8f97a1" font-size="11" text-anchor="middle">Firebird · senza API</text>
-        <rect x="210" y="96" width="140" height="108" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
-        <text x="280" y="130" fill="#e8ebee" font-size="13" text-anchor="middle">Ponte</text>
-        <text x="280" y="150" fill="#8f97a1" font-size="11" text-anchor="middle">Python</text>
-        <text x="280" y="180" fill="#62c7bf" font-size="10" text-anchor="middle">blocco come un collega</text>
-        <rect x="404" y="110" width="140" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
-        <text x="474" y="142" fill="#e8ebee" font-size="13" text-anchor="middle">PrestaShop</text>
-        <text x="474" y="162" fill="#8f97a1" font-size="11" text-anchor="middle">sito</text>
-        <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M156 140H210M210 160H156"/><path d="M350 140H404M404 160H350"/></g>
-        <g fill="#8f97a1" font-size="11">
-          <text x="86" y="60" text-anchor="middle">colleghi collegati</text>
-          <circle cx="56" cy="80" r="6" fill="#3a4148"/><circle cx="76" cy="80" r="6" fill="#3a4148"/><circle cx="96" cy="80" r="6" fill="#3a4148"/><circle cx="116" cy="80" r="6" fill="#3a4148"/>
-        </g>
-        <path d="M280 204V246" stroke="#62c7bf" stroke-dasharray="4 4" fill="none"/>
-        <text x="280" y="266" fill="#8f97a1" font-size="11" text-anchor="middle">scontro → la transazione si rifà da capo</text>
+      <svg viewBox="0 0 560 330" role="img" aria-label="Il gestionale senza API e il sito PrestaShop collegati da un ponte in Python, che blocca gli articoli come farebbe il gestionale con un collega">
+        <g fill="#8f97a1" font-size="11"><text x="16" y="34" fill="#e8ebee" font-size="13">Colleghi al lavoro nel gestionale</text>
+          <circle cx="24" cy="56" r="6" fill="#3a4148"/><circle cx="42" cy="56" r="6" fill="#3a4148"/><circle cx="60" cy="56" r="6" fill="#3a4148"/><circle cx="78" cy="56" r="6" fill="#3a4148"/></g>
+        <path d="M51 64V110" stroke="#3a4148" stroke-dasharray="3 3" fill="none"/>
+        <rect x="16" y="110" width="150" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <text x="91" y="144" fill="#e8ebee" font-size="13" text-anchor="middle">Gestionale</text>
+        <text x="91" y="164" fill="#8f97a1" font-size="11" text-anchor="middle">nessuna API</text>
+        <rect x="195" y="96" width="170" height="122" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/>
+        <text x="280" y="126" fill="#e8ebee" font-size="13" text-anchor="middle">Ponte in Python</text>
+        <g fill="#8f97a1" font-size="10" text-anchor="middle"><text x="280" y="152">blocca l'articolo come</text><text x="280" y="168">fa il gestionale quando</text><text x="280" y="184">un collega lo apre</text></g>
+        <rect x="394" y="110" width="150" height="80" rx="8" fill="#1d2126" stroke="#3a4148"/>
+        <text x="469" y="144" fill="#e8ebee" font-size="13" text-anchor="middle">Sito</text>
+        <text x="469" y="164" fill="#8f97a1" font-size="11" text-anchor="middle">PrestaShop</text>
+        <g fill="none" stroke="#62c7bf" stroke-width="1.5"><path d="M166 140H195M195 160H166"/><path d="M365 140H394M394 160H365"/></g>
+        <text x="380" y="92" fill="#8f97a1" font-size="10" text-anchor="middle">ogni ora</text>
+        <path d="M280 218V254" stroke="#62c7bf" stroke-dasharray="4 4" fill="none"/>
+        <g font-size="11" text-anchor="middle"><text x="280" y="276" fill="#e8ebee">Due scritture sullo stesso articolo?</text><text x="280" y="296" fill="#8f97a1">si annulla tutto e si riprova da capo:</text><text x="280" y="314" fill="#8f97a1">nessun dato lasciato a metà</text></g>
       </svg>
-      <div class="cap"><span>Schema disegnato qui: niente schermate del gestionale.</span></div>
     </div>
   </article>
 
@@ -296,7 +305,7 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
         <rect x="16" y="50" width="528" height="44" rx="6" fill="#2a3036"/>
         <rect x="16" y="50" width="58.6" height="44" rx="6" fill="#62c7bf"/>
         <text x="16" y="118" fill="#62c7bf" font-size="12">11,1% visitatori reali</text>
-        <text x="544" y="118" fill="#8f97a1" font-size="12" text-anchor="end">motori di ricerca, scraper, crawler di AI, attività interne</text>
+        <text x="88" y="70" fill="#8f97a1" font-size="11">88,9% motori di ricerca, scraper, crawler di AI,</text><text x="88" y="84" fill="#8f97a1" font-size="11">attività interne</text>
         <text x="16" y="170" fill="#e8ebee" font-size="13">Tempo PHP con le regole anti‑bot (simulazione)</text>
         <rect x="16" y="186" width="528" height="20" rx="4" fill="#2a3036"/>
         <rect x="16" y="186" width="219.1" height="20" rx="4" fill="none" stroke="#62c7bf" stroke-dasharray="4 3"/>
@@ -366,8 +375,8 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
         </div></div></div>
       </div>
       <div class="stage">
-        <div class="gallery"><div class="shot"><img id="plugImg" src="img/plugin-eq.webp" width="1080" height="1080" alt="" loading="lazy"></div></div>
-        <div class="cap"><span id="plugCap"></span><span class="dots" id="plugDots"></span></div>
+        <div class="gal" id="galPlug"><div class="shot"><img src="img/plugin-eq.webp" width="1080" height="1080" alt="" loading="lazy"><button type="button" class="nav prev" aria-label="Immagine precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Immagine successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+        <div class="cap"><span class="gcap"></span><span class="dots"></span></div></div>
       </div>
     </article>
 
@@ -393,41 +402,41 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
     <article class="case" id="c-guard" role="tabpanel" aria-labelledby="t-guard" hidden>
       <div>
         <h3>Guardaroba</h3>
-        <p class="lead">Dopo un trasloco io e la mia compagna abbiamo iniziato a vendere su Vinted vestiti e oggetti usati. Stare dietro a foto, descrizioni e dati di ogni annuncio era complicato: ho scritto un'app.</p>
-        <ul class="facts"><li><b>2</b><span>telefoni sullo stesso archivio, senza sovrascriversi</span></li><li><b>offline</b><span>una coda che non perde foto e modifiche</span></li><li><b>0</b><span>framework: HTML e JavaScript</span></li></ul>
+        <p class="lead" style="margin-bottom:14px">Dopo un trasloco io e la mia compagna abbiamo iniziato a vendere su Vinted vestiti e oggetti usati. Stare dietro a foto, descrizioni e dati di ogni annuncio era complicato: ho scritto un'app.</p>
+        <p class="what" id="guardWhat"></p>
+        <ul class="facts" style="margin-top:18px"><li><b>2</b><span>telefoni sullo stesso archivio, senza sovrascriversi</span></li><li><b>offline</b><span>una coda che non perde foto e modifiche</span></li><li><b>0</b><span>framework: HTML e JavaScript</span></li></ul>
         <div class="t-only"><div><div class="pcc">
           <div><h4>Come</h4><p>Foto salvate in cloud; foto condivise con un'app di AI per farsi scrivere i testi, che si copiano su Vinted con due tocchi; collegamento a Redrip per gestire il guardaroba dal computer.</p></div>
         </div></div></div>
         <div class="links"><a class="btn ghost" href="https://github.com/saverio-moretti-dev/guardaroba">Codice su GitHub ↗</a></div>
       </div>
       <div class="stage">
-        <div class="phones">
-          <img src="img/guardaroba-6766.webp" width="585" height="1266" alt="Nuovo articolo: scatta o scegli le foto" loading="lazy">
-          <img src="img/guardaroba-6767.webp" width="585" height="1266" alt="Elenco articoli con stato: da creare, bozza, pubblicata" loading="lazy">
-          <img src="img/guardaroba-6770.webp" width="585" height="1266" alt="Foto pronte da condividere e copiare su Vinted" loading="lazy">
-          <img src="img/guardaroba-6768.webp" width="585" height="1266" alt="Pagina Pubblica con bozze e annunci" loading="lazy">
-        </div>
-        <div class="cap"><span>Nuovo articolo · elenco · foto pronte · pubblicazione</span></div>
+        <div class="gal phone" id="galGuard"><div class="shot"><img src="img/guardaroba-6766.webp" width="585" height="1266" alt="" loading="lazy"><button type="button" class="nav prev" aria-label="Immagine precedente"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Immagine successiva"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button></div>
+        <div class="cap"><span class="gcap"></span><span class="dots"></span></div></div>
       </div>
     </article>
 
     <article class="case" id="c-agenti" role="tabpanel" aria-labelledby="t-agenti" hidden>
       <div>
-        <h3>Sistema di agenti per Claude Code</h3>
-        <p class="lead">Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende solo se il compito lo chiede. Un superagente tiene il quadro generale, fa da tramite con me, distribuisce gli ordini e controlla le consegne.</p>
-        <p class="mute" style="margin:0">Intorno, un'app per il consumo dei token: tetti per sessione o per giorno e i lavori non urgenti pianificati prima del ripristino settimanale.</p>
+        <h3>Un sistema mio per lavorare con Claude Code su più progetti</h3>
+        <p class="lead">Claude Code a ogni sessione riparte da zero, e io porto avanti più progetti insieme: plugin, musica, i miei strumenti. Ho costruito regole, strumenti e un archivio di conoscenze perché ogni sessione sappia da dove ripartire e cosa è già stato deciso.</p>
+        <ul class="facts"><li><b>17</b><span>repository tenute allineate da uno script mio</span></li><li><b>3</b><span>comandi miei per passare il lavoro fra sessioni: /superagente, /passaggio, /riparti</span></li><li><b>1</b><span>app mia per il consumo dei token: tetti per sessione e per giorno</span></li></ul>
+        <div class="t-only"><div><div class="pcc">
+          <div><h4>Come</h4><p>Le conoscenze sono divise in livelli collegati, come stanze ad albero: ogni agente parte dal livello del suo progetto e scende solo se il compito lo chiede. Un superagente tiene il quadro generale, fa da tramite con me, distribuisce gli ordini e controlla le consegne.</p></div>
+          <div><h4>Di chi è cosa</h4><p>Claude Code è di Anthropic. Regole, struttura, strumenti in Python e app dei token li ho progettati io.</p></div>
+        </div></div></div>
       </div>
       <div class="stage">
-        <svg viewBox="0 0 560 280" role="img" aria-label="Schema: io, superagente, agenti di progetto, stanze di conoscenza">
+        <svg viewBox="0 0 560 300" role="img" aria-label="Io decido; il superagente coordina gli agenti dei progetti; ognuno riparte dalle note lasciate dalla sessione precedente">
           <g font-size="12" text-anchor="middle">
-            <rect x="230" y="16" width="100" height="40" rx="8" fill="#1d2126" stroke="#3a4148"/><text x="280" y="41" fill="#e8ebee">io</text>
-            <rect x="200" y="88" width="160" height="44" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/><text x="280" y="115" fill="#e8ebee">superagente</text>
-            <g fill="#1d2126" stroke="#3a4148"><rect x="24" y="168" width="140" height="40" rx="8"/><rect x="210" y="168" width="140" height="40" rx="8"/><rect x="396" y="168" width="140" height="40" rx="8"/></g>
-            <text x="94" y="193" fill="#e8ebee">agente carriera</text><text x="280" y="193" fill="#e8ebee">agente plugin</text><text x="466" y="193" fill="#e8ebee">agente musica</text>
-            <text x="280" y="262" fill="#8f97a1" font-size="11">ognuno scende nelle stanze di conoscenza solo se serve</text>
+            <rect x="200" y="16" width="160" height="44" rx="8" fill="#1d2126" stroke="#3a4148"/><text x="280" y="36" fill="#e8ebee">io</text><text x="280" y="51" fill="#8f97a1" font-size="10">decido e approvo</text>
+            <rect x="180" y="88" width="200" height="50" rx="8" fill="rgba(98,199,191,.10)" stroke="#62c7bf"/><text x="280" y="109" fill="#e8ebee">superagente</text><text x="280" y="126" fill="#8f97a1" font-size="10">coordina, controlla le consegne</text>
+            <g fill="#1d2126" stroke="#3a4148"><rect x="24" y="176" width="150" height="44" rx="8"/><rect x="205" y="176" width="150" height="44" rx="8"/><rect x="386" y="176" width="150" height="44" rx="8"/></g>
+            <text x="99" y="203" fill="#e8ebee">agente plugin</text><text x="280" y="203" fill="#e8ebee">agente musica</text><text x="461" y="203" fill="#e8ebee">agente strumenti</text>
+            <g fill="#8f97a1" font-size="11"><text x="280" y="262">ogni sessione legge la nota lasciata dalla precedente</text><text x="280" y="280">e apre solo le conoscenze che servono al compito</text></g>
           </g>
-          <g fill="none" stroke="#62c7bf" stroke-width="1.3"><path d="M280 56V88"/><path d="M280 132V150H94V168M280 150V168M280 150H466V168"/></g>
-          <g fill="none" stroke="#3a4148" stroke-dasharray="3 3"><path d="M94 208V236M280 208V236M466 208V236"/></g>
+          <g fill="none" stroke="#62c7bf" stroke-width="1.3"><path d="M280 60V88"/><path d="M280 138V157H99V176M280 157V176M280 157H461V176"/></g>
+          <g fill="none" stroke="#3a4148" stroke-dasharray="3 3"><path d="M99 220V242M280 220V242M461 220V242"/></g>
         </svg>
       </div>
     </article>
@@ -443,13 +452,13 @@ footer .in{padding-block:22px;display:flex;justify-content:space-between;gap:12p
   <div class="links"><a class="btn" href="mailto:saveriomoretti94@gmail.com">Scrivimi una email</a><a class="btn ghost" href="https://github.com/saverio-moretti-dev">GitHub ↗</a></div>
   <dl>
     <dt>Email</dt><dd>saveriomoretti94@gmail.com</dd>
-    <dt>Dove</dt><dd>Arezzo, anche da remoto</dd>
+    <dt>Dove</dt><dd>Vivo ad Arezzo e lavoro anche da remoto</dd>
     <dt>Lingue</dt><dd>Italiano; inglese B1, leggo e scrivo documentazione tecnica</dd>
   </dl>
 </section>
 </main>
 
-<footer><div class="in"><span>Saverio Moretti</span><span>Il lavoro dell'azienda è raccontato senza il suo codice.</span></div></footer>
+<footer><div class="in"><span>Saverio Moretti</span><span>Questo portfolio l'ho progettato io e l'ha scritto Claude Code, come i miei moduli.</span><span>Il lavoro dell'azienda è raccontato senza il suo codice.</span></div></footer>
 
 <script>
 /* interruttore In breve / Tecnico, ricordato fra le visite */
@@ -466,25 +475,35 @@ document.querySelectorAll('[role=tablist]').forEach(list=>{
   pick(tabs.find(t=>t.getAttribute('aria-selected')==='true'));
 });
 
-/* 12 marketplace nello schema Amazon */
-const mk=document.getElementById('mk');
-for(let i=0;i<12;i++){const c=document.createElementNS('http://www.w3.org/2000/svg','circle'),col=i%3,row=Math.floor(i/3);
-  c.setAttribute('cx',400+col*60);c.setAttribute('cy',96+row*52);c.setAttribute('r',14);c.setAttribute('fill','#1d2126');c.setAttribute('stroke','#62c7bf');mk.append(c)}
-const fan=document.createElementNS('http://www.w3.org/2000/svg','path');fan.setAttribute('d','M352 160 L386 96 M352 160 L386 148 M352 160 L386 200 M352 160 L386 252');fan.setAttribute('stroke','#62c7bf');fan.setAttribute('fill','none');fan.setAttribute('opacity','.5');mk.append(fan);
-
-/* galleria plugin: cosa fa ognuno, in parole semplici */
-const P=[
- ['img/plugin-eq.webp','basic_eq','<b>Equalizzatore.</b> Alza o abbassa singole zone di frequenza, dai bassi agli acuti. La curva è ciò che il plugin fa; sotto si vede lo spettro del suono in tempo reale.'],
- ['img/plugin-comp.webp','basic_comp','<b>Compressore.</b> Riduce la differenza fra parti forti e deboli: i colpi più forti vengono abbassati. A sinistra la curva di risposta, al centro quanto sta riducendo, momento per momento.'],
- ['img/plugin-lfo.webp','basic_lfo','<b>LFO.</b> Un oscillatore lento che muove nel tempo un altro parametro, per esempio il volume o un filtro, e fa «respirare» il suono.'],
- ['img/plugin-filter.webp','double_filter','<b>Doppio filtro.</b> Due filtri, in serie o in parallelo, che tagliano i bassi o gli acuti. La curva bianca mostra cosa passa.']];
-let pi=0;const dots=document.getElementById('plugDots');
-function plug(i){pi=i;const[s,n,w]=P[i];const im=document.getElementById('plugImg');im.src=s;im.alt=n+' aperto in Logic Pro';document.getElementById('plugCap').textContent=n+' · in Logic Pro';document.getElementById('plugWhat').innerHTML=w;[...dots.children].forEach((d,j)=>d.setAttribute('aria-current',j===i))}
-P.forEach((p,j)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',p[1]);b.onclick=()=>plug(j);dots.append(b)});
-plug(0);
+/* gallerie a scorrimento: frecce, puntini, trascinamento col dito */
+function gallery(id,items,whatId){
+  const g=document.getElementById(id),im=g.querySelector('img'),cap=g.querySelector('.gcap'),dots=g.querySelector('.dots'),what=document.getElementById(whatId);let i=0;
+  const show=k=>{i=(k+items.length)%items.length;const[s,n,w]=items[i];im.src=s;im.alt=n;cap.textContent=n;what.innerHTML=w;[...dots.children].forEach((d,j)=>d.setAttribute('aria-current',j===i))};
+  items.forEach((it,j)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',it[1]);b.onclick=()=>show(j);dots.append(b)});
+  g.querySelector('.prev').onclick=()=>show(i-1);g.querySelector('.next').onclick=()=>show(i+1);
+  let x0=null;const sh=g.querySelector('.shot');
+  sh.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  sh.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)show(i+(dx<0?1:-1));x0=null});
+  items.forEach(it=>{const p=new Image();p.src=it[0]});
+  show(0);
+}
+gallery('galPlug',[
+ ['img/plugin-eq.webp','basic_eq · in Logic Pro','<b>Equalizzatore.</b> Alza o abbassa singole zone di frequenza, dai bassi agli acuti. La curva è ciò che il plugin fa; sotto si vede lo spettro del suono in tempo reale.'],
+ ['img/plugin-comp.webp','basic_comp · in Logic Pro','<b>Compressore.</b> Riduce la differenza fra parti forti e deboli: i colpi più forti vengono abbassati. A sinistra la curva di risposta, al centro quanto sta riducendo, momento per momento.'],
+ ['img/plugin-lfo.webp','basic_lfo · in Logic Pro','<b>LFO.</b> Un oscillatore lento che muove nel tempo un altro parametro, per esempio il volume o un filtro, e fa «respirare» il suono.'],
+ ['img/plugin-filter.webp','double_filter · in Logic Pro','<b>Doppio filtro.</b> Due filtri, in serie o in parallelo, che tagliano i bassi o gli acuti. La curva bianca mostra cosa passa.']],'plugWhat');
+gallery('galGuard',[
+ ['img/guardaroba-6766.webp','Nuovo articolo','<b>Nuovo articolo.</b> Scatti le foto o le prendi dalla galleria; l\'articolo entra fra quelli da compilare.'],
+ ['img/guardaroba-6767.webp','Articoli','<b>Articoli.</b> Ogni capo mostra a che punto è: da creare, bozza, pubblicato, venduto. Si cerca per brand, titolo o taglia.'],
+ ['img/guardaroba-6770.webp','Foto pronte','<b>Foto pronte.</b> Scegli le foto e le condividi con l\'app di AI che scrive il testo; poi «Copia su Vinted».'],
+ ['img/guardaroba-6768.webp','Pubblica','<b>Pubblica.</b> Bozze e annunci pronti: un tocco apre Vinted, un altro segna l\'articolo come pubblicato.']],'guardWhat');
 
 /* demo multimeter: si carica solo quando la chiedi */
-document.getElementById('demoGo').onclick=()=>{const d=document.getElementById('demo');d.innerHTML='<iframe src="demo/multimeter.html" title="Multimeter, demo dal vivo" allow="autoplay"></iframe>'};
+document.getElementById('demoGo').onclick=()=>{
+  const d=document.getElementById('demo');document.getElementById('c-multi').classList.add('live');d.classList.add('on');
+  d.innerHTML='<iframe src="demo/multimeter.html" title="Multimeter, demo dal vivo" allow="autoplay"></iframe>';
+  const f=d.firstChild,fit=()=>{f.style.transform='scale('+d.clientWidth/1280+')'};fit();new ResizeObserver(fit).observe(d);
+  d.scrollIntoView({behavior:'smooth',block:'nearest'})};
 </script>
 </body>
 </html>

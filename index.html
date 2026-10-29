@@ -161,6 +161,7 @@ table.mat th{font:500 12px var(--f-mono);color:var(--mute);text-transform:upperc
 footer{border-top:1px solid var(--line);font:12px var(--f-mono);color:var(--mute)}
 footer .in{padding-block:26px;display:grid;gap:6px}
 footer p{margin:0}
+@media (max-width:760px){.links.desk-only{display:none}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -410,7 +411,7 @@ footer p{margin:0}
         </div>
         <div>
           <ul class="facts"><li><b>LUFS</b><span>livelli e loudness, cioè quanto forte la sente l'orecchio</span></li><li><b>FFT</b><span>analizzatore di frequenze e spettrogramma 2D e 3D</span></li><li><b>L/R</b><span>campo stereo: lissajous, polare, correlazione</span></li></ul>
-          <div class="links"><a class="btn ghost" href="demo/multimeter.html">Apri a schermo intero ↗</a></div>
+          <div class="links desk-only"><a class="btn ghost" href="demo/multimeter.html">Apri a schermo intero ↗</a></div>
         </div>
       </div>
       <div class="stage">

@@ -24,6 +24,7 @@ a{color:inherit}
 .in{max-width:var(--w);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 .mono{font-family:var(--f-mono)}
 .mute{color:var(--mute)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 :focus-visible{outline:2px solid var(--acc);outline-offset:3px}
 
 /* barra */
@@ -83,7 +84,7 @@ svg text{font-family:var(--f-mono)}
 
 /* codice */
 pre.code{font-variant-ligatures:none;font-feature-settings:'liga' 0,'calt' 0;margin:0;overflow-x:auto;font:12.5px/1.6 var(--f-mono);color:#c9d1d9;background:var(--pan2);border-radius:8px;padding:16px 18px}
-pre.code .c{color:#7d8792}
+pre.code .c{color:#838d98}
 pre.code .k{color:var(--acc)}pre.code .s{color:#e6c07b}
 .notes{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px;font-size:14px;color:var(--mute)}
 .notes li{display:grid;grid-template-columns:22px 1fr;gap:8px}
@@ -180,7 +181,8 @@ footer p{margin:0}
 </div>
 
 <!-- LAVORO: la prima vista. Niente schermate aziendali: codice pubblico, schemi disegnati, numeri. -->
-<section id="lavoro" class="in" aria-label="Lavoro">
+<section id="lavoro" class="in" aria-labelledby="h-lavoro">
+  <h2 class="vh" id="h-lavoro">Lavoro</h2>
   <div class="tabs" role="tablist" aria-label="Casi di lavoro">
     <button role="tab" id="t-import" aria-controls="c-import" aria-selected="true"><b>Import CSV annullabile</b><small>identico al nativo</small></button>
     <button role="tab" id="t-amazon" aria-controls="c-amazon" aria-selected="false"><b>Amazon, 12 marketplace</b><small>239 test</small></button>
@@ -311,18 +313,25 @@ footer p{margin:0}
       </div></div></div>
     </div>
     <div class="stage">
-      <svg viewBox="0 0 560 250" role="img" aria-label="In 10 giorni solo l'11,1% del tempo del server serviva persone vere; bloccando i bot si risparmia fino al 41,5% del lavoro PHP, in simulazione">
+      <svg viewBox="0 0 560 274" role="img" aria-label="In 10 giorni solo l'11,1% del tempo del server serviva persone vere, il 60,2% bot e crawler, il 13,5% attività interne, il 15,2% altro; bloccando i bot si risparmia fino al 41,5% del lavoro PHP, in simulazione">
         <text x="16" y="30" fill="#e8ebee" font-size="13">Per chi lavorava il server (10 giorni di misure)</text>
-        <rect x="16" y="46" width="528" height="34" rx="6" fill="#2a3036"/>
-        <rect x="16" y="46" width="58.6" height="34" rx="6" fill="#62c7bf"/>
-        <text x="16" y="102" fill="#62c7bf" font-size="12">11,1% persone vere</text>
-        <text x="544" y="102" fill="#8f97a1" font-size="12" text-anchor="end">88,9% bot e attività interne</text>
-        <text x="16" y="160" fill="#e8ebee" font-size="13">Lavoro risparmiato bloccando i bot (simulazione)</text>
-        <rect x="16" y="176" width="528" height="34" rx="6" fill="#2a3036"/>
-        <rect x="16" y="176" width="219.1" height="34" rx="6" fill="#62c7bf" fill-opacity=".55"/>
-        <text x="16" y="232" fill="#62c7bf" font-size="12">fino al 41,5% in meno</text>
+        <clipPath id="barTraffico"><rect x="16" y="46" width="528" height="34" rx="6"/></clipPath>
+        <g clip-path="url(#barTraffico)">
+          <rect x="16" y="46" width="528" height="34" fill="#2a3036"/>
+          <rect x="16" y="46" width="58.6" height="34" fill="#62c7bf"/>
+          <rect x="74.6" y="46" width="317.9" height="34" fill="#9aa3ad"/>
+          <rect x="392.5" y="46" width="71.3" height="34" fill="#4e5760"/>
+        </g>
+        <rect x="16" y="92" width="10" height="10" rx="2" fill="#62c7bf"/><text x="32" y="101" fill="#62c7bf" font-size="12">11,1% persone vere</text>
+        <rect x="230" y="92" width="10" height="10" rx="2" fill="#9aa3ad"/><text x="246" y="101" fill="#c4cad0" font-size="12">60,2% bot e crawler</text>
+        <rect x="16" y="112" width="10" height="10" rx="2" fill="#4e5760"/><text x="32" y="121" fill="#8f97a1" font-size="12">13,5% attività interne</text>
+        <rect x="230" y="112" width="10" height="10" rx="2" fill="#2a3036" stroke="#4e5760"/><text x="246" y="121" fill="#8f97a1" font-size="12">15,2% altro</text>
+        <text x="16" y="184" fill="#e8ebee" font-size="13">Lavoro risparmiato bloccando i bot (simulazione)</text>
+        <rect x="16" y="200" width="528" height="34" rx="6" fill="#2a3036"/>
+        <rect x="16" y="200" width="219.1" height="34" rx="6" fill="#62c7bf" fill-opacity=".55"/>
+        <text x="16" y="256" fill="#62c7bf" font-size="12">fino al 41,5% in meno</text>
       </svg>
-      <div class="cap"><span>Bot: motori di ricerca, scraper, crawler di AI. Misure sul sito vero, senza modificarlo.</span></div>
+      <div class="cap"><span>Bot: Google 33,8%, scraper con identità false 18,2%, crawler di AI 8,2%. Misure sul sito vero, senza modificarlo.</span></div>
     </div>
   </article>
 </section>

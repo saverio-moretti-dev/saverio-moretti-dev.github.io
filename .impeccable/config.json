@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-29T18:17:27.959Z",
+        "reason": "agente 2026-10-29: .stage ha padding clamp(14px,2vw,22px) e .off usa .blk padding-block clamp(48px,...); falso positivo del rilevatore statico"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-29T18:17:27.993Z",
+        "reason": "agente 2026-10-29: titoli con font clamp() (h1 36-74px, h2 28-46px, h3 24-34px) letti come 16px dal rilevatore statico"
+      }
+    ]
+  }
+}

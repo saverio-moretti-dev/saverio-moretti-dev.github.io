@@ -38,7 +38,7 @@ Read on phone (from a CV PDF or email) and on desktop. Italian language. Linked 
 
 ## Evidence on Hand
 
-- Live multimeter: local copy `demo/multimeter.html` with the user's track `demo/audio/in-my-head.mp3`, embedded with a click-to-activate veil and a 4-step tutorial (remembered off in localStorage once completed).
+- Multimeter: in the page a square demo video `demo/multimeter.mp4` (autoplay muted loop, from the user's `mm.mp4`, 2026-10-29); the real app `demo/multimeter.html` (track `demo/audio/in-my-head.mp3`) opens only via «Apri a schermo intero», meant for desktop. The scaled live iframe + tutorial was removed: on phones it was tiny and unusable.
 - Public repos: `saverio-moretti-dev/reversibleimport` (PrestaShop 8.1 module, tests), `saverio-moretti-dev/guardaroba` (PWA, Node functions on Vercel).
 - Token manager UI screenshots: `~/Desktop/SEM Brana/Brana studio/coding/plugin/claude-token-manager/docs/screenshots/` (desktop/mobile, light/dark).
 - Metrics: 183 scripts/apps/flows (≈50 in use), catalog 10k→120k+ products, ~20 modules + 7 fixed, Amazon 12 marketplaces / 239 tests, Danea sync 244 tests, bot study 11.1% real visitors / up to 41.5% PHP time blocked in simulation.
